@@ -1,4 +1,4 @@
-Словарь STDL для Visual Studio Code v1.1
+Словарь STDL для Visual Studio Code v2.0
 
 Возможности:
 Файл описания параметров и портов (.json)

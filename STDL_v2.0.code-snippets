@@ -591,6 +591,14 @@
 		],
 		"description": "Style"
 	},
+	"Project": {
+		"prefix": "Project",
+		"scope": "lua",
+		"body": [
+			"Project"
+		],
+		"description": "Project"
+	},
 	//Методы
 	//Пространство имен
 	//---------------------------------------------------------------------------
@@ -618,14 +626,14 @@
 			".SetSymbolGeometry(${1:geometry})"
 		],
 		"description": "Style\n\rnil\n\rSetSymbolGeometry (ModelGeometry geometry)"
-	},
+	},	
 	"GetParameterValues": {
 		"prefix": ".GetParameterValues()",
 		"scope": "lua",
 		"body": [
 			".GetParameterValues()"
 		],
-		"description": "Style\n\rtable\n\rGetParameterValues ()"
+		"description": "Style,RebarStyle\n\rtable\n\rGetParameterValues ()"
 	},
 	"GetParameterGroup": {
 		"prefix": ".GetParameterGroup()",
@@ -651,6 +659,30 @@
 		],
 		"description": "Style\n\rPort\n\rGetPort (string name)"
 	},
+	"GetRebarStyle": {
+		"prefix": ".GetRebarStyle()",
+		"scope": "lua",
+		"body": [
+			".GetRebarStyle(${1:number_id})"
+		],
+		"description": "Project\n\rGetRebarStyle(number_id)"
+	},
+	"AddRebar": {
+		"prefix": ".AddRebar",
+		"scope": "lua",
+		"body": [
+			".AddRebar(${1:number_id},${2:curve}}"
+		],
+		"description": "Style\n\rnil\n\rAddRebar(number_id,Curve3D curve)"
+	},
+	"AddRebarSet": {
+		"prefix": ".AddRebarSet",
+		"scope": "lua",
+		"body": [
+			".AddRebarSet(${1:number_id},${2:curve},${3:direction},${4:step},${5:count})"
+		],
+		"description": "Style\n\rnil\n\rAddRebarSet(number id,Curve3D curve,Vector3D direction,number step,number count)"
+	},
 	//Методы
 	//Класс ModelGeometry
 	//---------------------------------------------------------------------------
@@ -670,6 +702,7 @@
 		],
 		"description": "self\n\rAddGeometrySet2D (GeometrySet2D geometrySet, Placement3D oPlacement)"
 	},
+
 	//class Parameter
 	"GetValue": {
 		"prefix": ".GetValue()",

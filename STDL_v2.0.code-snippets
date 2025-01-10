@@ -671,7 +671,7 @@
 		"prefix": ".AddRebar",
 		"scope": "lua",
 		"body": [
-			".AddRebar(${1:number_id},${2:curve}}"
+			".AddRebar(${1:number_id},${2:curve})"
 		],
 		"description": "Style\n\rnil\n\rAddRebar(number_id,Curve3D curve)"
 	},

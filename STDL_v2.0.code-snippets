@@ -1708,14 +1708,14 @@
 				"\t\t\"defaultName\": \"${1:name}\",",
 				"\t\t\"description\": \"${2:description}\",",
 				"\t\t\"version\": \"$3.$4.$5\",",
-				"\t\t\"author\": \"${6:author}\""
-			"\t},"
+				"\t\t\"author\": \"${6:author}\"",
+			"\t}",
 			"\t\"styleParameters\": [",
 			"\t\t$7",
-			"\t],"
+			"\t]",
 			"\t\"ports\": [",
 			"\t\t$8",
-			"\t]"
+			"\t]",
 			"}"
 		]
 	},
@@ -1781,7 +1781,7 @@
 			"\t\"name\": \"${1:name}\",",
 			"\t\"text\": \"${2:text}\",",
 			"\t\"type\": \"Boolean\",",
-			"\t\"default\": \"${3:false}\""
+			"\t\"default\": \"${3:false}\"",
 			"}"
 		]
 	},

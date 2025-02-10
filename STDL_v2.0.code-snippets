@@ -683,6 +683,14 @@
 		],
 		"description": "Style\n\rnil\n\rAddRebarSet(number id,Curve3D curve,Vector3D direction,number step,number count)"
 	},
+	"CastToParameterContainer": {
+		"prefix": "CastToParameterContainer",
+		"scope": "lua",
+		"body": [
+			"CastToParameterContainer(${1:entity})"
+		],
+		"description": "ParameterContainer\n\rCastToParameterContainer(Entity entity)"
+	},
 	//Методы
 	//Класс ModelGeometry
 	//---------------------------------------------------------------------------

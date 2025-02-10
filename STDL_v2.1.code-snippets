@@ -1,0 +1,2101 @@
+{
+	//Двумерное моделирование
+	//Классы
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"CircularProfile": {
+		"prefix": "CircularProfile()",
+		"scope": "lua",
+		"body": [
+			"CircularProfile(${1:diameter})"
+		],
+		"description": "CircularProfile (number diameter)"
+	},
+	"RectangularProfile": {
+		"prefix": "RectangularProfile()",
+		"scope": "lua",
+		"body": [
+			"RectangularProfile(${1:width},${2:height})"
+		],
+		"description": "RectangularProfile (number width, number height)"
+	},
+	"BoundingRect": {
+		"prefix": "BoundingRect()",
+		"scope": "lua",
+		"body": [
+			"BoundingRect(${1:point1},${2:point2})"
+		],
+		"description": "BoundingRect (Point2D point1, Point2D point2)"
+	},
+	"FillArea": {
+		"prefix": "FillArea",
+		"scope": "lua",
+		"body": [
+			"FillArea(${1:outerBoundary})"
+		],
+		"description": "FillArea (Curve2D outerBoundary, table oInnerBoundaries)"
+	},
+	"GeometrySet2D": {
+		"prefix": "GeometrySet2D()",
+		"scope": "lua",
+		"body": [
+			"GeometrySet2D()"
+		],
+		"description": "GeometrySet2D ()"
+	},
+	"Matrix2D": {
+		"prefix": "Matrix2D()",
+		"scope": "lua",
+		"body": [
+			"Matrix2D()"
+		],
+		"description": "Matrix2D ()"
+	},
+	"Point2D": {
+		"prefix": "Point2D()",
+		"scope": "lua",
+		"body": [
+			"Point2D(${1:x},${2:y})"
+		],
+		"description": "Point2D (number x, number y)"
+	},
+	//Двумерное моделирование
+	//Функции
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"CreateLineSegment2D": {
+		"prefix": "CreateLineSegment2D()",
+		"scope": "lua",
+		"body": [
+			"CreateLineSegment2D(${1:startPoint},${2:endPoint})"
+		],
+		"description": "Curve2D\n\rCreateLineSegment2D (Point2D startPoint, Point2D endPoint)"
+	},
+	"CreateArc2DByThreePoints": {
+		"prefix": "CreateArc2DByThreePoints()",
+		"scope": "lua",
+		"body": [
+			"CreateArc2DByThreePoints(${1:startPoint},${2:intermediatePoint},${3:endPoint})"
+		],
+		"description": "Curve2D\n\rCreateArc2DByThreePoints (Point2D startPoint, Point2D intermediatePoint, Point2D endPoint)"
+	},
+	"CreateArc2DByCenterStartEndPoints": {
+		"prefix": "CreateArc2DByCenterStartEndPoints()",
+		"scope": "lua",
+		"body": [
+			"CreateArc2DByCenterStartEndPoints(${1:centerPoint},${2:startPoint},${3:endPoint},${4:clockwise})"
+		],
+		"description": "Curve2D\n\rCreateArc2DByCenterStartEndPoints (Point2D centerPoint, Point2D startPoint, Point2D endPoint, boolean clockwise)"
+	},
+	"CreateCircle2D": {
+		"prefix": "CreateCircle2D()",
+		"scope": "lua",
+		"body": [
+			"CreateCircle2D(${1:center},${2:radius})"
+		],
+		"description": "Curve2D\n\rCreateCircle2D (Point2D center, number radius)"
+	},
+	"CreateRectangle2D": {
+		"prefix": "CreateRectangle2D()",
+		"scope": "lua",
+		"body": [
+			"CreateRectangle2D(${1:center},${2:angle},${3:width},${4:height})"
+		],
+		"description": "Curve2D\n\rCreateRectangle2D (CPoint2D center, double angle, number width, number height)"
+	},
+	"CreateEllipse2D": {
+		"prefix": "CreateEllipse2D()",
+		"scope": "lua",
+		"body": [
+			"CreateEllipse2D(${1:center},${2:angle},${3:radiusAlongXAxis},${4:radiusAlongYAxis})"
+		],
+		"description": "Curve2D\n\rCreateEllipse2D (Point2D center, number angle, number radiusAlongXAxis, number radiusAlongYAxis)"
+	},
+	"CreateEllipticalArc2DByCenterStartEndPoints": {
+		"prefix": "CreateEllipticalArc2DByCenterStartEndPoints()",
+		"scope": "lua",
+		"body": [
+			"CreateEllipticalArc2DByCenterStartEndPoints(${1:center},${2:angle},${3:radiusAlongXAxis},${4:radiusAlongYAxis},${5:startPoint},${6:endPoint},${7:clockwise})"
+		],
+		"description": "Curve2D\n\rCreateEllipticalArc2DByCenterStartEndPoints (Point2D center, number angle, number radiusAlongXAxis, number radiusAlongYAxis, Point2D startPoint, Point2D endPoint, boolean clockwise)"
+	},
+	"CreatePolyline2D": {
+		"prefix": "CreatePolyline2D()",
+		"scope": "lua",
+		"body": [
+			"CreatePolyline2D(${1:points})"
+		],
+		"description": "Curve2D\n\rCreatePolyline2D (table points)"
+	},
+	"CreateParametricCurve2D": {
+		"prefix": "CreateParametricCurve2D()",
+		"scope": "lua",
+		"body": [
+			"CreateParametricCurve2D(${1:xFunction},${2:yFunction},${3:coordinateSystem},${4:tStart},${5:tEnd})"
+		],
+		"description": "Curve2D\n\rCreateParametricCurve2D (string xFunction, string yFunction, CoordinateSystem2D coordinateSystem, number tStart, number tEnd)"
+	},
+	"IntersectCurves2D": {
+		"prefix": "IntersectCurves2D()",
+		"scope": "lua",
+		"body": [
+			"IntersectCurves2D(${1:curve1},${2:curve2},${3:includeTouch})"
+		],
+		"description": "table\n\rIntersectCurves2D (Curve2D curve1, Curve2D curve2, boolean includeTouch)"
+	},
+	"FilletCornerAfterSegment2D": {
+		"prefix": "FilletCornerAfterSegment2D()",
+		"scope": "lua",
+		"body": [
+			"FilletCornerAfterSegment2D(${1:curve},${2:segment_index},${3:radius})"
+		],
+		"description": "nil\n\rFilletCornerAfterSegment2D (Curve2D curve, number segment_index, number radius)"
+	},
+	"FilletCorners2D": {
+		"prefix": "FilletCorners2D()",
+		"scope": "lua",
+		"body": [
+			"FilletCorners2D(${1:curve},${2:radius})"
+		],
+		"description": "nil\n\rFilletCorners2D (Curve2D curve, number radius)"
+	},
+	"CreateCompositeCurve2D": {
+		"prefix": "CreateCompositeCurve2D()",
+		"scope": "lua",
+		"body": [
+			"CreateCompositeCurve2D(${1:curves})"
+		],
+		"description": "Curve2D\n\rCreateCompositeCurve2D (table curves)"
+	},
+	"ClipCurvesByRegions": {
+		"prefix": "ClipCurvesByRegions()",
+		"scope": "lua",
+		"body": [
+			"ClipCurvesByRegions(${1:curves},${2:regions},${3:invertRegions},${4:cutOnCurve})"
+		],
+		"description": "table\n\rClipCurvesByRegions (table curves, table regions, boolean invertRegions, boolean cutOnCurve)"
+	},
+	//Трёхмерное моделирование
+	//Классы
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"Axis3D": {
+		"prefix": "Axis3D()",
+		"scope": "lua",
+		"body": [
+			"Axis3D(${1:point},${2:direction})"
+		],
+		"description": "Axis3D (Point3D point, Vector3D direction)"
+	},
+	"Matrix3D": {
+		"prefix": "Matrix3D()",
+		"scope": "lua",
+		"body": [
+			"Matrix3D()"
+		],
+		"description": "Matrix3D ()"
+	},
+	"Placement3D": {
+		"prefix": "Placement3D()",
+		"scope": "lua",
+		"body": [
+			"Placement3D(${1:point},${2:z_axis_direction},${3:x_axis_direction})"
+		],
+		"description": "Placement3D (Point3D point, Vector3D z_axis_direction, Vector3D x_axis_direction)"
+	},
+	"Point3D": {
+		"prefix": "Point3D()",
+		"scope": "lua",
+		"body": [
+			"Point3D(${1:x},${2:y},${3:z})"
+		],
+		"description": "Point3D (number x, number y, number z)"
+	},
+	"Vector3D": {
+		"prefix": "Vector3D()",
+		"scope": "lua",
+		"body": [
+			"Vector3D(${1:x},${2:y},${3:z})"
+		],
+		"description": "Vector3D (number x, number y, number z)"
+	},
+	//Трёхмерное моделирование
+	//Параметры операций
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"EvolutionParameters": {
+		"prefix": "EvolutionParameters()",
+		"scope": "lua",
+		"body": [
+			"EvolutionParameters()"
+		],
+		"description": "EvolutionParameters ()"
+	},
+	"ExtrusionParameters": {
+		"prefix": "ExtrusionParameters()",
+		"scope": "lua",
+		"body": [
+			"ExtrusionParameters(${1:ForwardDirectionDepth})"
+		],
+		"description": "ExtrusionParameters (number ForwardDirectionDepth, number oReverseDirectionDepth)"
+	},
+	"LoftParameters": {
+		"prefix": "LoftParameters()",
+		"scope": "lua",
+		"body": [
+			"LoftParameters()"
+		],
+		"description": "LoftParameters ()"
+	},
+	"RevolutionParameters": {
+		"prefix": "RevolutionParameters()",
+		"scope": "lua",
+		"body": [
+			"RevolutionParameters(${1:CounterClockwiseRotationAngle})"
+		],
+		"description": "RevolutionParameters (number CounterClockwiseRotationAngle)"
+	},
+	//Трёхмерное моделирование
+	//Открытые атрибуты параметров операций
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"OutwardOffset": {
+		"prefix": ".OutwardOffset",
+		"scope": "lua",
+		"body": [
+			".OutwardOffset"
+		],
+		"description": "EvolutionParameters,ExtrusionParameters,LoftParameters,RevolutionParameters\n\rnumber\n\rOutwardOffset"
+	},
+	"InwardOffset": {
+		"prefix": ".InwardOffset",
+		"scope": "lua",
+		"body": [
+			".InwardOffset"
+		],
+		"description": "EvolutionParameters,ExtrusionParameters,LoftParameters,RevolutionParameters\n\rnumber\n\rInwardOffset",
+		
+	},
+	"Direction": {
+		"prefix": ".Direction",
+		"scope": "lua",
+		"body": [
+			".Direction"
+		],
+		"description": "ExtrusionParameters\n\rVector3D\n\rDirection"
+	},
+	"ForwardDirectionDraftAngle": {
+		"prefix": ".ForwardDirectionDraftAngle",
+		"scope": "lua",
+		"body": [
+			".ForwardDirectionDraftAngle"
+		],
+		"description": "ExtrusionParameters\n\rnumber\n\rForwardDirectionDraftAngle"
+	},
+	"ReverseDirectionDraftAngle": {
+		"prefix": ".ReverseDirectionDraftAngle",
+		"scope": "lua",
+		"body": [
+			".ReverseDirectionDraftAngle"
+		],
+		"description": "ExtrusionParameters\n\rnumber\n\rReverseDirectionDraftAngle"
+	},
+	"GuideCurve": {
+		"prefix": ".GuideCurve",
+		"scope": "lua",
+		"body": [
+			".GuideCurve"
+		],
+		"description": "LoftParameters\n\rCurve3D\n\rGuideCurve"
+	},
+	"ControlPoints": {
+		"prefix": ".ControlPoints",
+		"scope": "lua",
+		"body": [
+			".ControlPoints"
+		],
+		"description": "LoftParameters\n\rtable\n\rControlPoints"
+	},
+	"ClockwiseRotationAngle": {
+		"prefix": ".ClockwiseRotationAngle",
+		"scope": "lua",
+		"body": [
+			".ClockwiseRotationAngle"
+		],
+		"description": "RevolutionParameters\n\rnumber\n\rClockwiseRotationAngle"
+	},
+	//Трёхмерное моделирование
+	//Функции
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"CreateLineSegment3D": {
+		"prefix": "CreateLineSegment3D()",
+		"scope": "lua",
+		"body": [
+			"CreateLineSegment3D(${1:startPoint},${2:endPoint})"
+		],
+		"description": "Curve3D\n\rCreateLineSegment3D (Point3D startPoint, Point3D endPoint)"
+	},
+	"CreateCircle3D": {
+		"prefix": "CreateCircle3D()",
+		"scope": "lua",
+		"body": [
+			"CreateCircle3D(${1:center},${2:normal},${3:radius})"
+		],
+		"description": "Curve3D\n\rCreateCircle3D (Point3D center, Vector3D normal, number radius)"
+	},
+	"CreateArc3DByThreePoints": {
+		"prefix": "CreateArc3DByThreePoints()",
+		"scope": "lua",
+		"body": [
+			"CreateArc3DByThreePoints(${1:startPoint},${2:intermediatePoint},${3:endPoint})"
+		],
+		"description": "Curve3D\n\rCreateArc3DByThreePoints (Point3D startPoint, Point3D intermediatePoint, Point3D endPoint)"
+	},
+	"CreateArc3DByCenterStartEndPoints": {
+		"prefix": "CreateArc3DByCenterStartEndPoints()",
+		"scope": "lua",
+		"body": [
+			"CreateArc3DByCenterStartEndPoints(${1:centerPoint},${2:startPoint},${3:endPoint},${4:clockwise})"
+		],
+		"description": "Curve3D\n\rCreateArc3DByCenterStartEndPoints (Point3D centerPoint, Point3D startPoint, Point3D endPoint, bool clockwise)"
+	},
+	"CreateEllipse3D": {
+		"prefix": "CreateEllipse3D()",
+		"scope": "lua",
+		"body": [
+			"CreateEllipse3D(${1:center},${2:normal},${3:majorVector},${4:majorRadius},${5:minorRadius})"
+		],
+		"description": "Curve3D\n\rCreateEllipse3D (Point3D center, Vector3D normal, Vector3D majorVector, number majorRadius, number minorRadius)"
+	},
+	"CreateRectangle3D": {
+		"prefix": "CreateRectangle3D()",
+		"scope": "lua",
+		"body": [
+			"CreateRectangle3D(${1:center},${2:normal},${3:widthVector},${4:width},${5:height})"
+		],
+		"description": "Curve3D\n\rCreateRectangle3D (Point3D center, Vector3D normal, Vector3D widthVector, number width, number height)"
+	},
+	"CreateEllipticalArc3D": {
+		"prefix": "CreateEllipticalArc3D()",
+		"scope": "lua",
+		"body": [
+			"CreateEllipticalArc3D(${1:center},${2:normal},${3:majorVector},${4:majorRadius},${5:minorRadius},${6:startPoint},${7:endPoint},${8:clockwise})"
+		],
+		"description": "Curve3D\n\rCreateEllipticalArc3D (Point3D center, Vector3D normal, Vector3D majorVector, number majorRadius, number minorRadius, Point3D startPoint, Point3D endPoint, boolean clockwise)"
+	},
+	"CreateParametricCurve3D": {
+		"prefix": "CreateParametricCurve3D()",
+		"scope": "lua",
+		"body": [
+			"CreateParametricCurve3D(${1:xFunction},${2:yFunction},${3:zFunction},${4:coordinateSystem},${5:tStart},${6:tEnd})"
+		],
+		"description": "Curve3D\n\rCreateParametricCurve3D (string xFunction, string yFunction, string zFunction, CoordinateSystem3D coordinateSystem, number tStart, number tEnd, Placement3D oPlacement)"
+	},
+	"CreatePolyline3D": {
+		"prefix": "CreatePolyline3D()",
+		"scope": "lua",
+		"body": [
+			"CreatePolyline3D(${1:points})"
+		],
+		"description": "Curve3D\n\rCreatePolyline3D (table points)"
+	},
+	"CreateCompositeCurve3D": {
+		"prefix": "CreateCompositeCurve3D()",
+		"scope": "lua",
+		"body": [
+			"CreateCompositeCurve3D(${1:curves})"
+		],
+		"description": "Curve3D\n\rCreateCompositeCurve3D (table curves)"
+	},
+	"CreateXAxis3D": {
+		"prefix": "CreateXAxis3D()",
+		"scope": "lua",
+		"body": [
+			"CreateXAxis3D()"
+		],
+		"description": "Axis3D\n\rCreateXAxis3D ()"
+	},
+	"CreateYAxis3D": {
+		"prefix": "CreateYAxis3D()",
+		"scope": "lua",
+		"body": [
+			"CreateYAxis3D()"
+		],
+		"description": "Axis3D\n\rCreateYAxis3D ()"
+	},
+	"CreateZAxis3D": {
+		"prefix": "CreateZAxis3D()",
+		"scope": "lua",
+		"body": [
+			"CreateZAxis3D()"
+		],
+		"description": "Axis3D\n\rCreateZAxis3D ()"
+	},
+	"CreateBlock": {
+		"prefix": "CreateBlock()",
+		"scope": "lua",
+		"body": [
+			"CreateBlock(${1:xSize},${2:ySize},${3:zSize})"
+		],
+		"description": "Solid\n\rCreateBlock (number xSize, number ySize, number zSize, Placement3D oPlacement)"
+	},
+	"CreateRightCircularCylinder": {
+		"prefix": "CreateRightCircularCylinder()",
+		"scope": "lua",
+		"body": [
+			"CreateRightCircularCylinder(${1:radius},${2:height})"
+		],
+		"description": "Solid\n\rCreateRightCircularCylinder (number radius, number height, Placement3D oPlacement)"
+	},
+	"CreateRightEllipticalCylinder": {
+		"prefix": "CreateRightEllipticalCylinder()",
+		"scope": "lua",
+		"body": [
+			"CreateRightEllipticalCylinder(${1:radiusX},${2:radiusY},${3:height})"
+		],
+		"description": "Solid\n\rCreateRightEllipticalCylinder (number radiusX, number radiusY, number height, Placement3D oPlacement)"
+	},
+	"CreateRightPrism": {
+		"prefix": "CreateRightPrism()",
+		"scope": "lua",
+		"body": [
+			"CreateRightPrism(${1:points},${2:height})"
+		],
+		"description": "Solid\n\rCreateRightPrism (table points, number height, Placement3D oPlacement)"
+	},
+	"CreateSphere": {
+		"prefix": "CreateSphere()",
+		"scope": "lua",
+		"body": [
+			"CreateSphere(${1:radius})"
+		],
+		"description": "Solid\n\rCreateSphere (number radius, Point3D oPoint)"
+	},
+	"CreateRightCircularCone": {
+		"prefix": "CreateRightCircularCone()",
+		"scope": "lua",
+		"body": [
+			"CreateRightCircularCone(${1:radius},${2:height})"
+		],
+		"description": "Solid\n\rCreateRightCircularCone (number radius, number height, Placement3D oPlacement)"
+	},
+	"CreateRectangularPyramid": {
+		"prefix": "CreateRectangularPyramid()",
+		"scope": "lua",
+		"body": [
+			"CreateRectangularPyramid(${1:width},${2:depth},${3:height})"
+		],
+		"description": "Solid\n\rCreateRectangularPyramid (number width, number depth, number height, Placement3D oPlacement)"
+	},
+	"CreateSweptDiskSolid": {
+		"prefix": "CreateSweptDiskSolid()",
+		"scope": "lua",
+		"body": [
+			"CreateSweptDiskSolid(${1:radius},${2:innerRadius},${3:path})"
+		],
+		"description": "Solid\n\rCreateSweptDiskSolid (number radius, number innerRadius, Curve3D path)"
+	},
+	"Extrude": {
+		"prefix": "Extrude()",
+		"scope": "lua",
+		"body": [
+			"Extrude(${1:contour},${2:parameters})"
+		],
+		"description": "Solid\n\rExtrude (Curve2D contour, ExtrusionParameters parameters, Placement3D oPlacement)"
+	},
+	"Loft": {
+		"prefix": "Loft()",
+		"scope": "lua",
+		"body": [
+			"Loft(${1:profiles},${2:placements})"
+		],
+		"description": "Solid\n\rLoft (table profiles, table placements, LoftParameters oParameters)"
+	},
+	"Evolve": {
+		"prefix": "Evolve()",
+		"scope": "lua",
+		"body": [
+			"Evolve(${1:profile},${2:placements},${3:path})"
+		],
+		"description": "Solid\n\rEvolve (Curve2D profile, Placement3D placement, Curve3D path, EvolutionParameters oParameters)"
+	},
+	"Revolve": {
+		"prefix": "Revolve()",
+		"scope": "lua",
+		"body": [
+			"Revolve(${1:generatrixCurve},${2:initialCurvePlacement},${3:rotationAxis},${4:parameters})"
+		],
+		"description": "Solid\n\rRevolve (Curve2D generatrixCurve, Placement3D initialCurvePlacement, Axis3D rotationAxis, RevolutionParameters parameters)"
+	},
+	"FilletCorners3D": {
+		"prefix": "FilletCorners3D()",
+		"scope": "lua",
+		"body": [
+			"FilletCorners3D(${1:curve},${2:radius})"
+		],
+		"description": "nil\n\rFilletCorners3D (Curve3D curve, number radius)"
+	},
+	"FilletCornerAfterSegment3D": {
+		"prefix": "FilletCornerAfterSegment3D()",
+		"scope": "lua",
+		"body": [
+			"FilletCornerAfterSegment3D(${1:curve},${2:segmentIndex},${3:radius})"
+		],
+		"description": "nil\n\rFilletCornerAfterSegment3D (Curve3D curve, number segmentIndex, number radius)"
+	},
+	"Unite": {
+		"prefix": "Unite()",
+		"scope": "lua",
+		"body": [
+			"Unite(${1:solid1},${2:solid2})"
+		],
+		"description": "Solid\n\rUnite (Solid solid1, Solid solid2)"
+	},
+	"Subtract": {
+		"prefix": "Subtract()",
+		"scope": "lua",
+		"body": [
+			"Subtract(${1:solid1},${2:solid2})"
+		],
+		"description": "Solid\n\rSubtract (Solid solid1, Solid solid2)"
+	},
+	"Intersect": {
+		"prefix": "Intersect()",
+		"scope": "lua",
+		"body": [
+			"Intersect(${1:solid1},${2:solid2})"
+		],
+		"description": "Solid\n\rIntersect (Solid solid1, Solid solid2)"
+	},
+	//Редактирование стиля
+	//Классы
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"ModelGeometry": {
+		"prefix": "ModelGeometry()",
+		"scope": "lua",
+		"body": [
+			"ModelGeometry()"
+		],
+		"description": "ModelGeometry ()"
+	},
+	//Пространство имен
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"Style": {
+		"prefix": "Style",
+		"scope": "lua",
+		"body": [
+			"Style"
+		],
+		"description": "Style"
+	},
+	"Project": {
+		"prefix": "Project",
+		"scope": "lua",
+		"body": [
+			"Project"
+		],
+		"description": "Project"
+	},
+	//Методы
+	//Пространство имен
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"SetDetailedGeometry": {
+		"prefix": ".SetDetailedGeometry()",
+		"scope": "lua",
+		"body": [
+			".SetDetailedGeometry(${1:geometry})"
+		],
+		"description": "Style\n\rnil\n\rSetDetailedGeometry (ModelGeometry geometry)"
+	},
+	"SetSymbolicGeometry": {
+		"prefix": ".SetSymbolicGeometry()",
+		"scope": "lua",
+		"body": [
+			".SetSymbolicGeometry(${1:geometry})"
+		],
+		"description": "Style\n\rnil\n\rSetSymbolicGeometry (ModelGeometry geometry)"
+	},
+	"SetSymbolGeometry": {
+		"prefix": ".SetSymbolGeometry()",
+		"scope": "lua",
+		"body": [
+			".SetSymbolGeometry(${1:geometry})"
+		],
+		"description": "Style\n\rnil\n\rSetSymbolGeometry (ModelGeometry geometry)"
+	},	
+	"GetParameterValues": {
+		"prefix": ".GetParameterValues()",
+		"scope": "lua",
+		"body": [
+			".GetParameterValues()"
+		],
+		"description": "Style,RebarStyle\n\rtable\n\rGetParameterValues ()"
+	},
+	"GetParameterGroup": {
+		"prefix": ".GetParameterGroup()",
+		"scope": "lua",
+		"body": [
+			".GetParameterGroup(${1:groupName})"
+		],
+		"description": "Style\n\rParameterGroup\n\rGetParameterGroup (string groupName)"
+	},
+	"GetParameter": {
+		"prefix": ".GetParameter()",
+		"scope": "lua",
+		"body": [
+			".GetParameters(${1:groupName},${2:paramName})"
+		],
+		"description": "Style\n\rParameter\n\rGetParameter (string groupName, string paramName)"
+	},
+	"GetPort": {
+		"prefix": ".GetPort()",
+		"scope": "lua",
+		"body": [
+			".GetPort(${1:name})"
+		],
+		"description": "Style\n\rPort\n\rGetPort (string name)"
+	},
+	"GetRebarStyle": {
+		"prefix": ".GetRebarStyle()",
+		"scope": "lua",
+		"body": [
+			".GetRebarStyle(${1:number_id})"
+		],
+		"description": "Project\n\rGetRebarStyle(number_id)"
+	},
+	"AddRebar": {
+		"prefix": ".AddRebar",
+		"scope": "lua",
+		"body": [
+			".AddRebar(${1:number_id},${2:curve})"
+		],
+		"description": "Style\n\rnil\n\rAddRebar(number_id,Curve3D curve)"
+	},
+	"AddRebarSet": {
+		"prefix": ".AddRebarSet",
+		"scope": "lua",
+		"body": [
+			".AddRebarSet(${1:number_id},${2:curve},${3:direction},${4:step},${5:count})"
+		],
+		"description": "Style\n\rnil\n\rAddRebarSet(number id,Curve3D curve,Vector3D direction,number step,number count)"
+	},
+	"CastToParameterContainer": {
+		"prefix": "CastToParameterContainer",
+		"scope": "lua",
+		"body": [
+			"CastToParameterContainer(${1:entity})"
+		],
+		"description": "ParameterContainer\n\rCastToParameterContainer(Entity entity)"
+	},
+	//Методы
+	//Класс ModelGeometry
+	//---------------------------------------------------------------------------
+	"AddSolid": {
+		"prefix": ":AddSolid()",
+		"scope": "lua",
+		"body": [
+			":AddSolid(${1:solid})"
+		],
+		"description": "self\n\rAddSolid (Solid solid)"
+	},
+	"AddGeometrySet2D": {
+		"prefix": ":AddGeometrySet2D()",
+		"scope": "lua",
+		"body": [
+			":AddGeometrySet2D(${1:geometrySet})"
+		],
+		"description": "self\n\rAddGeometrySet2D (GeometrySet2D geometrySet, Placement3D oPlacement)"
+	},
+
+	//class Parameter
+	"GetValue": {
+		"prefix": ".GetValue()",
+		"scope": "lua",
+		"body": [
+			".GetValue()"
+		],
+		"description": "object\n\rGetValue ()"
+	},
+	"SetVisible": {
+		"prefix": ":SetVisible()",
+		"scope": "lua",
+		"body": [
+			":SetVisible(${1:isVisible})"
+		],
+		"description": "Parameter,ParameterGroup\n\rnil\n\rSetVisible (boolean isVisible)"
+	},
+	"SetEnabled": {
+		"prefix": ":SetEnabled()",
+		"scope": "lua",
+		"body": [
+			":SetEnabled(${1:isEnabled})"
+		],
+		"description": "Parameter,ParameterGroup\n\rnil\n\rSetEnabled (boolean isEnabled)"
+	},
+	//class Port
+	"SetPlacement": {
+		"prefix": ":SetPlacement()",
+		"scope": "lua",
+		"body": [
+			":SetPlacement(${1:placement})"
+		],
+		"description": "Port\n\rself\n\rSetPlacement (Placement3D placement)"
+	},
+	"SetAnchor": {
+		"prefix": ":SetAnchor()",
+		"scope": "lua",
+		"body": [
+			":SetAnchor(${1:anchor})"
+		],
+		"description": "Port\n\rself\n\rSetAnchor (Axis3D anchor)"
+	},
+	"SetPipeParameters": {
+		"prefix": ":SetPipeParameters()",
+		"scope": "lua",
+		"body": [
+			":SetPipeParameters(${1:connectorType},${2:nominalDiameter})"
+		],
+		"description": "Port\n\rself\n\rSetPipeParameters (PipeConnectorType connectorType, number nominalDiameter)"
+	},
+	"SetDuctParameters": {
+		"prefix": ":SetDuctParameters()",
+		"scope": "lua",
+		"body": [
+			":SetDuctParameters(${1:connectorType},${2:profile})"
+		],
+		"description": "Port\n\rself\n\rSetDuctParameters (DuctConnectorType connectorType, Profile profile))"
+	},
+	//Методы
+	//Двумерное моделирование
+	//---------------------------------------------------------------------------
+	"Shift2D": {
+		"prefix": ":Shift2D()",
+		"scope": "lua",
+		"body": [
+			":Shift(${1:x},${2:y})"
+		],
+		"description": "Curve2D,Matrix2D,Point2D,FillArea,GeometrySet2D\n\rself\n\rShift (number x, number y)"
+	},
+	"Rotate2D": {
+		"prefix": ":Rotate2D()",
+		"scope": "lua",
+		"body": [
+			":Rotate(${1:point},${2:angle})"
+		],
+		"description": "Matrix2D,Point2D,FillArea,GeometrySet2D,Curve2D\n\rself\n\rRotate (Point2D point, number angle)"
+	},
+	"Scale2D": {
+		"prefix": ":Scale2D()",
+		"scope": "lua",
+		"body": [
+			":Scale(${1:point},${2:x_scale},${3:y_scale})"
+		],
+		"description": "GeometrySet2D,FillArea,Curve2D,Point2D,Matrix2D\n\rself\n\rScale (Point2D point, number x_scale, number y_scale)"
+	},
+	"Transform2D": {
+		"prefix": ":Transform2D()",
+		"scope": "lua",
+		"body": [
+			":Transform(${1:matrix})"
+		],
+		"description": "Curve2D,FillArea,GeometrySet2D,Matrix2D,Point2D\n\rself\n\rTransform (Matrix2D matrix)"
+	},
+	"Clone": {
+		"prefix": ":Clone()",
+		"scope": "lua",
+		"body": [
+			":Clone()"
+		],
+		"description": "Curve2D,FillArea,GeometrySet2D,Matrix2D,Point2D,Axis3D,Curve3D,Matrix3D,Placement3D,Point3D,Solid,Vector3D\n\rself\n\rClone ()"
+	},
+	"Invert": {
+		"prefix": ":Invert()",
+		"scope": "lua",
+		"body": [
+			":Invert()"
+		],
+		"description": "Curve2D,Curve3D,Matrix2D,Matrix3D\n\rself\n\rInvert ()"
+	},
+	"GetStartPoint": {
+		"prefix": ":GetStartPoint()",
+		"scope": "lua",
+		"body": [
+			":GetStartPoint()"
+		],
+		"description": "Curve2D,Curve3D,Point2D,Point3D\n\rself\n\rGetStartPoint ()"
+	},
+	"GetEndPoint": {
+		"prefix": ":GetEndPoint()",
+		"scope": "lua",
+		"body": [
+			":GetEndPoint()"
+		],
+		"description": "Curve2D,Curve3D,Point2D,Point3D\n\rself\n\rGetEndPoint ()"
+	},
+	"GetBounds": {
+		"prefix": ":GetBounds()",
+		"scope": "lua",
+		"body": [
+			":GetBounds()"
+		],
+		"description": "BoundingRect\n\rself\n\rGetBounds ()"
+	},
+	"Trim2D": {
+		"prefix": ":Trim()",
+		"scope": "lua",
+		"body": [
+			":Trim(${1:start_point},${2:end_point})"
+		],
+		"description": "Curve2D\n\rself\n\rTrim (Point2D start_point, Point2D end_point)"
+	},
+	"Trim3D": {
+		"prefix": ":Trim3D()",
+		"scope": "lua",
+		"body": [
+			":Trim(${1:start_point},${2:end_point})"
+		],
+		"description": "Curve3D\n\rself\n\rTrim (Point3D start_point, Point3D end_point)"
+	},
+	"operator==": {
+		"prefix": ":operator==()",
+		"scope": "lua",
+		"body": [
+			":operator==(${1:other})"
+		],
+		"description": "Axis3D,Curve2D,Curve3D,FillArea,Matrix2D,Matrix3D,Placement3D,Point2D,Point3D,Solid\n\rboolean\n\roperator== (other))"
+	},
+	"operator~=": {
+		"prefix": ":operator~=()",
+		"scope": "lua",
+		"body": [
+			":operator~=(${1:other})"
+		],
+		"description": "Axis3D,Curve2D,Curve3D,FillArea,Matrix2D,Matrix3D,Placement3D,Point2D,Point3D,Solid\n\rboolean\n\roperator~= (other))"
+	},
+	"GetInnerBoundaries": {
+		"prefix": ":GetInnerBoundaries()",
+		"scope": "lua",
+		"body": [
+			":GetInnerBoundaries()"
+		],
+		"description": "FillArea\n\rtable\n\rGetInnerBoundaries ()"
+	},
+	"GetOuterBoundary": {
+		"prefix": ":GetOuterBoundary()",
+		"scope": "lua",
+		"body": [
+			":GetOuterBoundary()"
+		],
+		"description": "FillArea\n\rCurve2D\n\rGetOuterBoundary ()"
+	},
+	"AddCurve": {
+		"prefix": ":AddCurve()",
+		"scope": "lua",
+		"body": [
+			":AddCurve(${1:curve})"
+		],
+		"description": "GeometrySet2D\n\rself\n\rAddCurve (Curve2D curve)"
+	},
+	"AddMaterialColorSolidArea": {
+		"prefix": ":AddMaterialColorSolidArea()",
+		"scope": "lua",
+		"body": [
+			":AddMaterialColorSolidArea(${1:curve})"
+		],
+		"description": "self\n\rAddMaterialColorSolidArea (FillArea curve)"
+	},
+	"AddLineColorSolidArea": {
+		"prefix": ":AddLineColorSolidArea()",
+		"scope": "lua",
+		"body": [
+			":AddLineColorSolidArea(${1:curve})"
+		],
+		"description": "self\n\rAddLineColorSolidArea (FillArea curve)"
+	},
+	"GetX": {
+		"prefix": ":GetX()",
+		"scope": "lua",
+		"body": [
+			":GetX()"
+		],
+		"description": "Point2D,Point3D,Vector3D\n\rnumber\n\rGetX ()"
+	},
+	"GetY": {
+		"prefix": ":GetY()",
+		"scope": "lua",
+		"body": [
+			":GetY()"
+		],
+		"description": "Point2D,Point3D,Vector3D\n\rnumber\n\rGetY ()"
+	},
+	"GetZ": {
+		"prefix": ":GetZ()",
+		"scope": "lua",
+		"body": [
+			":GetZ()"
+		],
+		"description": "Point3D,Vector3D\n\rnumber\n\rGetZ ()"
+	},
+	"GetOrigin": {
+		"prefix": ":GetOrigin()",
+		"scope": "lua",
+		"body": [
+			":GetOrigin()"
+		],
+		"description": "Axis3D,Placement3D\n\rPoint3D\n\rGetOrigin ()"
+	},
+	"GetDirection": {
+		"prefix": ":GetDirection()",
+		"scope": "lua",
+		"body": [
+			":GetDirection()"
+		],
+		"description": "Axis3D\n\rVector3D\n\rGetDirection ()"
+	},
+	"Negate": {
+		"prefix": ":Negate()",
+		"scope": "lua",
+		"body": [
+			":Negate()"
+		],
+		"description": "Axis3D,Vector3D\n\rself\n\rNegate ()"
+	},	"Shift3D": {
+		"prefix": ":Shift3D()",
+		"scope": "lua",
+		"body": [
+			":Shift(${1:x},${2:y},${3:z})"
+		],
+		"description": "Axis3D,Curve3D,Matrix3D,Point3D,Solid\n\rself\n\rShift (number x, number y, number z)"
+	},
+	"Rotate3D": {
+		"prefix": ":Rotate3D()",
+		"scope": "lua",
+		"body": [
+			":Rotate(${1:axis},${2:angle})"
+		],
+		"description": "Axis3D, Curve3D, Matrix3D, Point3D, Solid\n\rself\n\rRotate (Axis3D axis, number angle)"
+	},
+	"Scale3D": {
+		"prefix": ":Scale3D()",
+		"scope": "lua",
+		"body": [
+			":Scale(${1:fixedPoint},${2:xScale},${3:yScale},${4:zScale})"
+		],
+		"description": "Axis3D, Curve3D, Matrix3D, Point3D, Solid\n\rself\n\rScale (Point3D fixedPoint, number xScale, number yScale, number zScale)"
+	},
+	"Transform3D": {
+		"prefix": ":Transform3D()",
+		"scope": "lua",
+		"body": [
+			":Transform(${1:matrix})"
+		],
+		"description": "Axis3D,Curve3D,Matrix3D,Point3D,Solid\n\rself\n\rTransform (Matrix3D matrix)"
+	},
+	"GetXAxisDirection": {
+		"prefix": ":GetXAxisDirection()",
+		"scope": "lua",
+		"body": [
+			":GetXAxisDirection()"
+		],
+		"description": "Placement3D\n\rVector3D\n\rGetXAxisDirection ()"
+	},
+	"GetYAxisDirection": {
+		"prefix": ":GetYAxisDirection()",
+		"scope": "lua",
+		"body": [
+			":GetYAxisDirection()"
+		],
+		"description": "Placement3D\n\rVector3D\n\rGetYAxisDirection ()"
+	},
+	"GetZAxisDirection": {
+		"prefix": ":GetZAxisDirection()",
+		"scope": "lua",
+		"body": [
+			":GetZAxisDirection()"
+		],
+		"description": "Placement3D\n\rVector3D\n\rGetZAxisDirection ()"
+	},
+	"GetMatrix": {
+		"prefix": ":GetMatrix()",
+		"scope": "lua",
+		"body": [
+			":GetMatrix()"
+		],
+		"description": "Placement3D\n\rMatrix3D\n\rGetMatrix ()"
+	},
+	"ShowTangentEdges": {
+		"prefix": ":ShowTangentEdges()",
+		"scope": "lua",
+		"body": [
+			":ShowTangentEdges(${1:boolean})"
+		],
+		"description": "self\n\rShowTangentEdges (boolean show)"
+	},
+	//enum
+	//DuctConnectorType
+	//---------------------------------------------------------------------------
+	"DuctConnectorType": {
+		"prefix": "CoreEnum.DuctConnectorType",
+		"scope": "lua,json",
+		"body": [
+			"DuctConnectorType"
+		],
+		"description": "Типы соединения в воздуховодных системах"
+	},
+	"DuctConnectorType.Drawband": {
+		"prefix": "DuctConnectorType.Drawband",
+		"scope": "lua,json",
+		"body": [
+			"Drawband"
+		],
+		"description": "Бандажное соединение в воздуховодных системах."
+	},
+	"DuctConnectorType.SlipOn ": {
+		"prefix": "DuctConnectorType.SlipOn",
+		"scope": "lua,json",
+		"body": [
+			"SlipOn"
+		],
+		"description": "Ниппельное соединение в воздуховодных системах."
+	},
+	"DuctConnectorType.DriveSlip": {
+		"prefix": "DuctConnectorType.DriveSlip",
+		"scope": "lua,json",
+		"body": [
+			"DriveSlip"
+		],
+		"description": "Реечное соединение в воздуховодных системах."
+	},
+	"DuctConnectorType.Weld": {
+		"prefix": "DuctConnectorType.Weld",
+		"scope": "lua,json",
+		"body": [
+			"Weld"
+		],
+		"description": "Сварное соединение в воздуховодных системах."
+	},
+	"DuctConnectorType.Flange": {
+		"prefix": "DuctConnectorType.Flange",
+		"scope": "lua,json",
+		"body": [
+			"Flange"
+		],
+		"description": "Фланцевое соединение в воздуховодных системах."
+	},
+	//enum
+	//PipeConnectorType
+	//---------------------------------------------------------------------------
+	"PipeConnectorType": {
+		"prefix": "CoreEnum.PipeConnectorType",
+		"scope": "lua,json",
+		"body": [
+			"PipeConnectorType"
+		],
+		"description": "Типы соединения в трубопроводных системах"
+	},
+	"PipeConnectorType.Weld": {
+		"prefix": "PipeConnectorType.Weld",
+		"scope": "lua,json",
+		"body": [
+			"Weld"
+		],
+		"description": "Сварное соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.Flange": {
+		"prefix": "PipeConnectorType.Flange",
+		"scope": "lua,json",
+		"body": [
+			"Flange"
+		],
+		"description": "Фланцевое соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.Compressed": {
+		"prefix": "PipeConnectorType.Compressed",
+		"scope": "lua,json",
+		"body": [
+			"Compressed"
+		],
+		"description": "Обжимное соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.Socket": {
+		"prefix": "PipeConnectorType.Socket",
+		"scope": "lua,json",
+		"body": [
+			"Socket"
+		],
+		"description": "Раструбное соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.Thread": {
+		"prefix": "PipeConnectorType.Thread",
+		"scope": "lua,json",
+		"body": [
+			"Thread"
+		],
+		"description": "Резьбовое соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.QuickConnection": {
+		"prefix": "PipeConnectorType.QuickConnection",
+		"scope": "lua,json",
+		"body": [
+			"QuickConnection"
+		],
+		"description": "Быстроразъёмное соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.Glue": {
+		"prefix": "PipeConnectorType.Glue",
+		"scope": "lua,json",
+		"body": [
+			"Glue"
+		],
+		"description": "Клеевое соединение в трубопроводных системах"
+	},
+	"PipeConnectorType.FusionWelding": {
+		"prefix": "PipeConnectorType.FusionWelding",
+		"scope": "lua,json",
+		"body": [
+			"FusionWelding"
+		],
+		"description": "Соединение диффузионной сваркой в трубопроводных системах"
+	},
+	"PipeConnectorType.Grooved": {
+		"prefix": "PipeConnectorType.Grooved",
+		"scope": "lua,json",
+		"body": [
+			"Grooved"
+		],
+		"description": "Замковое соединение в трубопроводных системах"
+	},
+	//enum
+	//PipeThreadSize
+	//---------------------------------------------------------------------------
+	"PipeThreadSize": {
+		"prefix": "CoreEnum.PipeThreadSize",
+		"scope": "lua,json",
+		"body": [
+			"PipeThreadSize"
+		],
+		"description": "Диаметры резьбового соединения в трубопроводных системах."
+	},
+	"D0_25": {
+		"prefix": "PipeThreadSize.D0_25",
+		"scope": "lua,json",
+		"body": [
+			"D0_25"
+		],
+		"description": "Диаметр резьбового соединения 1/4\""
+	},
+	"D0_375": {
+		"prefix": "PipeThreadSize.D0_375",
+		"scope": "lua,json",
+		"body": [
+			"D0_375"
+		],
+		"description": "Диаметр резьбового соединения 3/8\""
+	},
+	"D0_50": {
+		"prefix": "PipeThreadSize.D0_50",
+		"scope": "lua,json",
+		"body": [
+			"D0_50"
+		],
+		"description": "Диаметр резьбового соединения 1/2\""
+	},
+	"D0_75": {
+		"prefix": "PipeThreadSize.D0_75",
+		"scope": "lua,json",
+		"body": [
+			"D0_75"
+		],
+		"description": "Диаметр резьбового соединения 3/4\""
+	},
+	"D1_0": {
+		"prefix": "PipeThreadSize.D1_0",
+		"scope": "lua,json",
+		"body": [
+			"D1_0"
+		],
+		"description": "Диаметр резьбового соединения 1\""
+	},
+	"D1_25": {
+		"prefix": "PipeThreadSize.D1_25",
+		"scope": "lua,json",
+		"body": [
+			"D1_25"
+		],
+		"description": "Диаметр резьбового соединения 1 1/4\""
+	},
+	"D1_50": {
+		"prefix": "PipeThreadSize.D1_50",
+		"scope": "lua,json",
+		"body": [
+			"D1_50"
+		],
+		"description": "Диаметр резьбового соединения 1 1/2\""
+	},
+	"D2_0": {
+		"prefix": "PipeThreadSize.D2_0",
+		"scope": "lua,json",
+		"body": [
+			"D2_0"
+		],
+		"description": "Диаметр резьбового соединения 2\""
+	},
+	"D2_5": {
+		"prefix": "PipeThreadSize.D2_5",
+		"scope": "lua,json",
+		"body": [
+			"D2_5"
+		],
+		"description": "Диаметр резьбового соединения 2 1/2\""
+	},
+	"D3_0": {
+		"prefix": "PipeThreadSize.D3_0",
+		"scope": "lua,json",
+		"body": [
+			"D3_0"
+		],
+		"description": "Диаметр резьбового соединения 3\""
+	},
+	"D3_5": {
+		"prefix": "PipeThreadSize.D3_5",
+		"scope": "lua,json",
+		"body": [
+			"D3_5"
+		],
+		"description": "Диаметр резьбового соединения 3 1/2\""
+	},
+	"D4_0": {
+		"prefix": "PipeThreadSize.D4_0",
+		"scope": "lua,json",
+		"body": [
+			"D4_0"
+		],
+		"description": "Диаметр резьбового соединения 4\""
+	},
+	"D5_0": {
+		"prefix": "PipeThreadSize.D5_0",
+		"scope": "lua,json",
+		"body": [
+			"D5_0"
+		],
+		"description": "Диаметр резьбового соединения 5\""
+	},
+	"D6_0": {
+		"prefix": "PipeThreadSize.D6_0",
+		"scope": "lua,json",
+		"body": [
+			"D6_0"
+		],
+		"description": "Диаметр резьбового соединения 6\""
+	},
+	//LUA
+	//
+	//---------------------------------------------------------------------------
+	"elif": {
+        "body": "else if ${1:condition} then\n\t${0:-- body}\n",
+        "description": "elif",
+        "prefix": "elif",
+        "scope": "lua"
+    },
+	"for": {
+        "body": "for ${1:i}=${2:1},${3:10} do\n\t${0:print(i)}\nend",
+        "description": "for i=1,10",
+        "prefix": "for",
+        "scope": "lua"
+    },
+    "fori": {
+        "body": "for ${1:i},${2:v} in ipairs(${3:table_name}) do\n\t${0:print(i,v)}\nend",
+        "description": "for i,v in ipairs()",
+        "prefix": "fori",
+        "scope": "lua"
+    },
+    "forp": {
+        "body": "for ${1:k},${2:v} in pairs(${3:table_name}) do\n\t${0:print(k,v)}\nend",
+        "description": "for k,v in pairs()",
+        "prefix": "forp",
+        "scope": "lua"
+    },
+	"fun": {
+        "body": "function ${1:function_name}( ${2:...} )\n\t${0:-- body}\nend",
+        "description": "function",
+        "prefix": "fun",
+        "scope": "lua"
+    },
+	"function": {
+        "body": "function ${1:function_name}( ${2:...} )\n\t${0:-- body}\nend",
+        "description": "function",
+        "prefix": "function",
+        "scope": "lua"
+    },
+	"if": {
+        "body": "if ${1:condition} then\n\t${0:-- body}\nend",
+        "description": "if",
+        "prefix": "if",
+        "scope": "lua"
+    },
+    "ifel": {
+        "body": "if ${1:condition} then\n\t${2:-- body}\nelse\n\t${0:-- body}\nend",
+        "description": "ifel",
+        "prefix": "ifel",
+        "scope": "lua"
+    },
+	"ipairs": {
+        "body": "ipairs(${0:...})",
+        "description": "ipairs (t)",
+        "prefix": "ipairs",
+        "scope": "lua"
+    },
+	"local": {
+        "body": "local ${1:x} = ${0:1}",
+        "description": "local x = 1",
+        "prefix": "local",
+        "scope": "lua"
+    },
+    "math.abs": {
+        "body": "math.abs( ${1:x} )",
+        "description": "math.abs",
+        "prefix": "math.abs",
+        "scope": "lua"
+    },
+    "math.acos": {
+        "body": "math.acos( ${1:x} )",
+        "description": "math.acos",
+        "prefix": "math.acos",
+        "scope": "lua"
+    },
+    "math.asin": {
+        "body": "math.asin( ${1:x} )",
+        "description": "math.asin",
+        "prefix": "math.asin",
+        "scope": "lua"
+    },
+    "math.atan": {
+        "body": "math.atan( ${1:y}${2:[, x]} )",
+        "description": "math.atan",
+        "prefix": "math.atan",
+        "scope": "lua"
+    },
+    "math.atan2": {
+        "body": "math.atan2(${0:...})",
+        "description": "math.atan2 (y, x)",
+        "prefix": "math.atan2",
+        "scope": "lua"
+    },
+    "math.ceil": {
+        "body": "math.ceil( ${1:x} )",
+        "description": "math.ceil",
+        "prefix": "math.ceil",
+        "scope": "lua"
+    },
+    "math.cos": {
+        "body": "math.cos( ${1:x} )",
+        "description": "math.cos",
+        "prefix": "math.cos",
+        "scope": "lua"
+    },
+    "math.cosh": {
+        "body": "math.cosh(${0:...})",
+        "description": "math.cosh (x)",
+        "prefix": "math.cosh",
+        "scope": "lua"
+    },
+    "math.deg": {
+        "body": "math.deg( ${1:x} )",
+        "description": "math.deg",
+        "prefix": "math.deg",
+        "scope": "lua"
+    },
+    "math.exp": {
+        "body": "math.exp( ${1:x} )",
+        "description": "math.exp",
+        "prefix": "math.exp",
+        "scope": "lua"
+    },
+    "math.floor": {
+        "body": "math.floor( ${1:x} )",
+        "description": "math.floor",
+        "prefix": "math.floor",
+        "scope": "lua"
+    },
+    "math.fmod": {
+        "body": "math.fmod( ${1:x},${2:y} )",
+        "description": "math.fmod",
+        "prefix": "math.fmod",
+        "scope": "lua"
+    },
+    "math.frexp": {
+        "body": "math.frexp(${0:...})",
+        "description": "math.frexp (x)",
+        "prefix": "math.frexp",
+        "scope": "lua"
+    },
+    "math.huge": {
+        "body": "math.huge(${0:...})",
+        "description": "math.huge",
+        "prefix": "math.huge",
+        "scope": "lua"
+    },
+    "math.ldexp": {
+        "body": "math.ldexp(${0:...})",
+        "description": "math.ldexp (m, e)",
+        "prefix": "math.ldexp",
+        "scope": "lua"
+    },
+    "math.log": {
+        "body": "math.log( ${1:x}${2:[, base]} )",
+        "description": "math.log",
+        "prefix": "math.log",
+        "scope": "lua"
+    },
+    "math.log10": {
+        "body": "math.log10(${0:...})",
+        "description": "5.1\n\nmath.log10 (x)",
+        "prefix": "math.log10",
+        "scope": "lua"
+    },
+    "math.math.randomseed": {
+        "body": "math.math.randomseed( ${1:x} )",
+        "description": "math.math.randomseed",
+        "prefix": "math.math.randomseed",
+        "scope": "lua"
+    },
+    "math.max": {
+        "body": "math.max( ${1:x},${2:...} )",
+        "description": "math.max",
+        "prefix": "math.max",
+        "scope": "lua"
+    },
+    "math.maxinteger": {
+        "body": "math.maxinteger(${0:...})",
+        "description": "math.maxinteger",
+        "prefix": "math.maxinteger",
+        "scope": "lua"
+    },
+    "math.min": {
+        "body": "math.min( ${1:x},${2:...} )",
+        "description": "math.min",
+        "prefix": "math.min",
+        "scope": "lua"
+    },
+    "math.mininteger": {
+        "body": "math.mininteger(${0:...})",
+        "description": "math.mininteger",
+        "prefix": "math.mininteger",
+        "scope": "lua"
+    },
+    "math.modf": {
+        "body": "math.modf( ${1:x} )",
+        "description": "math.modf",
+        "prefix": "math.modf",
+        "scope": "lua"
+    },
+    "math.pi": {
+        "body": "math.pi(${0:...})",
+        "description": "math.pi",
+        "prefix": "math.pi",
+        "scope": "lua"
+    },
+    "math.pow": {
+        "body": "math.pow(${0:...})",
+        "description": "math.pow (x, y)",
+        "prefix": "math.pow",
+        "scope": "lua"
+    },
+    "math.rad": {
+        "body": "math.rad(${0:...})",
+        "description": "math.rad (x)",
+        "prefix": "math.rad",
+        "scope": "lua"
+    },
+    "math.random": {
+        "body": "math.random( ${1:[m]}${2:[, n]} )",
+        "description": "math.random",
+        "prefix": "math.random",
+        "scope": "lua"
+    },
+    "math.randomseed": {
+        "body": "math.randomseed(${0:...})",
+        "description": "math.randomseed (x)",
+        "prefix": "math.randomseed",
+        "scope": "lua"
+    },
+    "math.sin": {
+        "body": "math.sin( ${1:x} )",
+        "description": "math.sin",
+        "prefix": "math.sin",
+        "scope": "lua"
+    },
+    "math.sinh": {
+        "body": "math.sinh(${0:...})",
+        "description": "math.sinh (x)",
+        "prefix": "math.sinh",
+        "scope": "lua"
+    },
+    "math.sqrt": {
+        "body": "math.sqrt( ${1:x} )",
+        "description": "math.sqrt",
+        "prefix": "math.sqrt",
+        "scope": "lua"
+    },
+    "math.tan": {
+        "body": "math.tan( ${1:x} )",
+        "description": "math.tan",
+        "prefix": "math.tan",
+        "scope": "lua"
+    },
+    "math.tanh": {
+        "body": "math.tanh(${0:...})",
+        "description": "math.tanh (x)",
+        "prefix": "math.tanh",
+        "scope": "lua"
+    },
+    "math.tointeger": {
+        "body": "math.tointeger( ${1:x} )",
+        "description": "math.tointeger",
+        "prefix": "math.tointeger",
+        "scope": "lua"
+    },
+    "math.type": {
+        "body": "math.type( ${1:x} )",
+        "description": "math.type",
+        "prefix": "math.type",
+        "scope": "lua"
+    },
+    "math.ult": {
+        "body": "math.ult(${0:...})",
+        "description": "math.ult (m, n)",
+        "prefix": "math.ult",
+        "scope": "lua"
+    },
+	"next": {
+        "body": "next(${1:table}${2:[, index]})",
+        "description": "next (table [, index])",
+        "prefix": "next",
+        "scope": "lua"
+    },
+	"print": {
+        "body": "print(${1:...})",
+        "description": "print(...)",
+        "prefix": "print",
+        "scope": "lua"
+    },
+    "rawequal": {
+        "body": "rawequal(${0:...})",
+        "description": "rawequal (v1, v2)",
+        "prefix": "rawequal",
+        "scope": "lua"
+    },
+    "rawget": {
+        "body": "rawget(${0:...})",
+        "description": "rawget (table, index)",
+        "prefix": "rawget",
+        "scope": "lua"
+    },
+    "rawlen": {
+        "body": "rawlen(${0:...})",
+        "description": "5.2,rawlen (v)",
+        "prefix": "rawlen",
+        "scope": "lua"
+    },
+    "rawset": {
+        "body": "rawset(${0:...})",
+        "description": "rawset (table, index, value)",
+        "prefix": "rawset",
+        "scope": "lua"
+    },
+    "req": {
+        "body": "require(\"${1:module}\")",
+        "description": "require()",
+        "prefix": "req",
+        "scope": "lua"
+    },
+    "require": {
+        "body": "require(\"${1:module}\")",
+        "description": "require()",
+        "prefix": "require",
+        "scope": "lua"
+    },
+    "ret": {
+        "body": "return ${1:...}",
+        "description": "return ...",
+        "prefix": "ret",
+        "scope": "lua"
+    },
+    "select": {
+        "body": "select(${1:index}, ${2:...})",
+        "description": "select (index, \u00b7\u00b7\u00b7)",
+        "prefix": "select",
+        "scope": "lua"
+    },
+    "setmetatable": {
+        "body": "setmetatable(${1:table}, ${2:metatable})",
+        "description": "setmetatable (table, metatable)",
+        "prefix": "setmetatable",
+        "scope": "lua"
+    },
+	"table.concat": {
+        "body": "table.concat( ${1:tablename}${2:, \", \"}${3:, start_index}${4:, end_index} )",
+        "description": "table.concat",
+        "prefix": "table.concat",
+        "scope": "lua"
+    },
+    "table.insert": {
+        "body": "table.insert( ${1:list},${2: [pos,]}${3: value} )",
+        "description": "table.insert",
+        "prefix": "table.insert",
+        "scope": "lua"
+    },
+    "table.maxn": {
+        "body": "table.maxn(${0:...})",
+        "description": "5.1\n\ntable.maxn (table)",
+        "prefix": "table.maxn",
+        "scope": "lua"
+    },
+    "table.move": {
+        "body": "table.move(${0:...})",
+        "description": "table.move (a1, f, e, t [,a2])",
+        "prefix": "table.move",
+        "scope": "lua"
+    },
+    "table.pack": {
+        "body": "table.pack(${0:...})",
+        "description": "5.2,table.pack (...)",
+        "prefix": "table.pack",
+        "scope": "lua"
+    },
+    "table.remove": {
+        "body": "table.remove( ${1:list},${2: [pos,]} )",
+        "description": "table.remove",
+        "prefix": "table.remove",
+        "scope": "lua"
+    },
+    "table.sort": {
+        "body": "table.sort( ${1:tablename}${2:, sortfunction} )",
+        "description": "table.sort",
+        "prefix": "table.sort",
+        "scope": "lua"
+    },
+    "table.unpack": {
+        "body": "table.unpack(${0:...})",
+        "description": "table.unpack (list [, i [, j]])",
+        "prefix": "table.unpack",
+        "scope": "lua"
+    },
+	"tonumber": {
+        "body": "tonumber(${1:e}${2:[, base]})",
+        "description": "tonumber (e [, base])",
+        "prefix": "tonumber",
+        "scope": "lua"
+    },
+    "tostring": {
+        "body": "tostring(${1:v})",
+        "description": "tostring (v)",
+        "prefix": "tostring",
+        "scope": "lua"
+    },
+    "type": {
+        "body": "type(${1:v})",
+        "description": "type (v)",
+        "prefix": "type",
+        "scope": "lua"
+    },
+
+	//JSON
+	//Двумерное моделирование
+	//---------------------------------------------------------------------------
+	"STDL_scheme": {
+		"prefix": "STDL scheme",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"metadata\": {",
+				"\t\t\"defaultName\": \"${1:name}\",",
+				"\t\t\"description\": \"${2:description}\",",
+				"\t\t\"version\": \"$3.$4.$5\",",
+				"\t\t\"author\": \"${6:author}\"",
+			"\t},",
+			"\t\"styleParameters\": [",
+			"\t\t$7",
+			"\t],",
+			"\t\"ports\": [",
+			"\t\t$8",
+			"\t]",
+			"}"
+		]
+	},
+	"ParameterGroup": {
+		"prefix": "StyleParameters.ParameterGroup",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:GroupName}\",",
+			"\t\"text\": \"${2:Text}\",",
+			"\t\"params\": [",
+			"\t\t$3",
+			"\t]",
+			"}"
+		]
+	},
+	"Parameter": {
+		"prefix": "StyleParameters.Parameter",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"${3:type}\",",
+			"\t\"default\": \"${4:default}\",",
+			"\t\"min\": \"${5:min}\",",
+			"\t\"max\": \"${6:max}\"",
+			"}"
+		]
+	},
+	"ParameterMaterial": {
+		"prefix": "StyleParameters.ParameterMaterial",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:Material}\",",
+			"\t\"text\": \"${2:Материал}\",",
+			"\t\"type\": \"${3:Id}\",",
+			"\t\"entityTypeId\": \"${4:0abcb18f-0aaf-4509-bf89-5c5fad9d5d8b}\"",
+			"}"
+		]
+	},
+	"ParameterUserEnum": {
+		"prefix": "StyleParameters.ParameterUserEnum",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"UserEnum\",",
+			"\t\"default\": \"${3:default}\",",
+			"\t\"items\": [",
+			"\t\t$4",
+			"\t]",
+			"}"
+		]
+	},
+	"ParameterBoolean": {
+		"prefix": "StyleParameters.ParameterBoolean",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"Boolean\",",
+			"\t\"default\": \"${3:false}\""
+			"}"
+		]
+	},
+	"Items": {
+		"prefix": "items",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"key\": \"${1:key}\",",
+			"\t\"text\": \"${2:text}\"",
+			"}"
+		]
+	},
+	"ParameterCoreEnum": {
+		"prefix": "StyleParameters.ParameterCoreEnum",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"CoreEnum\",",
+			"\t\"coreEnumType\": \"${3:coreEnumType}\",",
+			"\t\"default\": \"${4:default}\"",
+			"}"
+		]
+	},
+	"Port": {
+		"prefix": "Port",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:Name}\",",
+			"\t\"text\": \"${2:Text}\",",
+			"\t\"flowDirection\": \"${3:FlowDirection}\",",
+			"\t\"systemCategories\": [",
+			"\t\t$4",
+			"\t]",
+			"}"
+		]
+	},
+	"tasks": {
+		"prefix": "make",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"tasks\": [",
+				"\t\t{",
+				"\t\t\t\"type\": \"shell\",",
+				"\t\t\t\"label\": \"Build rst file\",",
+				"\t\t\t\"command\": \"${1:Patch}RstBuilder.exe\",",
+				"\t\t\t\"args\": [",
+				"\t\t\t\t\"${2:Name}.json\",",
+				"\t\t\t\t\"${2:Name}.lua\",",
+				"\t\t\t\t${4:include file}",
+				"\t\t\t\t\"-o\",",
+				"\t\t\t\t\"$3${2:Name}.rst\"",
+				"\t\t\t],",
+				"\t\t\t\"group\": {",
+				"\t\t\t\"kind\": \"build\",",
+				"\t\t\t\"isDefault\": true",
+				"\t\t\t}",
+				"\t\t}",
+			"\t]",
+			"}"
+		]
+	},
+	"IncludeFile": {
+        "prefix": "include file",
+		"scope": "json",
+		"body": [
+			"\"-i\",",
+			"\"${1:Patch}.lua\","
+        ],
+		"description": "Указание подключаемого файла"
+    },
+	"Inlet": {
+		"prefix": "FlowDirection.Inlet",
+		"scope": "json",
+		"body": [
+			"Inlet",
+		],
+		"description": "Направление потока\n\rflowDirection\n\rВход"
+	},
+	"Outlet": {
+		"prefix": "FlowDirection.Outlet",
+		"scope": "json",
+		"body": [
+			"Outlet",
+		],
+		"description": "Направление потока\n\rflowDirection\n\rВыход"
+	},
+	"InletAndOutlet": {
+		"prefix": "FlowDirection.InletAndOutlet",
+		"scope": "json",
+		"body": [
+			"InletAndOutlet",
+		],
+		"description": "Направление потока\n\rflowDirection\n\rВход и выход"
+	},
+	"Integer": {
+		"prefix": "Type.Integer",
+		"scope": "json",
+		"body": [
+			"Integer",
+		],
+		"description": "Целое число"
+	},
+	"Real": {
+		"prefix": "Type.Real",
+		"scope": "json",
+		"body": [
+			"Real",
+		],
+		"description": "Действительное число"
+	},
+	"String": {
+		"prefix": "Type.String",
+		"scope": "json",
+		"body": [
+			"String",
+		],
+		"description": "Строка"
+	},
+	"Length": {
+		"prefix": "Type.Length",
+		"scope": "json",
+		"body": [
+			"Length",
+		],
+		"description": "Длина в миллиметрах"
+	},
+	"Angle": {
+		"prefix": "Type.Angle",
+		"scope": "json",
+		"body": [
+			"Angle",
+		],
+		"description": "Угол в десятичных градусах"
+	},
+	"Boolean": {
+		"prefix": "Type.Boolean",
+		"scope": "json",
+		"body": [
+			"Boolean",
+		],
+		"description": "Булевый (true/false)"
+	},
+	"DomesticColdWater": {
+		"prefix": "PipeSystems.DomesticColdWater",
+		"scope": "json",
+		"body": [
+			"\"DomesticColdWater\"",
+		],
+		"description": "Категория трубопроводных систем\n\rDomesticColdWater\n\rБытовое холодное водоснабжение"
+	},
+	"DomesticHotWater": {
+		"prefix": "PipeSystems.DomesticHotWater",
+		"scope": "json",
+		"body": [
+			"\"DomesticHotWater\"",
+		],
+		"description": "Категория трубопроводных систем\n\rDomesticHotWater\n\rБытовое горячее водоснабжение"
+	},
+	"DomesticSewage": {
+		"prefix": "PipeSystems.DomesticSewage",
+		"scope": "json",
+		"body": [
+			"\"DomesticSewage\"",
+		],
+		"description": "Категория трубопроводных систем\n\rDomesticSewage\n\rБытовая канализация"
+	},
+	"Gas": {
+		"prefix": "PipeSystems.Gas",
+		"scope": "json",
+		"body": [
+			"\"Gas\"",
+		],
+		"description": "Категория трубопроводных систем\n\rGas\n\rБытовое газоснабжение"
+	},
+	"Firewater": {
+		"prefix": "PipeSystems.Firewater",
+		"scope": "json",
+		"body": [
+			"\"Firewater\"",
+		],
+		"description": "Категория трубопроводных систем\n\rFirewater\n\rВодяное пожаротушение"
+	},
+	"Heating": {
+		"prefix": "PipeSystems.Heating",
+		"scope": "json",
+		"body": [
+			"\"Heating\"",
+		],
+		"description": "Категория трубопроводных систем\n\rHeating\n\rВодяное теплоснабжение"
+	},
+	"GaseousFireSuppression": {
+		"prefix": "PipeSystems.GaseousFireSuppression",
+		"scope": "json",
+		"body": [
+			"\"GaseousFireSuppression\"",
+		],
+		"description": "Категория трубопроводных систем\n\rGaseousFireSuppression\n\rГазовое пожаротушение"
+	},
+	"Rainwater": {
+		"prefix": "PipeSystems.Rainwater",
+		"scope": "json",
+		"body": [
+			"\"Rainwater\"",
+		],
+		"description": "Категория трубопроводных систем\n\rRainwater\n\rДождевая канализация"
+	},
+	"IndustrialColdWater": {
+		"prefix": "PipeSystems.IndustrialColdWater",
+		"scope": "json",
+		"body": [
+			"\"IndustrialColdWater\"",
+		],
+		"description": "Категория трубопроводных систем\n\rIndustrialColdWater\n\rПроизводственное холодное водоснабжение"
+	},
+	"IndustrialHotWater": {
+		"prefix": "PipeSystems.IndustrialHotWater",
+		"scope": "json",
+		"body": [
+			"\"IndustrialHotWater\"",
+		],
+		"description": "Категория трубопроводных систем\n\rIndustrialHotWater\n\rПроизводственное горячее водоснабжение"
+	},
+	"IndustrialSewage": {
+		"prefix": "PipeSystems.IndustrialSewage",
+		"scope": "json",
+		"body": [
+			"\"IndustrialSewage\"",
+		],
+		"description": "Категория трубопроводных систем\n\rIndustrialSewage\n\rПроизводственная канализация"
+	},
+	"OtherPipeSystem": {
+		"prefix": "PipeSystems.OtherPipeSystem",
+		"scope": "json",
+		"body": [
+			"\"OtherPipeSystem\"",
+		],
+		"description": "Категория трубопроводных систем\n\rOtherPipeSystem\n\rПрочие трубопроводные системы"
+	},
+	"Ventilation": {
+		"prefix": "DuctSystems.Ventilation",
+		"scope": "json",
+		"body": [
+			"\"Ventilation\"",
+		],
+		"description": "Категория воздуховодных систем\n\rVentilation\n\rПриточная вентиляция"
+	},
+	"Exhaust": {
+		"prefix": "DuctSystems.Exhaust",
+		"scope": "json",
+		"body": [
+			"\"Exhaust\"",
+		],
+		"description": "Категория воздуховодных систем\n\rExhaust\n\rВытяжная вентиляция"
+	},
+	"Pressurization": {
+		"prefix": "DuctSystems.Pressurization",
+		"scope": "json",
+		"body": [
+			"\"Pressurization\"",
+		],
+		"description": "Категория воздуховодных систем\n\rPressurization\n\rВытяжное дымоудаление"
+	},
+	"Vacuum": {
+		"prefix": "DuctSystems.Vacuum",
+		"scope": "json",
+		"body": [
+			"\"Vacuum\"",
+		],
+		"description": "Категория воздуховодных систем\n\rVacuum\n\rПылеудаление"
+	},
+	"OtherDuctSystem": {
+		"prefix": "DuctSystems.OtherDuctSystem",
+		"scope": "json",
+		"body": [
+			"\"OtherDuctSystem\"",
+		],
+		"description": "Категория воздуховодных систем\n\rOtherDuctSystem\n\rПрочие воздуховодные системы"
+	},
+	"LightingCircuit": {
+		"prefix": "ElectricalSystems.LightingCircuit",
+		"scope": "json",
+		"body": [
+			"\"LightingCircuit\"",
+		],
+		"description": "Категория электрических систем\n\rLightingCircuit\n\rОсветительная сеть"
+	},
+	"PowerCircuit": {
+		"prefix": "ElectricalSystems.PowerCircuit",
+		"scope": "json",
+		"body": [
+			"\"PowerCircuit\"",
+		],
+		"description": "Категория электрических систем\n\rPowerCircuit\n\rСиловая сеть"
+	},
+	"OtherElectricalSystem": {
+		"prefix": "ElectricalSystems.OtherElectricalSystem",
+		"scope": "json",
+		"body": [
+			"\"OtherElectricalSystem\"",
+		],
+		"description": "Категория электрических систем\n\rOtherElectricalSystem\n\rПрочие электрические системы"
+	}
+
+}

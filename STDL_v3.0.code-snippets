@@ -28,7 +28,7 @@
 		"description": "BoundingRect (Point2D point1, Point2D point2)"
 	},
 	"FillArea": {
-		"prefix": "FillArea",
+		"prefix": "FillArea()",
 		"scope": "lua",
 		"body": [
 			"FillArea(${1:outerBoundary})"
@@ -146,10 +146,8 @@
 	"FilletCornerAfterSegment2D": {
 		"prefix": "FilletCornerAfterSegment2D()",
 		"scope": "lua",
-		"body": [
-			"FilletCornerAfterSegment2D(${1:curve},${2:segment_index},${3:radius})"
-		],
-		"description": "nil\n\rFilletCornerAfterSegment2D (Curve2D curve, number segment_index, number radius)"
+		"body": ["FilletCornerAfterSegment2D(${1:curve},${2:segmentIndex},${3:radius})"],
+		"description": "nil\n\rFilletCornerAfterSegment2D (Curve2D curve, number segmentIndex, number radius)"
 	},
 	"FilletCorners2D": {
 		"prefix": "FilletCorners2D()",
@@ -273,8 +271,7 @@
 		"body": [
 			".InwardOffset"
 		],
-		"description": "EvolutionParameters,ExtrusionParameters,LoftParameters,RevolutionParameters\n\rnumber\n\rInwardOffset",
-		
+		"description": "EvolutionParameters,ExtrusionParameters,LoftParameters,RevolutionParameters\n\rnumber\n\rInwardOffset"	
 	},
 	"Direction": {
 		"prefix": ".Direction",
@@ -627,6 +624,22 @@
 		],
 		"description": "Style\n\rnil\n\rSetSymbolGeometry (ModelGeometry geometry)"
 	},	
+	"SetInsulationSkeleton": {
+		"prefix": ".SetInsulationSkeleton()",
+		"scope": "lua",
+		"body": [
+			".SetInsulationSkeleton({",
+			"\t{",
+			"\t\tsections = {${1:contour}},",
+			"\t\tplacements = {${2:placement}},",
+			"\t\tspine = ${3:spine},",
+			"\t\tcapStart = ${4:InsulationCapType.None},",
+			"\t\tcapEnd = ${5:InsulationCapType.None}",
+			"\t}",
+			"})"
+		],
+		"description": "Style\n\rnil\n\rSetInsulationSkeleton (table parts)\n\rЗадает остов изоляции для объекта"
+	},
 	"GetParameterValues": {
 		"prefix": ".GetParameterValues()",
 		"scope": "lua",
@@ -647,9 +660,9 @@
 		"prefix": ".GetParameter()",
 		"scope": "lua",
 		"body": [
-			".GetParameters(${1:groupName},${2:paramName})"
+			".GetParameter(${1:groupName},${2:paramName})"
 		],
-		"description": "Style\n\rParameter\n\rGetParameter (string groupName, string paramName)"
+		"description": "Style\n\rParameter\n\rGetParameter(string groupName, string paramName)"
 	},
 	"GetPort": {
 		"prefix": ".GetPort()",
@@ -668,7 +681,7 @@
 		"description": "Project\n\rGetRebarStyle(number_id)"
 	},
 	"AddRebar": {
-		"prefix": ".AddRebar",
+		"prefix": ".AddRebar()",
 		"scope": "lua",
 		"body": [
 			".AddRebar(${1:number_id},${2:curve})"
@@ -676,7 +689,7 @@
 		"description": "Style\n\rnil\n\rAddRebar(number_id,Curve3D curve)"
 	},
 	"AddRebarSet": {
-		"prefix": ".AddRebarSet",
+		"prefix": ".AddRebarSet()",
 		"scope": "lua",
 		"body": [
 			".AddRebarSet(${1:number_id},${2:curve},${3:direction},${4:step},${5:count})"
@@ -684,7 +697,7 @@
 		"description": "Style\n\rnil\n\rAddRebarSet(number id,Curve3D curve,Vector3D direction,number step,number count)"
 	},
 	"CastToParameterContainer": {
-		"prefix": "CastToParameterContainer",
+		"prefix": "CastToParameterContainer()",
 		"scope": "lua",
 		"body": [
 			"CastToParameterContainer(${1:entity})"
@@ -713,10 +726,10 @@
 
 	//class Parameter
 	"GetValue": {
-		"prefix": ".GetValue()",
+		"prefix": ":GetValue()",
 		"scope": "lua",
 		"body": [
-			".GetValue()"
+			":GetValue()"
 		],
 		"description": "object\n\rGetValue ()"
 	},
@@ -1039,259 +1052,66 @@
 	//DuctConnectorType
 	//---------------------------------------------------------------------------
 	"DuctConnectorType": {
-		"prefix": "CoreEnum.DuctConnectorType",
-		"scope": "lua,json",
+		"prefix": "DuctConnectorType",
+		"scope": "lua",
 		"body": [
-			"DuctConnectorType"
+			"DuctConnectorType.${1|Drawband,SlipOn,DriveSlip,Weld,Flange|}"
 		],
-		"description": "Типы соединения в воздуховодных системах"
-	},
-	"DuctConnectorType.Drawband": {
-		"prefix": "DuctConnectorType.Drawband",
-		"scope": "lua,json",
-		"body": [
-			"Drawband"
-		],
-		"description": "Бандажное соединение в воздуховодных системах."
-	},
-	"DuctConnectorType.SlipOn ": {
-		"prefix": "DuctConnectorType.SlipOn",
-		"scope": "lua,json",
-		"body": [
-			"SlipOn"
-		],
-		"description": "Ниппельное соединение в воздуховодных системах."
-	},
-	"DuctConnectorType.DriveSlip": {
-		"prefix": "DuctConnectorType.DriveSlip",
-		"scope": "lua,json",
-		"body": [
-			"DriveSlip"
-		],
-		"description": "Реечное соединение в воздуховодных системах."
-	},
-	"DuctConnectorType.Weld": {
-		"prefix": "DuctConnectorType.Weld",
-		"scope": "lua,json",
-		"body": [
-			"Weld"
-		],
-		"description": "Сварное соединение в воздуховодных системах."
-	},
-	"DuctConnectorType.Flange": {
-		"prefix": "DuctConnectorType.Flange",
-		"scope": "lua,json",
-		"body": [
-			"Flange"
-		],
-		"description": "Фланцевое соединение в воздуховодных системах."
+		"description": "Тип соединения в воздуховодных системах"
 	},
 	//enum
 	//PipeConnectorType
 	//---------------------------------------------------------------------------
 	"PipeConnectorType": {
-		"prefix": "CoreEnum.PipeConnectorType",
-		"scope": "lua,json",
+		"prefix": "PipeConnectorType",
+		"scope": "lua",
 		"body": [
-			"PipeConnectorType"
+			"PipeConnectorType.${1|Weld,Flange,Compressed,Socket,Thread,QuickConnection,Glue,FusionWelding,Grooved|}"
 		],
-		"description": "Типы соединения в трубопроводных системах"
-	},
-	"PipeConnectorType.Weld": {
-		"prefix": "PipeConnectorType.Weld",
-		"scope": "lua,json",
-		"body": [
-			"Weld"
-		],
-		"description": "Сварное соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.Flange": {
-		"prefix": "PipeConnectorType.Flange",
-		"scope": "lua,json",
-		"body": [
-			"Flange"
-		],
-		"description": "Фланцевое соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.Compressed": {
-		"prefix": "PipeConnectorType.Compressed",
-		"scope": "lua,json",
-		"body": [
-			"Compressed"
-		],
-		"description": "Обжимное соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.Socket": {
-		"prefix": "PipeConnectorType.Socket",
-		"scope": "lua,json",
-		"body": [
-			"Socket"
-		],
-		"description": "Раструбное соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.Thread": {
-		"prefix": "PipeConnectorType.Thread",
-		"scope": "lua,json",
-		"body": [
-			"Thread"
-		],
-		"description": "Резьбовое соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.QuickConnection": {
-		"prefix": "PipeConnectorType.QuickConnection",
-		"scope": "lua,json",
-		"body": [
-			"QuickConnection"
-		],
-		"description": "Быстроразъёмное соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.Glue": {
-		"prefix": "PipeConnectorType.Glue",
-		"scope": "lua,json",
-		"body": [
-			"Glue"
-		],
-		"description": "Клеевое соединение в трубопроводных системах"
-	},
-	"PipeConnectorType.FusionWelding": {
-		"prefix": "PipeConnectorType.FusionWelding",
-		"scope": "lua,json",
-		"body": [
-			"FusionWelding"
-		],
-		"description": "Соединение диффузионной сваркой в трубопроводных системах"
-	},
-	"PipeConnectorType.Grooved": {
-		"prefix": "PipeConnectorType.Grooved",
-		"scope": "lua,json",
-		"body": [
-			"Grooved"
-		],
-		"description": "Замковое соединение в трубопроводных системах"
+		"description": "Тип соединения в трубопроводных системах"
 	},
 	//enum
 	//PipeThreadSize
 	//---------------------------------------------------------------------------
 	"PipeThreadSize": {
-		"prefix": "CoreEnum.PipeThreadSize",
-		"scope": "lua,json",
+		"prefix": "PipeThreadSize",
+		"scope": "lua",
 		"body": [
-			"PipeThreadSize"
+			"PipeThreadSize.${1|D0_25,D0_375,D0_50,D0_75,D1_0,D1_25,D1_50,D2_0,D2_5,D3_0,D3_5,D4_0,D5_0,D6_0|}"
 		],
-		"description": "Диаметры резьбового соединения в трубопроводных системах."
+		"description": "Диаметр резьбового соединения в трубопроводных системах"
 	},
-	"D0_25": {
-		"prefix": "PipeThreadSize.D0_25",
-		"scope": "lua,json",
+	//enum
+	//CoordinateSystem
+	//---------------------------------------------------------------------------
+	"CoordinateSystem2D": {
+    "prefix": "CoordinateSystem2D",
+    "scope": "lua",
+    "body": [
+        "CoordinateSystem2D.${1|Cartesian,Polar|}"
+    ],
+    "description": "2D система координат (Cartesian или Polar)"
+    },
+	"CoordinateSystem3D": {
+    "prefix": "CoordinateSystem3D",
+    "scope": "lua",
+    "body": [
+        "CoordinateSystem3D.${1|Cartesian,Cylindrical,Spherical|}"
+    ],
+    "description": "3D система координат (Cartesian, Cylindrical или Spherical)"
+	},
+	//enum
+	//InsulationCapType
+	//---------------------------------------------------------------------------
+	"InsulationCapType": {
+		"prefix": "InsulationCapType",
+		"scope": "lua",
 		"body": [
-			"D0_25"
+			"InsulationCapType.${1|None,Flat|}"
 		],
-		"description": "Диаметр резьбового соединения 1/4\""
+		"description": "Тип завершения изоляции (None или Flat)"
 	},
-	"D0_375": {
-		"prefix": "PipeThreadSize.D0_375",
-		"scope": "lua,json",
-		"body": [
-			"D0_375"
-		],
-		"description": "Диаметр резьбового соединения 3/8\""
-	},
-	"D0_50": {
-		"prefix": "PipeThreadSize.D0_50",
-		"scope": "lua,json",
-		"body": [
-			"D0_50"
-		],
-		"description": "Диаметр резьбового соединения 1/2\""
-	},
-	"D0_75": {
-		"prefix": "PipeThreadSize.D0_75",
-		"scope": "lua,json",
-		"body": [
-			"D0_75"
-		],
-		"description": "Диаметр резьбового соединения 3/4\""
-	},
-	"D1_0": {
-		"prefix": "PipeThreadSize.D1_0",
-		"scope": "lua,json",
-		"body": [
-			"D1_0"
-		],
-		"description": "Диаметр резьбового соединения 1\""
-	},
-	"D1_25": {
-		"prefix": "PipeThreadSize.D1_25",
-		"scope": "lua,json",
-		"body": [
-			"D1_25"
-		],
-		"description": "Диаметр резьбового соединения 1 1/4\""
-	},
-	"D1_50": {
-		"prefix": "PipeThreadSize.D1_50",
-		"scope": "lua,json",
-		"body": [
-			"D1_50"
-		],
-		"description": "Диаметр резьбового соединения 1 1/2\""
-	},
-	"D2_0": {
-		"prefix": "PipeThreadSize.D2_0",
-		"scope": "lua,json",
-		"body": [
-			"D2_0"
-		],
-		"description": "Диаметр резьбового соединения 2\""
-	},
-	"D2_5": {
-		"prefix": "PipeThreadSize.D2_5",
-		"scope": "lua,json",
-		"body": [
-			"D2_5"
-		],
-		"description": "Диаметр резьбового соединения 2 1/2\""
-	},
-	"D3_0": {
-		"prefix": "PipeThreadSize.D3_0",
-		"scope": "lua,json",
-		"body": [
-			"D3_0"
-		],
-		"description": "Диаметр резьбового соединения 3\""
-	},
-	"D3_5": {
-		"prefix": "PipeThreadSize.D3_5",
-		"scope": "lua,json",
-		"body": [
-			"D3_5"
-		],
-		"description": "Диаметр резьбового соединения 3 1/2\""
-	},
-	"D4_0": {
-		"prefix": "PipeThreadSize.D4_0",
-		"scope": "lua,json",
-		"body": [
-			"D4_0"
-		],
-		"description": "Диаметр резьбового соединения 4\""
-	},
-	"D5_0": {
-		"prefix": "PipeThreadSize.D5_0",
-		"scope": "lua,json",
-		"body": [
-			"D5_0"
-		],
-		"description": "Диаметр резьбового соединения 5\""
-	},
-	"D6_0": {
-		"prefix": "PipeThreadSize.D6_0",
-		"scope": "lua,json",
-		"body": [
-			"D6_0"
-		],
-		"description": "Диаметр резьбового соединения 6\""
-	},
+
 	//LUA
 	//
 	//---------------------------------------------------------------------------
@@ -1317,12 +1137,6 @@
         "body": "for ${1:k},${2:v} in pairs(${3:table_name}) do\n\t${0:print(k,v)}\nend",
         "description": "for k,v in pairs()",
         "prefix": "forp",
-        "scope": "lua"
-    },
-	"fun": {
-        "body": "function ${1:function_name}( ${2:...} )\n\t${0:-- body}\nend",
-        "description": "function",
-        "prefix": "fun",
         "scope": "lua"
     },
 	"function": {
@@ -1607,12 +1421,6 @@
         "prefix": "rawset",
         "scope": "lua"
     },
-    "req": {
-        "body": "require(\"${1:module}\")",
-        "description": "require()",
-        "prefix": "req",
-        "scope": "lua"
-    },
     "require": {
         "body": "require(\"${1:module}\")",
         "description": "require()",
@@ -1717,10 +1525,10 @@
 				"\t\t\"description\": \"${2:description}\",",
 				"\t\t\"version\": \"$3.$4.$5\",",
 				"\t\t\"author\": \"${6:author}\"",
-			"\t}",
+			"\t},",
 			"\t\"styleParameters\": [",
 			"\t\t$7",
-			"\t]",
+			"\t],",
 			"\t\"ports\": [",
 			"\t\t$8",
 			"\t]",
@@ -1830,32 +1638,65 @@
 			"}"
 		]
 	},
-	"tasks": {
-		"prefix": "make",
+	"Build RST Tasks": {
+		"prefix": "rst-tasks",
 		"scope": "json",
 		"body": [
 			"{",
-			"\t\"tasks\": [",
-				"\t\t{",
-				"\t\t\t\"type\": \"shell\",",
-				"\t\t\t\"label\": \"Build rst file\",",
-				"\t\t\t\"command\": \"${1:Patch}RstBuilder.exe\",",
-				"\t\t\t\"args\": [",
-				"\t\t\t\t\"${2:Name}.json\",",
-				"\t\t\t\t\"${2:Name}.lua\",",
-				"\t\t\t\t${4:include file}",
-				"\t\t\t\t\"-o\",",
-				"\t\t\t\t\"$3${2:Name}.rst\"",
-				"\t\t\t],",
-				"\t\t\t\"group\": {",
-				"\t\t\t\"kind\": \"build\",",
-				"\t\t\t\"isDefault\": true",
-				"\t\t\t}",
-				"\t\t}",
-			"\t]",
+			"    \"version\": \"2.0.0\",",
+			"    \"tasks\": [",
+			"        {",
+			"            \"label\": \"Build rst file\",",
+			"            \"type\": \"shell\",",
+			"            \"command\": \"..\\\\\\\\..\\\\\\\\RstBuilder\\\\\\\\RstBuilder.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.json\",",
+			"                \"${1:ParamsTest}.lua\",",
+			"                \"-s\",",
+			"                \"1.0\",",
+			"                \"-o\",",
+			"                \"${1:ParamsTest}.rst\"",
+			"            ],",
+			"            \"group\": {",
+			"                \"kind\": \"build\",",
+			"                \"isDefault\": true",
+			"            }",
+			"        },",
+			"        {",
+			"            \"type\": \"shell\",",
+			"            \"label\": \"Load rst file\",",
+			"            \"command\": \"..\\\\\\\\..\\\\\\\\STDLLoader\\\\\\\\STDLLoader.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.rst\",",
+			"                \"${2:Equipment}\"",
+			"            ],",
+			"            \"group\": \"test\"",
+			"        },",
+			"        {",
+			"            \"type\": \"shell\",",
+			"            \"label\": \"StdlJsonEditor\",",
+			"            \"command\": \"..\\\\\\\\..\\\\\\\\StdlJsonEditor\\\\\\\\StdlJsonEditor.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.json\"",
+			"            ],",
+			"            \"group\": \"test\"",
+			"        },",
+			"        {",
+			"            \"type\": \"shell\",",
+			"            \"label\": \"JsonToLuaParams\",",
+			"            \"command\": \"..\\\\\\\\..\\\\\\\\JsonToLuaParams\\\\\\\\JsonToLuaParams.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.json\",",
+			"                \"${1:ParamsTest}.lua\"",
+			"            ],",
+			"            \"group\": \"test\"",
+			"        }",
+			"    ]",
 			"}"
-		]
+		],
+		"description": "Generate RST build tasks configuration"
 	},
+	
 	"IncludeFile": {
         "prefix": "include file",
 		"scope": "json",
@@ -1865,29 +1706,13 @@
         ],
 		"description": "Указание подключаемого файла"
     },
-	"Inlet": {
-		"prefix": "FlowDirection.Inlet",
-		"scope": "json",
+	"FlowDirection": {
+		"prefix": "FlowDirection",
+		"scope": "lua",
 		"body": [
-			"Inlet",
+			"FlowDirection.${1|Inlet,Outlet,InletAndOutlet|}"
 		],
-		"description": "Направление потока\n\rflowDirection\n\rВход"
-	},
-	"Outlet": {
-		"prefix": "FlowDirection.Outlet",
-		"scope": "json",
-		"body": [
-			"Outlet",
-		],
-		"description": "Направление потока\n\rflowDirection\n\rВыход"
-	},
-	"InletAndOutlet": {
-		"prefix": "FlowDirection.InletAndOutlet",
-		"scope": "json",
-		"body": [
-			"InletAndOutlet",
-		],
-		"description": "Направление потока\n\rflowDirection\n\rВход и выход"
+		"description": "Направление потока (Inlet, Outlet или InletAndOutlet)"
 	},
 	"Integer": {
 		"prefix": "Type.Integer",
@@ -2097,5 +1922,4 @@
 		],
 		"description": "Категория электрических систем\n\rOtherElectricalSystem\n\rПрочие электрические системы"
 	}
-
 }

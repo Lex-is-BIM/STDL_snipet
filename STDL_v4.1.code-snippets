@@ -1827,6 +1827,19 @@
 			"}"
 		]
 	},
+	"ParameterRebarStyleId": {
+    "prefix": "StyleParameters.ParameterRebarStyleId",
+    "scope": "json",
+    "body": [
+        "{",
+        "\t\"name\": \"${1:RebarStyleId}\",",
+        "\t\"text\": \"${2:Арматурный стиль}\",",
+        "\t\"type\": \"Id\",",
+        "\t\"entityTypeId\": \"608edb78-96f3-40a6-a0ec-71000105581b\"",
+        "}"
+    ],
+    "description": "Параметр для выбора арматурного стиля (RebarStyleId)"
+	},
 	"ParameterUserEnum": {
 		"prefix": "StyleParameters.ParameterUserEnum",
 		"scope": "json",

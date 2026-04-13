@@ -1,6 +1,6 @@
-# Словарь STDL для Visual Studio Code v3.0
+# Словарь STDL для Visual Studio Code v4.0 (Preview)
 
-Для версии STDL 3.0
+Для версии STDL 4.0
 
 ## Возможности
 
@@ -49,6 +49,11 @@
 #### Классы Parameter и ParameterGroup
 - Методы: `GetValue`, `SetVisible`, `SetEnabled`.
 
+#### NEW! Армирование (STDL 4.0)
+- Классы: `DoubleReinforcingMeshParameters`, `EdgeReinforcementParameters`, `RebarRowParameters`, `ReinforcingMeshParameters`, `ReinforcementContainer`, `CShapedRebarParameters`, `UShapedRebarParameters`, `VoidingSelector`, `ObjectSideSelector`, `RebarOverhangRule`, `ChairRebarParameters`, `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `BoundingBox`, `Entity`;
+- Атрибуты: `MinClearance`, `Strategy`, `Displacement`, `OverhangRules`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `Length`, `BaseLength`, `LegLength`;
+- Функции: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`.
+
 #### Перечисления Style Template API (с выпадающим списком)
 - `DuctConnectorType` — типы соединения воздуховодов;
 - `PipeConnectorType` — типы соединения трубопроводов;
@@ -56,7 +61,13 @@
 - `CoordinateSystem2D` — 2D системы координат (Cartesian, Polar);
 - `CoordinateSystem3D` — 3D системы координат (Cartesian, Cylindrical, Spherical);
 - `InsulationCapType` — типы завершения изоляции (None, Flat);
-- `FlowDirection` — направления потока (Inlet, Outlet, InletAndOutlet).
+- `FlowDirection` — направления потока (Inlet, Outlet, InletAndOutlet);
+- NEW! `InLayerAlignment` — расположение в слое основы (Left, Center, Right);
+- NEW! `ModelObjectType` — типы объектов модели (Wall, Floor, Door, Window, Roof, Beam, Column, Hole, Opening, IsolatedFoundation, WallFoundation, Ramp, Stair);
+- NEW! `WallSide` — стороны стены (Left, Right, Top, Bottom, Front, Back);
+- NEW! `FloorSide` — стороны перекрытия (Top, Bottom, Side);
+- NEW! `RebarLinearLayoutStrategy` — стратегия раскладки стержней (WithSupportRebars, Uniform);
+- NEW! `ReinforcingMeshRowsOrder` — порядок рядов сетки (LongitudinalInFront, TransverseInFront).
 
 #### Функции базовой библиотеки Lua
 - `print`, `type`, `tonumber`, `tostring`, `next`, `rawequal`, `rawget`, `rawset`, `select`, `setmetatable`, `require`.
@@ -70,16 +81,34 @@
 #### Библиотека для работы с таблицами Lua
 - `table.concat`, `table.insert`, `table.remove`, `table.sort`, `table.pack`, `table.unpack`, `table.move`.
 
-## Изменения в версии v3.0
+## Изменения в версии v4.0 (Preview)
 
-- Добавлены перечисления `CoordinateSystem2D`, `CoordinateSystem3D`, `InsulationCapType`, `FlowDirection` с выпадающим списком;
-- Добавлен метод `Style.SetInsulationSkeleton` для задания остова изоляции;
-- Добавлен метод `CastToParameterContainer`;
-- Исправлены префиксы методов `GetValue` (с `.` на `:`), `Trim3D` (с `:Trim()` на `:Trim3D()`);
-- Исправлены отсутствующие скобки у `FillArea`, `AddRebar`, `AddRebarSet`, `CastToParameterContainer`;
-- Удалены дублирующиеся сниппеты (`fun`, `req`, старый `CoordinateSystem2D`);
-- Все enum объединены в единый формат с выбором значения через Tab.
+### Добавлено
+- **Армирование**: полный набор классов, атрибутов и функций для создания арматурных сеток;
+- **Селекторы граней**: `VoidingSelector`, `ObjectSideSelector`;
+- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters`;
+- **Фиксаторы сетки**: `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `ChairRebarParameters`;
+- **Новые перечисления**: `InLayerAlignment`, `ModelObjectType`, `WallSide`, `FloorSide`, `RebarLinearLayoutStrategy`, `ReinforcingMeshRowsOrder`;
+- **Новые функции**: `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`;
+- **Новые классы**: `Entity`, `BoundingBox`.
+
+### Исправлено
+- Префикс `GetValue` изменён с `.` на `:`;
+- Префикс `Trim3D` изменён с `:Trim()` на `:Trim3D()`;
+- Добавлены отсутствующие скобки у `FillArea`, `AddRebar`, `AddRebarSet`, `CastToParameterContainer`;
+- Удалены дублирующиеся сниппеты.
 
 ## Установка
-Скопировать файл `STDL_v3.code-snippets` в папку:
+
+Скопировать файл `STDL_v4.code-snippets` в папку:
+
 `%UserProfile%\AppData\Roaming\Code\User\snippets\`
+
+## Совместимость
+
+- STDL версии 4.0 и выше;
+- Renga версии 4.0 и выше (для функций армирования).
+
+## Статус
+
+**Preview** — предварительная версия. Функции армирования проходят тестирование.

@@ -1111,6 +1111,259 @@
 		],
 		"description": "Тип завершения изоляции (None или Flat)"
 	},
+		//Армирование
+	//Классы
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	"DoubleReinforcingMeshParameters": {
+		"prefix": "DoubleReinforcingMeshParameters()",
+		"scope": "lua",
+		"body": ["DoubleReinforcingMeshParameters(${1:frontMeshParams}, ${2:backMeshParams})"],
+		"description": "DoubleReinforcingMeshParameters\n\rПараметры двух арматурных сеток"
+	},
+	"EdgeReinforcementParameters": {
+		"prefix": "EdgeReinforcementParameters()",
+		"scope": "lua",
+		"body": ["EdgeReinforcementParameters(${1:detail}, ${2:step}, ${3:edgeSelectors})"],
+		"description": "EdgeReinforcementParameters\n\rПараметры усиления торцов объекта"
+	},
+	"RebarHookParameters": {
+		"prefix": "RebarHookParameters()",
+		"scope": "lua",
+		"body": ["RebarHookParameters()"],
+		"description": "RebarHookParameters\n\rПараметры отгиба арматурного стержня"
+	},
+	"RebarOverhangParameters": {
+		"prefix": "RebarOverhangParameters()",
+		"scope": "lua",
+		"body": ["RebarOverhangParameters()"],
+		"description": "RebarOverhangParameters\n\rПараметры выпуска арматурного стержня"
+	},
+	"RebarRowParameters": {
+		"prefix": "RebarRowParameters()",
+		"scope": "lua",
+		"body": ["RebarRowParameters(${1:rebarStyleId}, ${2:spacing})"],
+		"description": "RebarRowParameters\n\rПараметры ряда арматурных стержней"
+	},
+	"ReinforcingMeshParameters": {
+		"prefix": "ReinforcingMeshParameters()",
+		"scope": "lua",
+		"body": ["ReinforcingMeshParameters(${1:longitudinalRowParams}, ${2:transverseRowParams})"],
+		"description": "ReinforcingMeshParameters\n\rПараметры сетки арматурных стержней"
+	},
+	"ReinforcingMeshSupportsParameters": {
+		"prefix": "ReinforcingMeshSupportsParameters()",
+		"scope": "lua",
+		"body": ["ReinforcingMeshSupportsParameters(${1:chairRebarParams}, ${2:layout})"],
+		"description": "ReinforcingMeshSupportsParameters\n\rПараметры фиксаторов арматурной сетки"
+	},
+	"ReinforcementContainer": {
+		"prefix": "ReinforcementContainer()",
+		"scope": "lua",
+		"body": ["ReinforcementContainer()"],
+		"description": "ReinforcementContainer\n\rКонтейнер армирования"
+	},
+	"CShapedRebarParameters": {
+		"prefix": "CShapedRebarParameters()",
+		"scope": "lua",
+		"body": ["CShapedRebarParameters(${1:rebarStyleId}, ${2:length}, ${3:legLength})"],
+		"description": "CShapedRebarParameters\n\rПараметры C-образной арматурной детали"
+	},
+	"UShapedRebarParameters": {
+		"prefix": "UShapedRebarParameters()",
+		"scope": "lua",
+		"body": ["UShapedRebarParameters(${1:rebarStyleId}, ${2:baseLength}, ${3:legLength})"],
+		"description": "UShapedRebarParameters\n\rПараметры U-образной арматурной детали"
+	},
+	"VoidingSelector": {
+		"prefix": "VoidingSelector()",
+		"scope": "lua",
+		"body": ["VoidingSelector(${1:modelObjectType})"],
+		"description": "VoidingSelector\n\rВыбирает грани объекта, образованные при пересечении с другим объектом"
+	},
+	"ObjectSideSelector": {
+		"prefix": "ObjectSideSelector()",
+		"scope": "lua",
+		"body": ["ObjectSideSelector(${1:side})"],
+		"description": "ObjectSideSelector\n\rВыбирает грани объекта, соответствующие указанной стороне"
+	},
+	"RebarOverhangRule": {
+		"prefix": "RebarOverhangRule()",
+		"scope": "lua",
+		"body": ["RebarOverhangRule({${1:overhangs}}, ${2:hook})"],
+		"description": "RebarOverhangRule\n\rПравило выпуска арматурного стержня"
+	},
+	"ChairRebarParameters": {
+		"prefix": "ChairRebarParameters()",
+		"scope": "lua",
+		"body": ["ChairRebarParameters(${1:rebarStyleId}, ${2:height}, ${3:width}, ${4:length})"],
+		"description": "ChairRebarParameters\n\rПараметры арматурного стула"
+	},
+	"ReinforcingMeshSupportsCellLayout": {
+		"prefix": "ReinforcingMeshSupportsCellLayout()",
+		"scope": "lua",
+		"body": ["ReinforcingMeshSupportsCellLayout(${1:longitudinalCells}, ${2:transverseCells})"],
+		"description": "ReinforcingMeshSupportsCellLayout\n\rРаскладка фиксаторов с указанием количества пройденных ячеек"
+	},
+	"ReinforcingMeshSupportsDistanceLayout": {
+		"prefix": "ReinforcingMeshSupportsDistanceLayout()",
+		"scope": "lua",
+		"body": ["ReinforcingMeshSupportsDistanceLayout(${1:longitudinalDistance}, ${2:transverseDistance})"],
+		"description": "ReinforcingMeshSupportsDistanceLayout\n\rРаскладка фиксаторов с указанием расстояния между элементами"
+	},
+	"BoundingBox": {
+		"prefix": "BoundingBox()",
+		"scope": "lua",
+		"body": ["BoundingBox()"],
+		"description": "BoundingBox\n\rГабаритный контейнер"
+	},
+	"Entity": {
+		"prefix": "Entity",
+		"scope": "lua",
+		"body": ["Entity"],
+		"description": "Entity\n\rБазовый элемент проекта Renga"
+	},
+
+	//Атрибуты классов армирования
+	//---------------------------------------------------------------------------
+	"MinClearance": {
+		"prefix": ".MinClearance",
+		"scope": "lua",
+		"body": [".MinClearance = ${1:20}"],
+		"description": "RebarRowParameters\n\rnumber\n\rMinClearance - минимальный зазор между стержнями"
+	},
+	"Strategy": {
+		"prefix": ".Strategy",
+		"scope": "lua",
+		"body": [".Strategy = ${1:strategy}"],
+		"description": "RebarRowParameters\n\rRebarLinearLayoutStrategy\n\rStrategy - стратегия раскладки"
+	},
+	"Displacement": {
+		"prefix": ".Displacement",
+		"scope": "lua",
+		"body": [".Displacement = ${1:0}"],
+		"description": "RebarRowParameters\n\rnumber\n\rDisplacement - смещение"
+	},
+	"OverhangRules": {
+		"prefix": ".OverhangRules",
+		"scope": "lua",
+		"body": [".OverhangRules = ${1:overhangRules}"],
+		"description": "RebarRowParameters\n\rtable\n\rOverhangRules - правила выпусков"
+	},
+	"BendingFactor": {
+		"prefix": ".BendingFactor",
+		"scope": "lua",
+		"body": [".BendingFactor = ${1:factor}"],
+		"description": "RebarRowParameters,CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rBendingFactor - коэффициент гибки"
+	},
+	"UseRectangularApproximation": {
+		"prefix": ".UseRectangularApproximation",
+		"scope": "lua",
+		"body": [".UseRectangularApproximation = ${1:true}"],
+		"description": "ReinforcingMeshParameters\n\rboolean\n\rUseRectangularApproximation - использовать прямоугольную аппроксимацию"
+	},
+	"Supports": {
+		"prefix": ".Supports",
+		"scope": "lua",
+		"body": [".Supports = ${1:support}"],
+		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshSupportsParameters\n\rSupports - фиксаторы сетки"
+	},
+	"RebarStyleId": {
+		"prefix": ".RebarStyleId",
+		"scope": "lua",
+		"body": [".RebarStyleId = ${1:id}"],
+		"description": "CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rRebarStyleId - идентификатор стиля арматурного стержня"
+	},
+	"Length": {
+		"prefix": ".Length",
+		"scope": "lua",
+		"body": [".Length = ${1:length}"],
+		"description": "CShapedRebarParameters\n\rnumber\n\rLength - длина детали"
+	},
+	"BaseLength": {
+		"prefix": ".BaseLength",
+		"scope": "lua",
+		"body": [".BaseLength = ${1:baseLength}"],
+		"description": "UShapedRebarParameters\n\rnumber\n\rBaseLength - длина основания"
+	},
+	"LegLength": {
+		"prefix": ".LegLength",
+		"scope": "lua",
+		"body": [".LegLength = ${1:legLength}"],
+		"description": "CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rLegLength - длина ножки"
+	},
+
+	//Перечисления армирования
+	//---------------------------------------------------------------------------
+	"InLayerAlignment": {
+		"prefix": "InLayerAlignment",
+		"scope": "lua",
+		"body": ["InLayerAlignment.${1|Left,Center,Right|}"],
+		"description": "Расположение в слое основы (Left, Center или Right)"
+	},
+	"ModelObjectType": {
+		"prefix": "ModelObjectType",
+		"scope": "lua",
+		"body": ["ModelObjectType.${1|Wall,Floor,Door,Window,Roof,Beam,Column,Hole,Opening,IsolatedFoundation,WallFoundation,Ramp,Stair|}"],
+		"description": "Типы объектов модели"
+	},
+	"WallSide": {
+		"prefix": "WallSide",
+		"scope": "lua",
+		"body": ["WallSide.${1|Left,Right,Top,Bottom,Front,Back|}"],
+		"description": "Сторона стены"
+	},
+	"FloorSide": {
+		"prefix": "FloorSide",
+		"scope": "lua",
+		"body": ["FloorSide.${1|Top,Bottom,Side|}"],
+		"description": "Сторона перекрытия"
+	},
+	"RebarLinearLayoutStrategy": {
+		"prefix": "RebarLinearLayoutStrategy",
+		"scope": "lua",
+		"body": ["RebarLinearLayoutStrategy.${1|WithSupportRebars,Uniform|}"],
+		"description": "Тип раскладки арматурных стержней вдоль прямой линии"
+	},
+	"ReinforcingMeshRowsOrder": {
+		"prefix": "ReinforcingMeshRowsOrder",
+		"scope": "lua",
+		"body": ["ReinforcingMeshRowsOrder.${1|LongitudinalInFront,TransverseInFront|}"],
+		"description": "Порядок рядов сетки арматурных стержней"
+	},
+
+	//Функции армирования
+	//---------------------------------------------------------------------------
+	"CreateReinforcingMeshInBaseLayer": {
+		"prefix": "CreateReinforcingMeshInBaseLayer()",
+		"scope": "lua",
+		"body": ["CreateReinforcingMeshInBaseLayer(${1:object}, ${2:clearCoverRules}, ${3:meshParameters}, ${4:meshAlignment}, ${5:meshOffset})"],
+		"description": "ReinforcementContainer\n\rCreateReinforcingMeshInBaseLayer (Entity object, table clearCoverRules, ReinforcingMeshParameters meshParameters, InLayerAlignment meshAlignment, number meshOffset)"
+	},
+	"CreateDoubleReinforcingMeshInBaseLayer": {
+		"prefix": "CreateDoubleReinforcingMeshInBaseLayer()",
+		"scope": "lua",
+		"body": ["CreateDoubleReinforcingMeshInBaseLayer(${1:object}, ${2:clearCoverRules}, ${3:meshParameters}, ${4:edgeReinfParameters})"],
+		"description": "ReinforcementContainer\n\rCreateDoubleReinforcingMeshInBaseLayer (Entity object, table clearCoverRules, DoubleReinforcingMeshParameters meshParameters, EdgeReinforcementParameters edgeReinfParameters)"
+	},
+	"GetParameterValue": {
+		"prefix": "GetParameterValue()",
+		"scope": "lua",
+		"body": ["GetParameterValue(${1:entity}, ${2:name})"],
+		"description": "value\n\rGetParameterValue (Entity entity, string name)\n\rВозвращает значение параметра по имени"
+	},
+	"GetBoundingBox": {
+		"prefix": "GetBoundingBox()",
+		"scope": "lua",
+		"body": ["GetBoundingBox(${1:entity})"],
+		"description": "BoundingBox\n\rGetBoundingBox (Entity entity)"
+	},
+	"GetReinforcementUnitStyle": {
+		"prefix": "GetReinforcementUnitStyle()",
+		"scope": "lua",
+		"body": ["GetReinforcementUnitStyle(${1:id})"],
+		"description": "Entity\n\rGetReinforcementUnitStyle (number id)"
+	},
 
 	//LUA
 	//

@@ -1118,7 +1118,7 @@
 	"DoubleReinforcingMeshParameters": {
 		"prefix": "DoubleReinforcingMeshParameters()",
 		"scope": "lua",
-		"body": ["DoubleReinforcingMeshParameters(${1:frontMeshParams}, ${2:backMeshParams})"],
+		"body": ["DoubleReinforcingMeshParameters(${1:frontMesh}, ${2:backMesh})"],
 		"description": "DoubleReinforcingMeshParameters\n\rПараметры двух арматурных сеток"
 	},
 	"EdgeReinforcementParameters": {
@@ -1142,9 +1142,21 @@
 	"RebarRowParameters": {
 		"prefix": "RebarRowParameters()",
 		"scope": "lua",
-		"body": ["RebarRowParameters(${1:rebarStyleId}, ${2:spacing})"],
+		"body": ["RebarRowParameters(${1:rebarStyleId}, ${2:layout})"],
 		"description": "RebarRowParameters\n\rПараметры ряда арматурных стержней"
 	},
+	"RebarRowEdgeProtectionLayout": {
+		"prefix": "RebarRowEdgeProtectionLayout()",
+		"scope": "lua",
+		"body": ["RebarRowEdgeProtectionLayout(${1:step}, ${2:minClearance})"],
+		"description": "RebarRowEdgeProtectionLayout\n\rРаскладка арматурных стержней с защитой граней"
+	},
+	"RebarRowUniformLayout": {
+		"prefix": "RebarRowUniformLayout()",
+		"scope": "lua",
+		"body": ["RebarRowUniformLayout(${1:step}, ${2:displacement})"],
+		"description": "RebarRowUniformLayout\n\rРаскладка арматурных стержней с равномерным шагом"
+	},	
 	"ReinforcingMeshParameters": {
 		"prefix": "ReinforcingMeshParameters()",
 		"scope": "lua",
@@ -1202,13 +1214,13 @@
 	"ReinforcingMeshSupportsCellLayout": {
 		"prefix": "ReinforcingMeshSupportsCellLayout()",
 		"scope": "lua",
-		"body": ["ReinforcingMeshSupportsCellLayout(${1:longitudinalCells}, ${2:transverseCells})"],
+		"body": ["ReinforcingMeshSupportsCellLayout(${1:verticalStep}, ${2:horizontalStep})"],
 		"description": "ReinforcingMeshSupportsCellLayout\n\rРаскладка фиксаторов с указанием количества пройденных ячеек"
 	},
 	"ReinforcingMeshSupportsDistanceLayout": {
 		"prefix": "ReinforcingMeshSupportsDistanceLayout()",
 		"scope": "lua",
-		"body": ["ReinforcingMeshSupportsDistanceLayout(${1:longitudinalDistance}, ${2:transverseDistance})"],
+		"body": ["ReinforcingMeshSupportsDistanceLayout(${1:verticalStep}, ${2:horizontalStep})"],
 		"description": "ReinforcingMeshSupportsDistanceLayout\n\rРаскладка фиксаторов с указанием расстояния между элементами"
 	},
 	"BoundingBox": {
@@ -1226,23 +1238,59 @@
 
 	//Атрибуты классов армирования
 	//---------------------------------------------------------------------------
-	"MinClearance": {
-		"prefix": ".MinClearance",
+	"Layout": {
+		"prefix": ".Layout",
 		"scope": "lua",
-		"body": [".MinClearance = ${1:20}"],
-		"description": "RebarRowParameters\n\rnumber\n\rMinClearance - минимальный зазор между стержнями"
+		"body": [".Layout = ${1:layout}"],
+		"description": "RebarRowParameters\n\robject\n\rLayout - тип раскладки арматурных стержней"
+		},
+	"Step": {
+		"prefix": ".Step",
+		"scope": "lua",
+		"body": [".Step = ${1:step}"],
+		"description": "RebarRowEdgeProtectionLayout,RebarRowUniformLayout\n\rnumber\n\rStep - шаг раскладки"
 	},
-	"Strategy": {
-		"prefix": ".Strategy",
+	"HorizontalStep": {
+		"prefix": ".HorizontalStep",
 		"scope": "lua",
-		"body": [".Strategy = ${1:strategy}"],
-		"description": "RebarRowParameters\n\rRebarLinearLayoutStrategy\n\rStrategy - стратегия раскладки"
+		"body": [".HorizontalStep = ${1:step}"],
+		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rHorizontalStep - шаг по горизонтали"
 	},
-	"Displacement": {
-		"prefix": ".Displacement",
+	"VerticalStep": {
+		"prefix": ".VerticalStep",
 		"scope": "lua",
-		"body": [".Displacement = ${1:0}"],
-		"description": "RebarRowParameters\n\rnumber\n\rDisplacement - смещение"
+		"body": [".VerticalStep = ${1:step}"],
+		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rVerticalStep - шаг по вертикали"
+	},
+	"Displacements": {
+		"prefix": ".Displacements",
+		"scope": "lua",
+		"body": [".Displacements = {${1:displacements}}"],
+		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rtable\n\rDisplacements - смещения рядов фиксаторов"
+	},
+	"FrontMesh": {
+		"prefix": ".FrontMesh",
+		"scope": "lua",
+		"body": [".FrontMesh = ${1:frontMesh}"],
+		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshParameters\n\rFrontMesh - параметры передней сетки"
+	},
+	"BackMesh": {
+		"prefix": ".BackMesh",
+		"scope": "lua",
+		"body": [".BackMesh = ${1:backMesh}"],
+		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshParameters\n\rBackMesh - параметры задней сетки"
+	},
+	"Detail": {
+		"prefix": ".Detail",
+		"scope": "lua",
+		"body": [".Detail = ${1:detail}"],
+		"description": "EdgeReinforcementParameters\n\robject\n\rDetail - параметры детали (U-образный стержень)"
+	},
+	"EdgeSelectors": {
+		"prefix": ".EdgeSelectors",
+		"scope": "lua",
+		"body": [".EdgeSelectors = ${1:edgeSelectors}"],
+		"description": "EdgeReinforcementParameters\n\rtable\n\rEdgeSelectors - правила выбора усиливаемых граней"
 	},
 	"OverhangRules": {
 		"prefix": ".OverhangRules",
@@ -1274,7 +1322,7 @@
 		"body": [".RebarStyleId = ${1:id}"],
 		"description": "CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rRebarStyleId - идентификатор стиля арматурного стержня"
 	},
-	"Length": {
+	"RebarLength": {
 		"prefix": ".Length",
 		"scope": "lua",
 		"body": [".Length = ${1:length}"],
@@ -1334,6 +1382,8 @@
 
 	//Функции армирования
 	//---------------------------------------------------------------------------
+
+	
 	"CreateReinforcingMeshInBaseLayer": {
 		"prefix": "CreateReinforcingMeshInBaseLayer()",
 		"scope": "lua",

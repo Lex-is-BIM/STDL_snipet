@@ -1,6 +1,6 @@
-# Словарь STDL для Visual Studio Code v4.0 (Preview)
+# Словарь STDL для Visual Studio Code v4.2
 
-Для версии STDL 4.0
+Для версии STDL 4.0+
 
 ## Возможности
 
@@ -10,7 +10,8 @@
 - Параметры и типы параметров;
 - Порты;
 - Направления потока;
-- Категории систем.
+- Категории систем;
+- Параметры арматурных стилей.
 
 ### Файл скрипта (.lua)
 
@@ -49,10 +50,16 @@
 #### Классы Parameter и ParameterGroup
 - Методы: `GetValue`, `SetVisible`, `SetEnabled`.
 
-#### NEW! Армирование (STDL 4.0)
-- Классы: `DoubleReinforcingMeshParameters`, `EdgeReinforcementParameters`, `RebarRowParameters`, `ReinforcingMeshParameters`, `ReinforcementContainer`, `CShapedRebarParameters`, `UShapedRebarParameters`, `VoidingSelector`, `ObjectSideSelector`, `RebarOverhangRule`, `ChairRebarParameters`, `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `BoundingBox`, `Entity`;
-- Атрибуты: `MinClearance`, `Strategy`, `Displacement`, `OverhangRules`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `Length`, `BaseLength`, `LegLength`;
-- Функции: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`.
+#### Армирование (STDL 4.0+)
+- **Классы раскладки**: `RebarRowEdgeProtectionLayout`, `RebarRowUniformLayout`;
+- **Классы сеток**: `DoubleReinforcingMeshParameters`, `ReinforcingMeshParameters`, `ReinforcingMeshSupportsParameters`;
+- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters`;
+- **Селекторы**: `VoidingSelector`, `ObjectSideSelector`;
+- **Фиксаторы**: `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `ChairRebarParameters`;
+- **Контейнер**: `ReinforcementContainer`;
+- **Вспомогательные**: `Entity`, `BoundingBox`, `RebarOverhangRule`;
+- **Атрибуты**: `Layout`, `Step`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`, `OverhangRules`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `RebarLength`, `RebarBaseLength`, `RebarLegLength`;
+- **Функции**: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`.
 
 #### Перечисления Style Template API (с выпадающим списком)
 - `DuctConnectorType` — типы соединения воздуховодов;
@@ -62,12 +69,12 @@
 - `CoordinateSystem3D` — 3D системы координат (Cartesian, Cylindrical, Spherical);
 - `InsulationCapType` — типы завершения изоляции (None, Flat);
 - `FlowDirection` — направления потока (Inlet, Outlet, InletAndOutlet);
-- NEW! `InLayerAlignment` — расположение в слое основы (Left, Center, Right);
-- NEW! `ModelObjectType` — типы объектов модели (Wall, Floor, Door, Window, Roof, Beam, Column, Hole, Opening, IsolatedFoundation, WallFoundation, Ramp, Stair);
-- NEW! `WallSide` — стороны стены (Left, Right, Top, Bottom, Front, Back);
-- NEW! `FloorSide` — стороны перекрытия (Top, Bottom, Side);
-- NEW! `RebarLinearLayoutStrategy` — стратегия раскладки стержней (WithSupportRebars, Uniform);
-- NEW! `ReinforcingMeshRowsOrder` — порядок рядов сетки (LongitudinalInFront, TransverseInFront).
+- `InLayerAlignment` — расположение в слое основы (Left, Center, Right);
+- `ModelObjectType` — типы объектов модели;
+- `WallSide` — стороны стены;
+- `FloorSide` — стороны перекрытия;
+- `RebarLinearLayoutStrategy` — стратегия раскладки стержней;
+- `ReinforcingMeshRowsOrder` — порядок рядов сетки.
 
 #### Функции базовой библиотеки Lua
 - `print`, `type`, `tonumber`, `tostring`, `next`, `rawequal`, `rawget`, `rawset`, `select`, `setmetatable`, `require`.
@@ -81,22 +88,20 @@
 #### Библиотека для работы с таблицами Lua
 - `table.concat`, `table.insert`, `table.remove`, `table.sort`, `table.pack`, `table.unpack`, `table.move`.
 
-## Изменения в версии v4.0 (Preview)
+## Изменения в версии v4.2
 
 ### Добавлено
-- **Армирование**: полный набор классов, атрибутов и функций для создания арматурных сеток;
-- **Селекторы граней**: `VoidingSelector`, `ObjectSideSelector`;
-- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters`;
-- **Фиксаторы сетки**: `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `ChairRebarParameters`;
-- **Новые перечисления**: `InLayerAlignment`, `ModelObjectType`, `WallSide`, `FloorSide`, `RebarLinearLayoutStrategy`, `ReinforcingMeshRowsOrder`;
-- **Новые функции**: `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`;
-- **Новые классы**: `Entity`, `BoundingBox`.
+- `RebarRowEdgeProtectionLayout` и `RebarRowUniformLayout` — новые классы раскладки стержней;
+- Новые атрибуты: `Layout`, `Step`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`;
+- `ParameterRebarStyleId` для JSON-схемы.
 
 ### Исправлено
-- Префикс `GetValue` изменён с `.` на `:`;
-- Префикс `Trim3D` изменён с `:Trim()` на `:Trim3D()`;
-- Добавлены отсутствующие скобки у `FillArea`, `AddRebar`, `AddRebarSet`, `CastToParameterContainer`;
-- Удалены дублирующиеся сниппеты.
+- Конфликты ключей: `Length` → `RebarLength`, `BaseLength` → `RebarBaseLength`, `LegLength` → `RebarLegLength`;
+- Обновлён конструктор `RebarRowParameters` (теперь принимает `layout` вместо `spacing`);
+- Обновлены `DoubleReinforcingMeshParameters`, `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`.
+
+### Удалено
+- Устаревшие атрибуты: `MinClearance`, `Strategy`, `Displacement`.
 
 ## Установка
 
@@ -104,11 +109,16 @@
 
 `%UserProfile%\AppData\Roaming\Code\User\snippets\`
 
+или (для портативной версии):
+
+`<папка с VSCode>\data\user-data\User\snippets\`
+
+## Ссылки
+
+- **Текущая версия (v4.2)**: `STDL_v4.code-snippets`
+- [Предыдущая версия (v3.0)](https://github.com/Lex-is-BIM/STDL_snipet/commit/ad10cb6)
+
 ## Совместимость
 
 - STDL версии 4.0 и выше;
 - Renga версии 4.0 и выше (для функций армирования).
-
-## Статус
-
-**Preview** — предварительная версия. Функции армирования проходят тестирование.

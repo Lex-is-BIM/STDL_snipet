@@ -1,4 +1,4 @@
-# Словарь STDL для Visual Studio Code v4.2
+# Словарь STDL для Visual Studio Code v4.3
 
 Для версии STDL 4.0+
 
@@ -59,7 +59,8 @@
 - **Контейнер**: `ReinforcementContainer`;
 - **Вспомогательные**: `Entity`, `BoundingBox`, `RebarOverhangRule`;
 - **Атрибуты**: `Layout`, `Step`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`, `OverhangRules`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `RebarLength`, `RebarBaseLength`, `RebarLegLength`;
-- **Функции**: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`.
+- **Функции**: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`;
+- **NEW! Шаблоны функций**: `CreateObjectReinforcement`, `SetStyleParameterStates`.
 
 #### Перечисления Style Template API (с выпадающим списком)
 - `DuctConnectorType` — типы соединения воздуховодов;
@@ -88,37 +89,20 @@
 #### Библиотека для работы с таблицами Lua
 - `table.concat`, `table.insert`, `table.remove`, `table.sort`, `table.pack`, `table.unpack`, `table.move`.
 
-## Изменения в версии v4.2
+## Изменения в версии v4.3
 
 ### Добавлено
-- `RebarRowEdgeProtectionLayout` и `RebarRowUniformLayout` — новые классы раскладки стержней;
-- Новые атрибуты: `Layout`, `Step`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`;
-- `ParameterRebarStyleId` для JSON-схемы.
+- `CreateObjectReinforcement` — шаблон базовой функции армирования;
+- `SetStyleParameterStates` — шаблон управления состояниями параметров;
+- Автогенерация сниппетов параметров стиля из JSON (группы с выпадающим списком).
 
 ### Исправлено
-- Конфликты ключей: `Length` → `RebarLength`, `BaseLength` → `RebarBaseLength`, `LegLength` → `RebarLegLength`;
-- Обновлён конструктор `RebarRowParameters` (теперь принимает `layout` вместо `spacing`);
-- Обновлены `DoubleReinforcingMeshParameters`, `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`.
-
-### Удалено
-- Устаревшие атрибуты: `MinClearance`, `Strategy`, `Displacement`.
+- Префикс `GetValue` изменён с `.` на `:`;
+- Обновлена структура раскладки стержней (`RebarRowEdgeProtectionLayout`, `RebarRowUniformLayout`);
+- Исправлены конфликты ключей в атрибутах.
 
 ## Установка
 
 Скопировать файл `STDL_v4.code-snippets` в папку:
 
 `%UserProfile%\AppData\Roaming\Code\User\snippets\`
-
-или (для портативной версии):
-
-`<папка с VSCode>\data\user-data\User\snippets\`
-
-## Ссылки
-
-- **Текущая версия (v4.2)**: `STDL_v4.code-snippets`
-- [Предыдущая версия (v3.0)](https://github.com/Lex-is-BIM/STDL_snipet/commit/ad10cb6)
-
-## Совместимость
-
-- STDL версии 4.0 и выше;
-- Renga версии 4.0 и выше (для функций армирования).

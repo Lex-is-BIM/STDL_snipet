@@ -1414,6 +1414,26 @@
 		"body": ["GetReinforcementUnitStyle(${1:id})"],
 		"description": "Entity\n\rGetReinforcementUnitStyle (number id)"
 	},
+	"CreateObjectReinforcement": {
+    "prefix": "CreateObjectReinforcement",
+    "scope": "lua",
+    "body": [
+        "function CreateObjectReinforcement(object, styleParameters)",
+        "    ${1:-- тело функции}",
+        "end"
+    ],
+    "description": "Базовая функция армирования объекта\nCreateObjectReinforcement(object, styleParameters)"
+	},
+	"SetStyleParameterStates": {
+		"prefix": "SetStyleParameterStates",
+		"scope": "lua",
+		"body": [
+			"function SetStyleParameterStates(parameters)",
+			"    ${1:-- управление параметрами}",
+			"end"
+		],
+		"description": "Базовая функция управления состояниями параметров\nSetStyleParameterStates(parameters)"
+	},
 
 	//LUA
 	//

@@ -680,22 +680,6 @@
 		],
 		"description": "Project\n\rGetRebarStyle(number_id)"
 	},
-	"AddRebar": {
-		"prefix": ".AddRebar()",
-		"scope": "lua",
-		"body": [
-			".AddRebar(${1:number_id},${2:curve})"
-		],
-		"description": "Style\n\rnil\n\rAddRebar(number_id,Curve3D curve)"
-	},
-	"AddRebarSet": {
-		"prefix": ".AddRebarSet()",
-		"scope": "lua",
-		"body": [
-			".AddRebarSet(${1:number_id},${2:curve},${3:direction},${4:step},${5:count})"
-		],
-		"description": "Style\n\rnil\n\rAddRebarSet(number id,Curve3D curve,Vector3D direction,number step,number count)"
-	},
 	"CastToParameterContainer": {
 		"prefix": "CastToParameterContainer()",
 		"scope": "lua",
@@ -723,7 +707,7 @@
 		],
 		"description": "self\n\rAddGeometrySet2D (GeometrySet2D geometrySet, Placement3D oPlacement)"
 	},
-
+	
 	//class Parameter
 	"GetValue": {
 		"prefix": ":GetValue()",
@@ -780,7 +764,7 @@
 		"body": [
 			":SetDuctParameters(${1:connectorType},${2:profile})"
 		],
-		"description": "Port\n\rself\n\rSetDuctParameters (DuctConnectorType connectorType, Profile profile))"
+		"description": "Port\n\rself\n\rSetDuctParameters (DuctConnectorType connectorType, Profile profile)"
 	},
 	//Методы
 	//Двумерное моделирование
@@ -879,7 +863,7 @@
 		"body": [
 			":operator==(${1:other})"
 		],
-		"description": "Axis3D,Curve2D,Curve3D,FillArea,Matrix2D,Matrix3D,Placement3D,Point2D,Point3D,Solid\n\rboolean\n\roperator== (other))"
+		"description": "Axis3D,Curve2D,Curve3D,FillArea,Matrix2D,Matrix3D,Placement3D,Point2D,Point3D,Solid\n\rboolean\n\roperator== (other)"
 	},
 	"operator~=": {
 		"prefix": ":operator~=()",
@@ -887,7 +871,7 @@
 		"body": [
 			":operator~=(${1:other})"
 		],
-		"description": "Axis3D,Curve2D,Curve3D,FillArea,Matrix2D,Matrix3D,Placement3D,Point2D,Point3D,Solid\n\rboolean\n\roperator~= (other))"
+		"description": "Axis3D,Curve2D,Curve3D,FillArea,Matrix2D,Matrix3D,Placement3D,Point2D,Point3D,Solid\n\rboolean\n\roperator~= (other)"
 	},
 	"GetInnerBoundaries": {
 		"prefix": ":GetInnerBoundaries()",
@@ -976,7 +960,8 @@
 			":Negate()"
 		],
 		"description": "Axis3D,Vector3D\n\rself\n\rNegate ()"
-	},	"Shift3D": {
+	},
+	"Shift3D": {
 		"prefix": ":Shift3D()",
 		"scope": "lua",
 		"body": [
@@ -1085,20 +1070,20 @@
 	//CoordinateSystem
 	//---------------------------------------------------------------------------
 	"CoordinateSystem2D": {
-    "prefix": "CoordinateSystem2D",
-    "scope": "lua",
-    "body": [
-        "CoordinateSystem2D.${1|Cartesian,Polar|}"
-    ],
-    "description": "2D система координат (Cartesian или Polar)"
-    },
+	    "prefix": "CoordinateSystem2D",
+	    "scope": "lua",
+	    "body": [
+	        "CoordinateSystem2D.${1|Cartesian,Polar|}"
+	    ],
+	    "description": "2D система координат (Cartesian или Polar)"
+	},
 	"CoordinateSystem3D": {
-    "prefix": "CoordinateSystem3D",
-    "scope": "lua",
-    "body": [
-        "CoordinateSystem3D.${1|Cartesian,Cylindrical,Spherical|}"
-    ],
-    "description": "3D система координат (Cartesian, Cylindrical или Spherical)"
+	    "prefix": "CoordinateSystem3D",
+	    "scope": "lua",
+	    "body": [
+	        "CoordinateSystem3D.${1|Cartesian,Cylindrical,Spherical|}"
+	    ],
+	    "description": "3D система координат (Cartesian, Cylindrical или Spherical)"
 	},
 	//enum
 	//InsulationCapType
@@ -1111,45 +1096,63 @@
 		],
 		"description": "Тип завершения изоляции (None или Flat)"
 	},
-		//Армирование
-	//Классы
+	//Армирование
+	//Классы --- ОБНОВЛЕНО v4.4
 	//---------------------------------------------------------------------------
 	//---------------------------------------------------------------------------
+	"AnyFaceSelector": {
+		"prefix": "AnyFaceSelector()",
+		"scope": "lua",
+		"body": ["AnyFaceSelector()"],
+		"description": "AnyFaceSelector\n\rВыбирает любые грани объекта"
+	},
 	"DoubleReinforcingMeshParameters": {
 		"prefix": "DoubleReinforcingMeshParameters()",
 		"scope": "lua",
 		"body": ["DoubleReinforcingMeshParameters(${1:frontMesh}, ${2:backMesh})"],
 		"description": "DoubleReinforcingMeshParameters\n\rПараметры двух арматурных сеток"
 	},
+	"EdgeReinforcementCenteredLayout": {
+		"prefix": "EdgeReinforcementCenteredLayout()",
+		"scope": "lua",
+		"body": ["EdgeReinforcementCenteredLayout()"],
+		"description": "EdgeReinforcementCenteredLayout\n\rРаскладка арматурных деталей от центра грани торца"
+	},
 	"EdgeReinforcementParameters": {
 		"prefix": "EdgeReinforcementParameters()",
 		"scope": "lua",
-		"body": ["EdgeReinforcementParameters(${1:detail}, ${2:step}, ${3:edgeSelectors})"],
+		"body": ["EdgeReinforcementParameters(${1:detail}, ${2:layout}, ${3:edgeSelectors})"],
 		"description": "EdgeReinforcementParameters\n\rПараметры усиления торцов объекта"
+	},
+	"RebarChairParameters": {
+		"prefix": "RebarChairParameters()",
+		"scope": "lua",
+		"body": ["RebarChairParameters(${1:rebarStyleId}, ${2:height}, ${3:width}, ${4:length})"],
+		"description": "RebarChairParameters\n\rПараметры арматурного стула"
 	},
 	"RebarHookParameters": {
 		"prefix": "RebarHookParameters()",
 		"scope": "lua",
-		"body": ["RebarHookParameters()"],
+		"body": ["RebarHookParameters(${1:angle}, ${2:extensionLength}, ${3:rotationAngle})"],
 		"description": "RebarHookParameters\n\rПараметры отгиба арматурного стержня"
 	},
 	"RebarOverhangParameters": {
 		"prefix": "RebarOverhangParameters()",
 		"scope": "lua",
-		"body": ["RebarOverhangParameters()"],
+		"body": ["RebarOverhangParameters(${1:overhangs}, ${2:oHook})"],
 		"description": "RebarOverhangParameters\n\rПараметры выпуска арматурного стержня"
-	},
-	"RebarRowParameters": {
-		"prefix": "RebarRowParameters()",
-		"scope": "lua",
-		"body": ["RebarRowParameters(${1:rebarStyleId}, ${2:layout})"],
-		"description": "RebarRowParameters\n\rПараметры ряда арматурных стержней"
 	},
 	"RebarRowEdgeProtectionLayout": {
 		"prefix": "RebarRowEdgeProtectionLayout()",
 		"scope": "lua",
 		"body": ["RebarRowEdgeProtectionLayout(${1:step}, ${2:minClearance})"],
 		"description": "RebarRowEdgeProtectionLayout\n\rРаскладка арматурных стержней с защитой граней"
+	},
+	"RebarRowParameters": {
+		"prefix": "RebarRowParameters()",
+		"scope": "lua",
+		"body": ["RebarRowParameters(${1:rebarStyleId}, ${2:layout})"],
+		"description": "RebarRowParameters\n\rПараметры ряда арматурных стержней"
 	},
 	"RebarRowUniformLayout": {
 		"prefix": "RebarRowUniformLayout()",
@@ -1166,8 +1169,20 @@
 	"ReinforcingMeshSupportsParameters": {
 		"prefix": "ReinforcingMeshSupportsParameters()",
 		"scope": "lua",
-		"body": ["ReinforcingMeshSupportsParameters(${1:chairRebarParams}, ${2:layout})"],
+		"body": ["ReinforcingMeshSupportsParameters(${1:detail}, ${2:layout})"],
 		"description": "ReinforcingMeshSupportsParameters\n\rПараметры фиксаторов арматурной сетки"
+	},
+	"ReinforcingMeshSupportsCellLayout": {
+		"prefix": "ReinforcingMeshSupportsCellLayout()",
+		"scope": "lua",
+		"body": ["ReinforcingMeshSupportsCellLayout(${1:verticalStep}, ${2:horizontalStep})"],
+		"description": "ReinforcingMeshSupportsCellLayout\n\rРаскладка фиксаторов с указанием количества пройденных ячеек"
+	},
+	"ReinforcingMeshSupportsDistanceLayout": {
+		"prefix": "ReinforcingMeshSupportsDistanceLayout()",
+		"scope": "lua",
+		"body": ["ReinforcingMeshSupportsDistanceLayout(${1:verticalStep}, ${2:horizontalStep})"],
+		"description": "ReinforcingMeshSupportsDistanceLayout\n\rРаскладка фиксаторов с указанием расстояния между элементами"
 	},
 	"ReinforcementContainer": {
 		"prefix": "ReinforcementContainer()",
@@ -1180,6 +1195,12 @@
 		"scope": "lua",
 		"body": ["CShapedRebarParameters(${1:rebarStyleId}, ${2:length}, ${3:legLength})"],
 		"description": "CShapedRebarParameters\n\rПараметры C-образной арматурной детали"
+	},
+	"SShapedRebarParameters": {
+		"prefix": "SShapedRebarParameters()",
+		"scope": "lua",
+		"body": ["SShapedRebarParameters(${1:rebarStyleId}, ${2:length}, ${3:legLength})"],
+		"description": "SShapedRebarParameters\n\rПараметры S-образной арматурной детали"
 	},
 	"UShapedRebarParameters": {
 		"prefix": "UShapedRebarParameters()",
@@ -1199,30 +1220,6 @@
 		"body": ["ObjectSideSelector(${1:side})"],
 		"description": "ObjectSideSelector\n\rВыбирает грани объекта, соответствующие указанной стороне"
 	},
-	"RebarOverhangRule": {
-		"prefix": "RebarOverhangRule()",
-		"scope": "lua",
-		"body": ["RebarOverhangRule({${1:overhangs}}, ${2:hook})"],
-		"description": "RebarOverhangRule\n\rПравило выпуска арматурного стержня"
-	},
-	"ChairRebarParameters": {
-		"prefix": "ChairRebarParameters()",
-		"scope": "lua",
-		"body": ["ChairRebarParameters(${1:rebarStyleId}, ${2:height}, ${3:width}, ${4:length})"],
-		"description": "ChairRebarParameters\n\rПараметры арматурного стула"
-	},
-	"ReinforcingMeshSupportsCellLayout": {
-		"prefix": "ReinforcingMeshSupportsCellLayout()",
-		"scope": "lua",
-		"body": ["ReinforcingMeshSupportsCellLayout(${1:verticalStep}, ${2:horizontalStep})"],
-		"description": "ReinforcingMeshSupportsCellLayout\n\rРаскладка фиксаторов с указанием количества пройденных ячеек"
-	},
-	"ReinforcingMeshSupportsDistanceLayout": {
-		"prefix": "ReinforcingMeshSupportsDistanceLayout()",
-		"scope": "lua",
-		"body": ["ReinforcingMeshSupportsDistanceLayout(${1:verticalStep}, ${2:horizontalStep})"],
-		"description": "ReinforcingMeshSupportsDistanceLayout\n\rРаскладка фиксаторов с указанием расстояния между элементами"
-	},
 	"BoundingBox": {
 		"prefix": "BoundingBox()",
 		"scope": "lua",
@@ -1235,98 +1232,50 @@
 		"body": ["Entity"],
 		"description": "Entity\n\rБазовый элемент проекта Renga"
 	},
-
-	//Атрибуты классов армирования
+	
+	//Методы
+	//Класс ReinforcementContainer --- ОБНОВЛЕНО v4.4
 	//---------------------------------------------------------------------------
-	"Layout": {
-		"prefix": ".Layout",
+	"AddRebar": {
+		"prefix": ":AddRebar()",
 		"scope": "lua",
-		"body": [".Layout = ${1:layout}"],
-		"description": "RebarRowParameters\n\robject\n\rLayout - тип раскладки арматурных стержней"
-		},
-	"Step": {
-		"prefix": ".Step",
-		"scope": "lua",
-		"body": [".Step = ${1:step}"],
-		"description": "RebarRowEdgeProtectionLayout,RebarRowUniformLayout\n\rnumber\n\rStep - шаг раскладки"
+		"body": [
+			":AddRebar(${1:id},${2:curve})"
+		],
+		"description": "ReinforcementContainer\n\rnil\n\rAddRebar (number id, Curve3D curve)"
 	},
-	"HorizontalStep": {
-		"prefix": ".HorizontalStep",
+	"AddRebarSet": {
+		"prefix": ":AddRebarSet()",
 		"scope": "lua",
-		"body": [".HorizontalStep = ${1:step}"],
-		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rHorizontalStep - шаг по горизонтали"
+		"body": [
+			":AddRebarSet(${1:id},${2:curve},${3:direction},${4:step},${5:count})"
+		],
+		"description": "ReinforcementContainer\n\rnil\n\rAddRebarSet (number id, Curve3D curve, Vector3D direction, number step, number count)"
 	},
-	"VerticalStep": {
-		"prefix": ".VerticalStep",
+	"AddReinforcementUnit": {
+		"prefix": ":AddReinforcementUnit()",
 		"scope": "lua",
-		"body": [".VerticalStep = ${1:step}"],
-		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rVerticalStep - шаг по вертикали"
+		"body": [
+			":AddReinforcementUnit(${1:id},${2:placement})"
+		],
+		"description": "ReinforcementContainer\n\rnil\n\rAddReinforcementUnit (number id, Placement3D placement)"
 	},
-	"Displacements": {
-		"prefix": ".Displacements",
+	"AddReinforcement": {
+		"prefix": ":AddReinforcement()",
 		"scope": "lua",
-		"body": [".Displacements = {${1:displacements}}"],
-		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rtable\n\rDisplacements - смещения рядов фиксаторов"
+		"body": [
+			":AddReinforcement(${1:container})"
+		],
+		"description": "ReinforcementContainer\n\rnil\n\rAddReinforcement (ReinforcementContainer container)"
 	},
-	"FrontMesh": {
-		"prefix": ".FrontMesh",
-		"scope": "lua",
-		"body": [".FrontMesh = ${1:frontMesh}"],
-		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshParameters\n\rFrontMesh - параметры передней сетки"
-	},
+	
+	//Атрибуты классов армирования --- ОБНОВЛЕНО v4.4
+	//---------------------------------------------------------------------------
 	"BackMesh": {
 		"prefix": ".BackMesh",
 		"scope": "lua",
 		"body": [".BackMesh = ${1:backMesh}"],
 		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshParameters\n\rBackMesh - параметры задней сетки"
-	},
-	"Detail": {
-		"prefix": ".Detail",
-		"scope": "lua",
-		"body": [".Detail = ${1:detail}"],
-		"description": "EdgeReinforcementParameters\n\robject\n\rDetail - параметры детали (U-образный стержень)"
-	},
-	"EdgeSelectors": {
-		"prefix": ".EdgeSelectors",
-		"scope": "lua",
-		"body": [".EdgeSelectors = ${1:edgeSelectors}"],
-		"description": "EdgeReinforcementParameters\n\rtable\n\rEdgeSelectors - правила выбора усиливаемых граней"
-	},
-	"OverhangRules": {
-		"prefix": ".OverhangRules",
-		"scope": "lua",
-		"body": [".OverhangRules = ${1:overhangRules}"],
-		"description": "RebarRowParameters\n\rtable\n\rOverhangRules - правила выпусков"
-	},
-	"BendingFactor": {
-		"prefix": ".BendingFactor",
-		"scope": "lua",
-		"body": [".BendingFactor = ${1:factor}"],
-		"description": "RebarRowParameters,CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rBendingFactor - коэффициент гибки"
-	},
-	"UseRectangularApproximation": {
-		"prefix": ".UseRectangularApproximation",
-		"scope": "lua",
-		"body": [".UseRectangularApproximation = ${1:true}"],
-		"description": "ReinforcingMeshParameters\n\rboolean\n\rUseRectangularApproximation - использовать прямоугольную аппроксимацию"
-	},
-	"Supports": {
-		"prefix": ".Supports",
-		"scope": "lua",
-		"body": [".Supports = ${1:support}"],
-		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshSupportsParameters\n\rSupports - фиксаторы сетки"
-	},
-	"RebarStyleId": {
-		"prefix": ".RebarStyleId",
-		"scope": "lua",
-		"body": [".RebarStyleId = ${1:id}"],
-		"description": "CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rRebarStyleId - идентификатор стиля арматурного стержня"
-	},
-	"RebarLength": {
-		"prefix": ".Length",
-		"scope": "lua",
-		"body": [".Length = ${1:length}"],
-		"description": "CShapedRebarParameters\n\rnumber\n\rLength - длина детали"
 	},
 	"BaseLength": {
 		"prefix": ".BaseLength",
@@ -1334,20 +1283,152 @@
 		"body": [".BaseLength = ${1:baseLength}"],
 		"description": "UShapedRebarParameters\n\rnumber\n\rBaseLength - длина основания"
 	},
+	"BendAngle": {
+		"prefix": ".BendAngle",
+		"scope": "lua",
+		"body": [".BendAngle = ${1:angle}"],
+		"description": "RebarHookParameters\n\rnumber\n\rBendAngle - угол отгиба"
+	},
+	"BendingFactor": {
+		"prefix": ".BendingFactor",
+		"scope": "lua",
+		"body": [".BendingFactor = ${1:factor}"],
+		"description": "RebarRowParameters,CShapedRebarParameters,UShapedRebarParameters,RebarChairParameters,SShapedRebarParameters\n\rnumber\n\rBendingFactor - коэффициент гибки"
+	},
+	"Detail": {
+		"prefix": ".Detail",
+		"scope": "lua",
+		"body": [".Detail = ${1:detail}"],
+		"description": "EdgeReinforcementParameters,ReinforcingMeshSupportsParameters\n\robject\n\rDetail - параметры детали"
+	},
+	"Displacements": {
+		"prefix": ".Displacements",
+		"scope": "lua",
+		"body": [".Displacements = {${1:displacements}}"],
+		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rtable\n\rDisplacements - смещения рядов фиксаторов"
+	},
+	"EdgeSelectors": {
+		"prefix": ".EdgeSelectors",
+		"scope": "lua",
+		"body": [".EdgeSelectors = ${1:edgeSelectors}"],
+		"description": "EdgeReinforcementParameters\n\rtable\n\rEdgeSelectors - правила выбора усиливаемых граней"
+	},
+	"ExtensionLength": {
+		"prefix": ".ExtensionLength",
+		"scope": "lua",
+		"body": [".ExtensionLength = ${1:extensionLength}"],
+		"description": "RebarHookParameters\n\rnumber\n\rExtensionLength - длина анкеровки"
+	},
+	"FrontMesh": {
+		"prefix": ".FrontMesh",
+		"scope": "lua",
+		"body": [".FrontMesh = ${1:frontMesh}"],
+		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshParameters\n\rFrontMesh - параметры передней сетки"
+	},
+	"HorizontalStep": {
+		"prefix": ".HorizontalStep",
+		"scope": "lua",
+		"body": [".HorizontalStep = ${1:step}"],
+		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rHorizontalStep - шаг по горизонтали"
+	},
+	"Hook": {
+		"prefix": ".Hook",
+		"scope": "lua",
+		"body": [".Hook = ${1:hook}"],
+		"description": "RebarOverhangParameters\n\rRebarHookParameters\n\rHook - параметры отгиба стержня"
+	},
+	"Layout": {
+		"prefix": ".Layout",
+		"scope": "lua",
+		"body": [".Layout = ${1:layout}"],
+		"description": "RebarRowParameters,EdgeReinforcementParameters,ReinforcingMeshSupportsParameters\n\robject\n\rLayout - тип раскладки"
+	},
 	"LegLength": {
 		"prefix": ".LegLength",
 		"scope": "lua",
 		"body": [".LegLength = ${1:legLength}"],
-		"description": "CShapedRebarParameters,UShapedRebarParameters\n\rnumber\n\rLegLength - длина ножки"
+		"description": "CShapedRebarParameters,UShapedRebarParameters,SShapedRebarParameters\n\rnumber\n\rLegLength - длина ножки"
 	},
-
-	//Перечисления армирования
+	"Length": {
+		"prefix": ".Length",
+		"scope": "lua",
+		"body": [".Length = ${1:length}"],
+		"description": "CShapedRebarParameters,SShapedRebarParameters\n\rnumber\n\rLength - длина детали"
+	},
+	"LongitudinalFreeEnd": {
+		"prefix": ".LongitudinalFreeEnd",
+		"scope": "lua",
+		"body": [".LongitudinalFreeEnd = ${1:freeEnd}"],
+		"description": "ReinforcingMeshParameters\n\rnumber\n\rLongitudinalFreeEnd - свободный конец продольных стержней"
+	},
+	"OverhangRules": {
+		"prefix": ".OverhangRules",
+		"scope": "lua",
+		"body": [".OverhangRules = ${1:overhangRules}"],
+		"description": "RebarRowParameters\n\rtable\n\rOverhangRules - правила выпусков"
+	},
+	"Overhangs": {
+		"prefix": ".Overhangs",
+		"scope": "lua",
+		"body": [".Overhangs = ${1:overhangs}"],
+		"description": "RebarOverhangParameters\n\rtable\n\rOverhangs - величины выпусков"
+	},
+	"RebarStyleId": {
+		"prefix": ".RebarStyleId",
+		"scope": "lua",
+		"body": [".RebarStyleId = ${1:id}"],
+		"description": "RebarRowParameters,CShapedRebarParameters,UShapedRebarParameters,RebarChairParameters,SShapedRebarParameters\n\rnumber\n\rRebarStyleId - идентификатор стиля арматурного стержня"
+	},
+	"RotationAngle": {
+		"prefix": ".RotationAngle",
+		"scope": "lua",
+		"body": [".RotationAngle = ${1:rotationAngle}"],
+		"description": "RebarHookParameters\n\rnumber\n\rRotationAngle - угол поворота крюка вокруг оси стержня"
+	},
+	"RowsOrder": {
+		"prefix": ".RowsOrder",
+		"scope": "lua",
+		"body": [".RowsOrder = ${1:order}"],
+		"description": "ReinforcingMeshParameters\n\rReinforcingMeshRowsOrder\n\rRowsOrder - порядок рядов арматурных стержней"
+	},
+	"Step": {
+		"prefix": ".Step",
+		"scope": "lua",
+		"body": [".Step = ${1:step}"],
+		"description": "RebarRowEdgeProtectionLayout,RebarRowUniformLayout\n\rnumber\n\rStep - шаг раскладки"
+	},
+	"Supports": {
+		"prefix": ".Supports",
+		"scope": "lua",
+		"body": [".Supports = ${1:support}"],
+		"description": "DoubleReinforcingMeshParameters\n\rReinforcingMeshSupportsParameters\n\rSupports - фиксаторы сетки"
+	},
+	"TransverseFreeEnd": {
+		"prefix": ".TransverseFreeEnd",
+		"scope": "lua",
+		"body": [".TransverseFreeEnd = ${1:freeEnd}"],
+		"description": "ReinforcingMeshParameters\n\rnumber\n\rTransverseFreeEnd - свободный конец поперечных стержней"
+	},
+	"UseRectangularApproximation": {
+		"prefix": ".UseRectangularApproximation",
+		"scope": "lua",
+		"body": [".UseRectangularApproximation = ${1:true}"],
+		"description": "ReinforcingMeshParameters\n\rboolean\n\rUseRectangularApproximation - использовать прямоугольную аппроксимацию"
+	},
+	"VerticalStep": {
+		"prefix": ".VerticalStep",
+		"scope": "lua",
+		"body": [".VerticalStep = ${1:step}"],
+		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rVerticalStep - шаг по вертикали"
+	},
+	
+	//Перечисления армирования --- ОБНОВЛЕНО v4.4
 	//---------------------------------------------------------------------------
 	"InLayerAlignment": {
 		"prefix": "InLayerAlignment",
 		"scope": "lua",
-		"body": ["InLayerAlignment.${1|Left,Center,Right|}"],
-		"description": "Расположение в слое основы (Left, Center или Right)"
+		"body": ["InLayerAlignment.${1|OuterSide,Center,InnerSide|}"],
+		"description": "Расположение в слое основы (OuterSide, Center или InnerSide)"
 	},
 	"ModelObjectType": {
 		"prefix": "ModelObjectType",
@@ -1367,34 +1448,27 @@
 		"body": ["FloorSide.${1|Top,Bottom,Side|}"],
 		"description": "Сторона перекрытия"
 	},
-	"RebarLinearLayoutStrategy": {
-		"prefix": "RebarLinearLayoutStrategy",
-		"scope": "lua",
-		"body": ["RebarLinearLayoutStrategy.${1|WithSupportRebars,Uniform|}"],
-		"description": "Тип раскладки арматурных стержней вдоль прямой линии"
-	},
 	"ReinforcingMeshRowsOrder": {
 		"prefix": "ReinforcingMeshRowsOrder",
 		"scope": "lua",
 		"body": ["ReinforcingMeshRowsOrder.${1|LongitudinalInFront,TransverseInFront|}"],
 		"description": "Порядок рядов сетки арматурных стержней"
 	},
-
+	
 	//Функции армирования
 	//---------------------------------------------------------------------------
-
 	
 	"CreateReinforcingMeshInBaseLayer": {
 		"prefix": "CreateReinforcingMeshInBaseLayer()",
 		"scope": "lua",
-		"body": ["CreateReinforcingMeshInBaseLayer(${1:object}, ${2:clearCoverRules}, ${3:meshParameters}, ${4:meshAlignment}, ${5:meshOffset})"],
-		"description": "ReinforcementContainer\n\rCreateReinforcingMeshInBaseLayer (Entity object, table clearCoverRules, ReinforcingMeshParameters meshParameters, InLayerAlignment meshAlignment, number meshOffset)"
+		"body": ["CreateReinforcingMeshInBaseLayer(${1:object}, ${2:clearCoverRules}, ${3:meshParameters}, ${4:oMeshAlignment}, ${5:oMeshOffset})"],
+		"description": "ReinforcementContainer\n\rCreateReinforcingMeshInBaseLayer (Entity object, table clearCoverRules, ReinforcingMeshParameters meshParameters, InLayerAlignment oMeshAlignment, number oMeshOffset)"
 	},
 	"CreateDoubleReinforcingMeshInBaseLayer": {
 		"prefix": "CreateDoubleReinforcingMeshInBaseLayer()",
 		"scope": "lua",
-		"body": ["CreateDoubleReinforcingMeshInBaseLayer(${1:object}, ${2:clearCoverRules}, ${3:meshParameters}, ${4:edgeReinfParameters})"],
-		"description": "ReinforcementContainer\n\rCreateDoubleReinforcingMeshInBaseLayer (Entity object, table clearCoverRules, DoubleReinforcingMeshParameters meshParameters, EdgeReinforcementParameters edgeReinfParameters)"
+		"body": ["CreateDoubleReinforcingMeshInBaseLayer(${1:object}, ${2:clearCoverRules}, ${3:meshParameters}, ${4:oEdgeReinfParameters})"],
+		"description": "ReinforcementContainer\n\rCreateDoubleReinforcingMeshInBaseLayer (Entity object, table clearCoverRules, DoubleReinforcingMeshParameters meshParameters, EdgeReinforcementParameters oEdgeReinfParameters)"
 	},
 	"GetParameterValue": {
 		"prefix": "GetParameterValue()",
@@ -1415,14 +1489,14 @@
 		"description": "Entity\n\rGetReinforcementUnitStyle (number id)"
 	},
 	"CreateObjectReinforcement": {
-    "prefix": "CreateObjectReinforcement",
-    "scope": "lua",
-    "body": [
-        "function CreateObjectReinforcement(object, styleParameters)",
-        "    ${1:-- тело функции}",
-        "end"
-    ],
-    "description": "Базовая функция армирования объекта\nCreateObjectReinforcement(object, styleParameters)"
+	    "prefix": "CreateObjectReinforcement",
+	    "scope": "lua",
+	    "body": [
+	        "function CreateObjectReinforcement(object, styleParameters)",
+	        "    ${1:-- тело функции}",
+	        "end"
+	    ],
+	    "description": "Базовая функция армирования объекта\nCreateObjectReinforcement(object, styleParameters)"
 	},
 	"SetStyleParameterStates": {
 		"prefix": "SetStyleParameterStates",
@@ -1434,7 +1508,7 @@
 		],
 		"description": "Базовая функция управления состояниями параметров\nSetStyleParameterStates(parameters)"
 	},
-
+	
 	//LUA
 	//
 	//---------------------------------------------------------------------------
@@ -1571,7 +1645,7 @@
         "scope": "lua"
     },
     "math.huge": {
-        "body": "math.huge(${0:...})",
+        "body": "math.huge",
         "description": "math.huge",
         "prefix": "math.huge",
         "scope": "lua"
@@ -1592,12 +1666,6 @@
         "body": "math.log10(${0:...})",
         "description": "5.1\n\nmath.log10 (x)",
         "prefix": "math.log10",
-        "scope": "lua"
-    },
-    "math.math.randomseed": {
-        "body": "math.math.randomseed( ${1:x} )",
-        "description": "math.math.randomseed",
-        "prefix": "math.math.randomseed",
         "scope": "lua"
     },
     "math.max": {
@@ -1631,7 +1699,7 @@
         "scope": "lua"
     },
     "math.pi": {
-        "body": "math.pi(${0:...})",
+        "body": "math.pi",
         "description": "math.pi",
         "prefix": "math.pi",
         "scope": "lua"
@@ -1758,7 +1826,7 @@
     },
     "select": {
         "body": "select(${1:index}, ${2:...})",
-        "description": "select (index, \u00b7\u00b7\u00b7)",
+        "description": "select (index, ···)",
         "prefix": "select",
         "scope": "lua"
     },
@@ -1834,7 +1902,7 @@
         "prefix": "type",
         "scope": "lua"
     },
-
+	
 	//JSON
 	//Двумерное моделирование
 	//---------------------------------------------------------------------------
@@ -1898,17 +1966,17 @@
 		]
 	},
 	"ParameterRebarStyleId": {
-    "prefix": "StyleParameters.ParameterRebarStyleId",
-    "scope": "json",
-    "body": [
-        "{",
-        "\t\"name\": \"${1:RebarStyleId}\",",
-        "\t\"text\": \"${2:Арматурный стиль}\",",
-        "\t\"type\": \"Id\",",
-        "\t\"entityTypeId\": \"608edb78-96f3-40a6-a0ec-71000105581b\"",
-        "}"
-    ],
-    "description": "Параметр для выбора арматурного стиля (RebarStyleId)"
+	    "prefix": "StyleParameters.ParameterRebarStyleId",
+	    "scope": "json",
+	    "body": [
+	        "{",
+	        "\t\"name\": \"${1:RebarStyleId}\",",
+	        "\t\"text\": \"${2:Арматурный стиль}\",",
+	        "\t\"type\": \"Id\",",
+	        "\t\"entityTypeId\": \"608edb78-96f3-40a6-a0ec-71000105581b\"",
+	        "}"
+	    ],
+	    "description": "Параметр для выбора арматурного стиля (RebarStyleId)"
 	},
 	"ParameterUserEnum": {
 		"prefix": "StyleParameters.ParameterUserEnum",
@@ -1984,7 +2052,7 @@
 			"        {",
 			"            \"label\": \"Build rst file\",",
 			"            \"type\": \"shell\",",
-			"            \"command\": \"..\\\\\\\\..\\\\\\\\RstBuilder\\\\\\\\RstBuilder.exe\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\RstBuilder\\\\RstBuilder.exe\",",
 			"            \"args\": [",
 			"                \"${1:ParamsTest}.json\",",
 			"                \"${1:ParamsTest}.lua\",",
@@ -2001,7 +2069,7 @@
 			"        {",
 			"            \"type\": \"shell\",",
 			"            \"label\": \"Load rst file\",",
-			"            \"command\": \"..\\\\\\\\..\\\\\\\\STDLLoader\\\\\\\\STDLLoader.exe\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\STDLLoader\\\\STDLLoader.exe\",",
 			"            \"args\": [",
 			"                \"${1:ParamsTest}.rst\",",
 			"                \"${2:Equipment}\"",
@@ -2011,7 +2079,7 @@
 			"        {",
 			"            \"type\": \"shell\",",
 			"            \"label\": \"StdlJsonEditor\",",
-			"            \"command\": \"..\\\\\\\\..\\\\\\\\StdlJsonEditor\\\\\\\\StdlJsonEditor.exe\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\StdlJsonEditor\\\\StdlJsonEditor.exe\",",
 			"            \"args\": [",
 			"                \"${1:ParamsTest}.json\"",
 			"            ],",
@@ -2020,7 +2088,7 @@
 			"        {",
 			"            \"type\": \"shell\",",
 			"            \"label\": \"JsonToLuaParams\",",
-			"            \"command\": \"..\\\\\\\\..\\\\\\\\JsonToLuaParams\\\\\\\\JsonToLuaParams.exe\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\JsonToLuaParams\\\\JsonToLuaParams.exe\",",
 			"            \"args\": [",
 			"                \"${1:ParamsTest}.json\",",
 			"                \"${1:ParamsTest}.lua\"",
@@ -2054,7 +2122,7 @@
 		"prefix": "Type.Integer",
 		"scope": "json",
 		"body": [
-			"Integer",
+			"Integer"
 		],
 		"description": "Целое число"
 	},
@@ -2062,7 +2130,7 @@
 		"prefix": "Type.Real",
 		"scope": "json",
 		"body": [
-			"Real",
+			"Real"
 		],
 		"description": "Действительное число"
 	},
@@ -2070,7 +2138,7 @@
 		"prefix": "Type.String",
 		"scope": "json",
 		"body": [
-			"String",
+			"String"
 		],
 		"description": "Строка"
 	},
@@ -2078,7 +2146,7 @@
 		"prefix": "Type.Length",
 		"scope": "json",
 		"body": [
-			"Length",
+			"Length"
 		],
 		"description": "Длина в миллиметрах"
 	},
@@ -2086,7 +2154,7 @@
 		"prefix": "Type.Angle",
 		"scope": "json",
 		"body": [
-			"Angle",
+			"Angle"
 		],
 		"description": "Угол в десятичных градусах"
 	},
@@ -2094,7 +2162,7 @@
 		"prefix": "Type.Boolean",
 		"scope": "json",
 		"body": [
-			"Boolean",
+			"Boolean"
 		],
 		"description": "Булевый (true/false)"
 	},
@@ -2102,7 +2170,7 @@
 		"prefix": "PipeSystems.DomesticColdWater",
 		"scope": "json",
 		"body": [
-			"\"DomesticColdWater\"",
+			"\"DomesticColdWater\""
 		],
 		"description": "Категория трубопроводных систем\n\rDomesticColdWater\n\rБытовое холодное водоснабжение"
 	},
@@ -2110,7 +2178,7 @@
 		"prefix": "PipeSystems.DomesticHotWater",
 		"scope": "json",
 		"body": [
-			"\"DomesticHotWater\"",
+			"\"DomesticHotWater\""
 		],
 		"description": "Категория трубопроводных систем\n\rDomesticHotWater\n\rБытовое горячее водоснабжение"
 	},
@@ -2118,7 +2186,7 @@
 		"prefix": "PipeSystems.DomesticSewage",
 		"scope": "json",
 		"body": [
-			"\"DomesticSewage\"",
+			"\"DomesticSewage\""
 		],
 		"description": "Категория трубопроводных систем\n\rDomesticSewage\n\rБытовая канализация"
 	},
@@ -2126,7 +2194,7 @@
 		"prefix": "PipeSystems.Gas",
 		"scope": "json",
 		"body": [
-			"\"Gas\"",
+			"\"Gas\""
 		],
 		"description": "Категория трубопроводных систем\n\rGas\n\rБытовое газоснабжение"
 	},
@@ -2134,7 +2202,7 @@
 		"prefix": "PipeSystems.Firewater",
 		"scope": "json",
 		"body": [
-			"\"Firewater\"",
+			"\"Firewater\""
 		],
 		"description": "Категория трубопроводных систем\n\rFirewater\n\rВодяное пожаротушение"
 	},
@@ -2142,7 +2210,7 @@
 		"prefix": "PipeSystems.Heating",
 		"scope": "json",
 		"body": [
-			"\"Heating\"",
+			"\"Heating\""
 		],
 		"description": "Категория трубопроводных систем\n\rHeating\n\rВодяное теплоснабжение"
 	},
@@ -2150,7 +2218,7 @@
 		"prefix": "PipeSystems.GaseousFireSuppression",
 		"scope": "json",
 		"body": [
-			"\"GaseousFireSuppression\"",
+			"\"GaseousFireSuppression\""
 		],
 		"description": "Категория трубопроводных систем\n\rGaseousFireSuppression\n\rГазовое пожаротушение"
 	},
@@ -2158,7 +2226,7 @@
 		"prefix": "PipeSystems.Rainwater",
 		"scope": "json",
 		"body": [
-			"\"Rainwater\"",
+			"\"Rainwater\""
 		],
 		"description": "Категория трубопроводных систем\n\rRainwater\n\rДождевая канализация"
 	},
@@ -2166,7 +2234,7 @@
 		"prefix": "PipeSystems.IndustrialColdWater",
 		"scope": "json",
 		"body": [
-			"\"IndustrialColdWater\"",
+			"\"IndustrialColdWater\""
 		],
 		"description": "Категория трубопроводных систем\n\rIndustrialColdWater\n\rПроизводственное холодное водоснабжение"
 	},
@@ -2174,7 +2242,7 @@
 		"prefix": "PipeSystems.IndustrialHotWater",
 		"scope": "json",
 		"body": [
-			"\"IndustrialHotWater\"",
+			"\"IndustrialHotWater\""
 		],
 		"description": "Категория трубопроводных систем\n\rIndustrialHotWater\n\rПроизводственное горячее водоснабжение"
 	},
@@ -2182,7 +2250,7 @@
 		"prefix": "PipeSystems.IndustrialSewage",
 		"scope": "json",
 		"body": [
-			"\"IndustrialSewage\"",
+			"\"IndustrialSewage\""
 		],
 		"description": "Категория трубопроводных систем\n\rIndustrialSewage\n\rПроизводственная канализация"
 	},
@@ -2190,7 +2258,7 @@
 		"prefix": "PipeSystems.OtherPipeSystem",
 		"scope": "json",
 		"body": [
-			"\"OtherPipeSystem\"",
+			"\"OtherPipeSystem\""
 		],
 		"description": "Категория трубопроводных систем\n\rOtherPipeSystem\n\rПрочие трубопроводные системы"
 	},
@@ -2198,7 +2266,7 @@
 		"prefix": "DuctSystems.Ventilation",
 		"scope": "json",
 		"body": [
-			"\"Ventilation\"",
+			"\"Ventilation\""
 		],
 		"description": "Категория воздуховодных систем\n\rVentilation\n\rПриточная вентиляция"
 	},
@@ -2206,7 +2274,7 @@
 		"prefix": "DuctSystems.Exhaust",
 		"scope": "json",
 		"body": [
-			"\"Exhaust\"",
+			"\"Exhaust\""
 		],
 		"description": "Категория воздуховодных систем\n\rExhaust\n\rВытяжная вентиляция"
 	},
@@ -2214,7 +2282,7 @@
 		"prefix": "DuctSystems.Pressurization",
 		"scope": "json",
 		"body": [
-			"\"Pressurization\"",
+			"\"Pressurization\""
 		],
 		"description": "Категория воздуховодных систем\n\rPressurization\n\rВытяжное дымоудаление"
 	},
@@ -2222,7 +2290,7 @@
 		"prefix": "DuctSystems.Vacuum",
 		"scope": "json",
 		"body": [
-			"\"Vacuum\"",
+			"\"Vacuum\""
 		],
 		"description": "Категория воздуховодных систем\n\rVacuum\n\rПылеудаление"
 	},
@@ -2230,7 +2298,7 @@
 		"prefix": "DuctSystems.OtherDuctSystem",
 		"scope": "json",
 		"body": [
-			"\"OtherDuctSystem\"",
+			"\"OtherDuctSystem\""
 		],
 		"description": "Категория воздуховодных систем\n\rOtherDuctSystem\n\rПрочие воздуховодные системы"
 	},
@@ -2238,7 +2306,7 @@
 		"prefix": "ElectricalSystems.LightingCircuit",
 		"scope": "json",
 		"body": [
-			"\"LightingCircuit\"",
+			"\"LightingCircuit\""
 		],
 		"description": "Категория электрических систем\n\rLightingCircuit\n\rОсветительная сеть"
 	},
@@ -2246,7 +2314,7 @@
 		"prefix": "ElectricalSystems.PowerCircuit",
 		"scope": "json",
 		"body": [
-			"\"PowerCircuit\"",
+			"\"PowerCircuit\""
 		],
 		"description": "Категория электрических систем\n\rPowerCircuit\n\rСиловая сеть"
 	},
@@ -2254,7 +2322,7 @@
 		"prefix": "ElectricalSystems.OtherElectricalSystem",
 		"scope": "json",
 		"body": [
-			"\"OtherElectricalSystem\"",
+			"\"OtherElectricalSystem\""
 		],
 		"description": "Категория электрических систем\n\rOtherElectricalSystem\n\rПрочие электрические системы"
 	}

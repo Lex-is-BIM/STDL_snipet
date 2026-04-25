@@ -1,4 +1,4 @@
-# Словарь STDL для Visual Studio Code v4.3
+# Словарь STDL для Visual Studio Code v4.5
 
 Для версии STDL 4.0+
 
@@ -33,10 +33,13 @@
 - Атрибуты: `OutwardOffset`, `InwardOffset`, `Direction`, `ForwardDirectionDraftAngle`, `ReverseDirectionDraftAngle`, `GuideCurve`, `ControlPoints`, `ClockwiseRotationAngle`.
 
 #### Пространство имен Style
-- Методы: `SetDetailedGeometry`, `SetSymbolicGeometry`, `SetSymbolGeometry`, `SetInsulationSkeleton`, `GetParameterValues`, `GetParameterGroup`, `GetParameter`, `GetPort`, `AddRebar`, `AddRebarSet`.
+- Методы: `SetDetailedGeometry`, `SetSymbolicGeometry`, `SetSymbolGeometry`, `SetInsulationSkeleton`, `GetParameterValues`, `GetParameterGroup`, `GetParameter`, `GetPort`.
 
 #### Пространство имен Project
 - Методы: `GetRebarStyle`.
+
+#### Класс ReinforcementContainer
+- Методы: `AddRebar`, `AddRebarSet`, `AddReinforcementUnit`, `AddReinforcement`.
 
 #### Прочие функции
 - `CastToParameterContainer` — приведение сущности к контейнеру параметров.
@@ -51,16 +54,17 @@
 - Методы: `GetValue`, `SetVisible`, `SetEnabled`.
 
 #### Армирование (STDL 4.0+)
-- **Классы раскладки**: `RebarRowEdgeProtectionLayout`, `RebarRowUniformLayout`;
+- **Классы раскладки**: `RebarRowEdgeProtectionLayout`, `RebarRowUniformLayout`, `EdgeReinforcementLayout`, `EdgeReinforcementCenteredLayout`;
 - **Классы сеток**: `DoubleReinforcingMeshParameters`, `ReinforcingMeshParameters`, `ReinforcingMeshSupportsParameters`;
-- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters`;
-- **Селекторы**: `VoidingSelector`, `ObjectSideSelector`;
-- **Фиксаторы**: `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `ChairRebarParameters`;
+- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters`, `SShapedRebarParameters`;
+- **Селекторы**: `VoidingSelector`, `ObjectSideSelector`, `AnyFaceSelector`;
+- **Фиксаторы**: `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `RebarChairParameters`;
+- **Параметры крюков и свесов**: `RebarHookParameters`, `RebarOverhangParameters`;
 - **Контейнер**: `ReinforcementContainer`;
-- **Вспомогательные**: `Entity`, `BoundingBox`, `RebarOverhangRule`;
-- **Атрибуты**: `Layout`, `Step`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`, `OverhangRules`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `RebarLength`, `RebarBaseLength`, `RebarLegLength`;
+- **Вспомогательные**: `Entity`, `BoundingBox`;
+- **Атрибуты**: `Layout`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `RebarLength`, `RebarBaseLength`, `RebarLegLength`, `BendAngle`, `ExtensionLength`, `RotationAngle`, `Overhangs`, `Hook`, `LongitudinalFreeEnd`, `TransverseFreeEnd`;
 - **Функции**: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`;
-- **NEW! Шаблоны функций**: `CreateObjectReinforcement`, `SetStyleParameterStates`.
+- **Шаблоны функций**: `CreateObjectReinforcement`, `SetStyleParameterStates`.
 
 #### Перечисления Style Template API (с выпадающим списком)
 - `DuctConnectorType` — типы соединения воздуховодов;
@@ -70,11 +74,10 @@
 - `CoordinateSystem3D` — 3D системы координат (Cartesian, Cylindrical, Spherical);
 - `InsulationCapType` — типы завершения изоляции (None, Flat);
 - `FlowDirection` — направления потока (Inlet, Outlet, InletAndOutlet);
-- `InLayerAlignment` — расположение в слое основы (Left, Center, Right);
+- `InLayerAlignment` — расположение в слое основы (OuterSide, Center, InnerSide);
 - `ModelObjectType` — типы объектов модели;
 - `WallSide` — стороны стены;
 - `FloorSide` — стороны перекрытия;
-- `RebarLinearLayoutStrategy` — стратегия раскладки стержней;
 - `ReinforcingMeshRowsOrder` — порядок рядов сетки.
 
 #### Функции базовой библиотеки Lua
@@ -84,22 +87,29 @@
 - `if`, `ifel`, `elif`, `for`, `fori`, `forp`, `function`, `local`, `ret`.
 
 #### Математическая библиотека Lua
-- `math.abs`, `math.acos`, `math.asin`, `math.atan`, `math.atan2`, `math.ceil`, `math.cos`, `math.cosh`, `math.deg`, `math.exp`, `math.floor`, `math.fmod`, `math.log`, `math.max`, `math.min`, `math.modf`, `math.pi`, `math.rad`, `math.random`, `math.randomseed`, `math.sin`, `math.sinh`, `math.sqrt`, `math.tan`, `math.tanh`, `math.tointeger`, `math.type`.
+- `math.abs`, `math.acos`, `math.asin`, `math.atan`, `math.atan2`, `math.ceil`, `math.cos`, `math.cosh`, `math.deg`, `math.exp`, `math.floor`, `math.fmod`, `math.huge`, `math.log`, `math.max`, `math.min`, `math.modf`, `math.pi`, `math.rad`, `math.random`, `math.randomseed`, `math.sin`, `math.sinh`, `math.sqrt`, `math.tan`, `math.tanh`, `math.tointeger`, `math.type`.
 
 #### Библиотека для работы с таблицами Lua
 - `table.concat`, `table.insert`, `table.remove`, `table.sort`, `table.pack`, `table.unpack`, `table.move`.
 
-## Изменения в версии v4.3
+## Изменения в версии v4.5
 
-### Добавлено
-- `CreateObjectReinforcement` — шаблон базовой функции армирования;
-- `SetStyleParameterStates` — шаблон управления состояниями параметров;
-- Автогенерация сниппетов параметров стиля из JSON (группы с выпадающим списком).
+### Новые сниппеты
+- `SShapedRebarParameters` — S-образная форма детали армирования;
+- `AnyFaceSelector` — селектор любой грани;
+- `EdgeReinforcementCenteredLayout` — центрированная раскладка краевого армирования;
+- `AddReinforcementUnit` — добавление элемента армирования в контейнер;
+- `AddReinforcement` — добавление армирования в контейнер;
+- Параметры крюков и свесов: `BendAngle`, `ExtensionLength`, `RotationAngle`, `Overhangs`, `Hook`, `LongitudinalFreeEnd`, `TransverseFreeEnd`.
 
-### Исправлено
-- Префикс `GetValue` изменён с `.` на `:`;
-- Обновлена структура раскладки стержней (`RebarRowEdgeProtectionLayout`, `RebarRowUniformLayout`);
-- Исправлены конфликты ключей в атрибутах.
+### Уточнённые сигнатуры
+- `RebarHookParameters` и `RebarOverhangParameters` — обновлены под актуальное API;
+- `ChairRebarParameters` → `RebarChairParameters` (класс переименован);
+- `InLayerAlignment`: значения `Left`/`Right` заменены на `OuterSide`/`InnerSide`;
+- `EdgeReinforcementParameters` — параметр `step` заменён на `layout`.
+
+### Исправления
+- `math.pi` и `math.huge` — теперь вставляются как константы (без скобок).
 
 ## Установка
 

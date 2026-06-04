@@ -1097,7 +1097,7 @@
 		"description": "Тип завершения изоляции (None или Flat)"
 	},
 	//Армирование
-	//Классы --- ОБНОВЛЕНО v4.4
+	//Классы --- ОБНОВЛЕНО v4.6
 	//---------------------------------------------------------------------------
 	//---------------------------------------------------------------------------
 	"AnyFaceSelector": {
@@ -1136,12 +1136,6 @@
 		"body": ["RebarHookParameters(${1:angle}, ${2:extensionLength}, ${3:rotationAngle})"],
 		"description": "RebarHookParameters\n\rПараметры отгиба арматурного стержня"
 	},
-	"RebarOverhangParameters": {
-		"prefix": "RebarOverhangParameters()",
-		"scope": "lua",
-		"body": ["RebarOverhangParameters(${1:overhangs}, ${2:oHook})"],
-		"description": "RebarOverhangParameters\n\rПараметры выпуска арматурного стержня"
-	},
 	"RebarRowEdgeProtectionLayout": {
 		"prefix": "RebarRowEdgeProtectionLayout()",
 		"scope": "lua",
@@ -1163,7 +1157,7 @@
 	"ReinforcingMeshParameters": {
 		"prefix": "ReinforcingMeshParameters()",
 		"scope": "lua",
-		"body": ["ReinforcingMeshParameters(${1:longitudinalRowParams}, ${2:transverseRowParams})"],
+		"body": ["ReinforcingMeshParameters(${1:longitudinalRow}, ${2:transverseRow})"],
 		"description": "ReinforcingMeshParameters\n\rПараметры сетки арматурных стержней"
 	},
 	"ReinforcingMeshSupportsParameters": {
@@ -1205,7 +1199,7 @@
 	"UShapedRebarParameters": {
 		"prefix": "UShapedRebarParameters()",
 		"scope": "lua",
-		"body": ["UShapedRebarParameters(${1:rebarStyleId}, ${2:baseLength}, ${3:legLength})"],
+		"body": ["UShapedRebarParameters(${1:rebarStyleId}, ${2:baseLength}, ${3:leftLegLength}, ${4:rightLegLength})"],
 		"description": "UShapedRebarParameters\n\rПараметры U-образной арматурной детали"
 	},
 	"VoidingSelector": {
@@ -1232,7 +1226,38 @@
 		"body": ["Entity"],
 		"description": "Entity\n\rБазовый элемент проекта Renga"
 	},
-	
+	"ZonedRebarRowParameters": {
+		"prefix": "ZonedRebarRowParameters()",
+		"scope": "lua",
+		"body": ["ZonedRebarRowParameters(${1:mainRowParameters})"],
+		"description": "ZonedRebarRowParameters\n\rПараметры зонированного расположения рядов арматурных стержней"
+	},
+	"RebarOverhangParameters": {
+    "prefix": "RebarOverhangParameters()",
+    "scope": "lua",
+    "body": ["RebarOverhangParameters({${1:overhangs}})"],
+    "description": "RebarOverhangParameters\n\rПараметры выпуска арматурного стержня"
+	},
+	"RebarOverhangParametersWithHook": {
+		"prefix": "RebarOverhangParametersWithHook()",
+		"scope": "lua",
+		"body": ["RebarOverhangParameters({${1:overhangs}}, ${2:hook})"],
+		"description": "RebarOverhangParameters\n\rПараметры выпуска с крюком"
+	},
+	//Примеры OverhangRules
+	//---------------------------------------------------------------------------
+	"OverhangRuleItem": {
+		"prefix": "overhangRule",
+		"scope": "lua",
+		"body": ["{ ${1:selector}, RebarOverhangParameters({${2:overhangs}}) }"],
+		"description": "Элемент правил выпусков: {селектор, RebarOverhangParameters({выпуск1, выпуск2, ...})}"
+	},
+	"OverhangRuleConstant": {
+		"prefix": "overhangRuleConstant",
+		"scope": "lua",
+		"body": ["{ ${1:selector}, RebarOverhangParameters({${2:overhang}}) }"],
+		"description": "Одинаковый выпуск для всех стержней (одно значение)"
+	},	
 	//Методы
 	//Класс ReinforcementContainer --- ОБНОВЛЕНО v4.4
 	//---------------------------------------------------------------------------
@@ -1267,9 +1292,8 @@
 			":AddReinforcement(${1:container})"
 		],
 		"description": "ReinforcementContainer\n\rnil\n\rAddReinforcement (ReinforcementContainer container)"
-	},
-	
-	//Атрибуты классов армирования --- ОБНОВЛЕНО v4.4
+	},	
+	//Атрибуты классов армирования --- ОБНОВЛЕНО v4.6
 	//---------------------------------------------------------------------------
 	"BackMesh": {
 		"prefix": ".BackMesh",
@@ -1313,6 +1337,12 @@
 		"body": [".EdgeSelectors = ${1:edgeSelectors}"],
 		"description": "EdgeReinforcementParameters\n\rtable\n\rEdgeSelectors - правила выбора усиливаемых граней"
 	},
+	"EndZones": {
+		"prefix": ".EndZones",
+		"scope": "lua",
+		"body": [".EndZones = ${1:endZones}"],
+		"description": "ZonedRebarRowParameters\n\rtable\n\rEndZones - таблица пар параметров ряда и размера в конце сетки"
+	},
 	"ExtensionLength": {
 		"prefix": ".ExtensionLength",
 		"scope": "lua",
@@ -1335,7 +1365,7 @@
 		"prefix": ".Hook",
 		"scope": "lua",
 		"body": [".Hook = ${1:hook}"],
-		"description": "RebarOverhangParameters\n\rRebarHookParameters\n\rHook - параметры отгиба стержня"
+		"description": "RebarOverhangParameters\n\rRebarHookParameters\n\rHook - параметры отгиба стержня (опционально)"
 	},
 	"Layout": {
 		"prefix": ".Layout",
@@ -1343,13 +1373,25 @@
 		"body": [".Layout = ${1:layout}"],
 		"description": "RebarRowParameters,EdgeReinforcementParameters,ReinforcingMeshSupportsParameters\n\robject\n\rLayout - тип раскладки"
 	},
+	"LeftHook": {
+		"prefix": ".LeftHook",
+		"scope": "lua",
+		"body": [".LeftHook = ${1:leftHook}"],
+		"description": "UShapedRebarParameters\n\rRebarHookParameters\n\rLeftHook - параметры левого крюка"
+	},
+	"LeftLegLength": {
+		"prefix": ".LeftLegLength",
+		"scope": "lua",
+		"body": [".LeftLegLength = ${1:leftLegLength}"],
+		"description": "UShapedRebarParameters\n\rnumber\n\rLeftLegLength - длина левой ножки"
+	},
 	"LegLength": {
 		"prefix": ".LegLength",
 		"scope": "lua",
 		"body": [".LegLength = ${1:legLength}"],
-		"description": "CShapedRebarParameters,UShapedRebarParameters,SShapedRebarParameters\n\rnumber\n\rLegLength - длина ножки"
+		"description": "CShapedRebarParameters,SShapedRebarParameters\n\rnumber\n\rLegLength - длина ножки"
 	},
-	"Length": {
+	"RebarLength": {
 		"prefix": ".Length",
 		"scope": "lua",
 		"body": [".Length = ${1:length}"],
@@ -1361,23 +1403,59 @@
 		"body": [".LongitudinalFreeEnd = ${1:freeEnd}"],
 		"description": "ReinforcingMeshParameters\n\rnumber\n\rLongitudinalFreeEnd - свободный конец продольных стержней"
 	},
+	"LongitudinalRow": {
+		"prefix": ".LongitudinalRow",
+		"scope": "lua",
+		"body": [".LongitudinalRow = ${1:longitudinalRow}"],
+		"description": "ReinforcingMeshParameters\n\robject (RebarRowParameters или ZonedRebarRowParameters)\n\rLongitudinalRow - параметры продольных стержней"
+	},
+	"MainRowParameters": {
+		"prefix": ".MainRowParameters",
+		"scope": "lua",
+		"body": [".MainRowParameters = ${1:mainRowParameters}"],
+		"description": "ZonedRebarRowParameters\n\rRebarRowParameters\n\rMainRowParameters - параметры основного ряда стержней"
+	},
+	"MinClearance": {
+		"prefix": ".MinClearance",
+		"scope": "lua",
+		"body": [".MinClearance = ${1:minClearance}"],
+		"description": "ZonedRebarRowParameters\n\rnumber\n\rMinClearance - минимальное расстояние между стержнями на границе зон"
+	},
 	"OverhangRules": {
 		"prefix": ".OverhangRules",
 		"scope": "lua",
 		"body": [".OverhangRules = ${1:overhangRules}"],
-		"description": "RebarRowParameters\n\rtable\n\rOverhangRules - правила выпусков"
+		"description": "RebarRowParameters\n\rtable\n\rOverhangRules - правила выпусков. Каждый элемент: {selector, RebarOverhangParameters}"
 	},
 	"Overhangs": {
 		"prefix": ".Overhangs",
 		"scope": "lua",
-		"body": [".Overhangs = ${1:overhangs}"],
-		"description": "RebarOverhangParameters\n\rtable\n\rOverhangs - величины выпусков"
+		"body": [".Overhangs = {${1:overhangs}}"],
+		"description": "RebarOverhangParameters\n\rtable\n\rOverhangs - величины выпусков для каждого стержня в ряду"
+	},
+	"OverhangShapes": {
+		"prefix": ".OverhangShapes",
+		"scope": "lua",
+		"body": [".OverhangShapes = ${1:overhangShapes}"],
+		"description": "RebarOverhangParameters\n\rtable\n\rOverhangShapes - формы выпусков для каждого стержня (v4.1+)"
 	},
 	"RebarStyleId": {
 		"prefix": ".RebarStyleId",
 		"scope": "lua",
 		"body": [".RebarStyleId = ${1:id}"],
 		"description": "RebarRowParameters,CShapedRebarParameters,UShapedRebarParameters,RebarChairParameters,SShapedRebarParameters\n\rnumber\n\rRebarStyleId - идентификатор стиля арматурного стержня"
+	},
+	"RightHook": {
+		"prefix": ".RightHook",
+		"scope": "lua",
+		"body": [".RightHook = ${1:rightHook}"],
+		"description": "UShapedRebarParameters\n\rRebarHookParameters\n\rRightHook - параметры правого крюка"
+	},
+	"RightLegLength": {
+		"prefix": ".RightLegLength",
+		"scope": "lua",
+		"body": [".RightLegLength = ${1:rightLegLength}"],
+		"description": "UShapedRebarParameters\n\rnumber\n\rRightLegLength - длина правой ножки"
 	},
 	"RotationAngle": {
 		"prefix": ".RotationAngle",
@@ -1390,6 +1468,12 @@
 		"scope": "lua",
 		"body": [".RowsOrder = ${1:order}"],
 		"description": "ReinforcingMeshParameters\n\rReinforcingMeshRowsOrder\n\rRowsOrder - порядок рядов арматурных стержней"
+	},
+	"StartZones": {
+		"prefix": ".StartZones",
+		"scope": "lua",
+		"body": [".StartZones = ${1:startZones}"],
+		"description": "ZonedRebarRowParameters\n\rtable\n\rStartZones - таблица пар параметров ряда и размера в начале сетки"
 	},
 	"Step": {
 		"prefix": ".Step",
@@ -1409,6 +1493,12 @@
 		"body": [".TransverseFreeEnd = ${1:freeEnd}"],
 		"description": "ReinforcingMeshParameters\n\rnumber\n\rTransverseFreeEnd - свободный конец поперечных стержней"
 	},
+	"TransverseRow": {
+		"prefix": ".TransverseRow",
+		"scope": "lua",
+		"body": [".TransverseRow = ${1:transverseRow}"],
+		"description": "ReinforcingMeshParameters\n\robject (RebarRowParameters или ZonedRebarRowParameters)\n\rTransverseRow - параметры поперечных стержней"
+	},
 	"UseRectangularApproximation": {
 		"prefix": ".UseRectangularApproximation",
 		"scope": "lua",
@@ -1420,8 +1510,7 @@
 		"scope": "lua",
 		"body": [".VerticalStep = ${1:step}"],
 		"description": "ReinforcingMeshSupportsCellLayout,ReinforcingMeshSupportsDistanceLayout\n\rnumber\n\rVerticalStep - шаг по вертикали"
-	},
-	
+	},	
 	//Перечисления армирования --- ОБНОВЛЕНО v4.4
 	//---------------------------------------------------------------------------
 	"InLayerAlignment": {

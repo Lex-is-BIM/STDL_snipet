@@ -1,6 +1,6 @@
-# Словарь STDL для Visual Studio Code v4.5
+# Словарь STDL для Visual Studio Code v4.1+
 
-Для версии STDL 4.0+
+Для версии STDL 4.1+ (Renga 9.1 и выше)
 
 ## Возможности
 
@@ -53,16 +53,24 @@
 #### Классы Parameter и ParameterGroup
 - Методы: `GetValue`, `SetVisible`, `SetEnabled`.
 
-#### Армирование (STDL 4.0+)
+#### Армирование (STDL 4.1+)
+
+**Ключевые возможности v4.1:**
+- Крюки для U-образных стержней (`LeftHook`, `RightHook`)
+- Зоны усиления при раскладке стержней (`ZonedRebarRowParameters`)
+- Различные формы выпусков арматурных стержней (`OverhangShapes`)
+
+**Классы и функции:**
 - **Классы раскладки**: `RebarRowEdgeProtectionLayout`, `RebarRowUniformLayout`, `EdgeReinforcementLayout`, `EdgeReinforcementCenteredLayout`;
+- **Зонированный ряд**: `ZonedRebarRowParameters` (новое в v4.1);
 - **Классы сеток**: `DoubleReinforcingMeshParameters`, `ReinforcingMeshParameters`, `ReinforcingMeshSupportsParameters`;
-- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters`, `SShapedRebarParameters`;
+- **Формы деталей**: `CShapedRebarParameters`, `UShapedRebarParameters` (с крюками), `SShapedRebarParameters`;
 - **Селекторы**: `VoidingSelector`, `ObjectSideSelector`, `AnyFaceSelector`;
 - **Фиксаторы**: `ReinforcingMeshSupportsCellLayout`, `ReinforcingMeshSupportsDistanceLayout`, `RebarChairParameters`;
-- **Параметры крюков и свесов**: `RebarHookParameters`, `RebarOverhangParameters`;
+- **Параметры крюков и свесов**: `RebarHookParameters`, `RebarOverhangParameters` (с формами выпусков);
 - **Контейнер**: `ReinforcementContainer`;
 - **Вспомогательные**: `Entity`, `BoundingBox`;
-- **Атрибуты**: `Layout`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `RebarLength`, `RebarBaseLength`, `RebarLegLength`, `BendAngle`, `ExtensionLength`, `RotationAngle`, `Overhangs`, `Hook`, `LongitudinalFreeEnd`, `TransverseFreeEnd`;
+- **Атрибуты**: `Layout`, `HorizontalStep`, `VerticalStep`, `Displacements`, `FrontMesh`, `BackMesh`, `Detail`, `EdgeSelectors`, `BendingFactor`, `UseRectangularApproximation`, `Supports`, `RebarStyleId`, `RebarLength`, `LegLength`, `LeftLegLength`, `RightLegLength`, `LeftHook`, `RightHook`, `BendAngle`, `ExtensionLength`, `RotationAngle`, `Overhangs`, `OverhangShapes`, `Hook`, `LongitudinalFreeEnd`, `TransverseFreeEnd`, `StartZones`, `EndZones`, `MainRowParameters`, `MinClearance`;
 - **Функции**: `CreateReinforcingMeshInBaseLayer`, `CreateDoubleReinforcingMeshInBaseLayer`, `GetParameterValue`, `GetBoundingBox`, `GetReinforcementUnitStyle`;
 - **Шаблоны функций**: `CreateObjectReinforcement`, `SetStyleParameterStates`.
 
@@ -92,27 +100,45 @@
 #### Библиотека для работы с таблицами Lua
 - `table.concat`, `table.insert`, `table.remove`, `table.sort`, `table.pack`, `table.unpack`, `table.move`.
 
-## Изменения в версии v4.5
+## Изменения в версии v4.1+
+
+### Новые возможности (Renga 9.1+)
+- **Крюки для U-образных стержней** — `LeftHook`, `RightHook` с настраиваемыми углами и длиной;
+- **Зоны усиления** — `ZonedRebarRowParameters` для переменного шага стержней в пределах ряда;
+- **Формы выпусков** — `OverhangShapes` для различных форм выпусков арматурных стержней.
 
 ### Новые сниппеты
-- `SShapedRebarParameters` — S-образная форма детали армирования;
-- `AnyFaceSelector` — селектор любой грани;
-- `EdgeReinforcementCenteredLayout` — центрированная раскладка краевого армирования;
-- `AddReinforcementUnit` — добавление элемента армирования в контейнер;
-- `AddReinforcement` — добавление армирования в контейнер;
-- Параметры крюков и свесов: `BendAngle`, `ExtensionLength`, `RotationAngle`, `Overhangs`, `Hook`, `LongitudinalFreeEnd`, `TransverseFreeEnd`.
-
-### Уточнённые сигнатуры
-- `RebarHookParameters` и `RebarOverhangParameters` — обновлены под актуальное API;
-- `ChairRebarParameters` → `RebarChairParameters` (класс переименован);
-- `InLayerAlignment`: значения `Left`/`Right` заменены на `OuterSide`/`InnerSide`;
-- `EdgeReinforcementParameters` — параметр `step` заменён на `layout`.
+- `ZonedRebarRowParameters` — зонированный ряд стержней;
+- `LeftLegLength`, `RightLegLength` — раздельные ножки для U-образных стержней;
+- `LeftHook`, `RightHook` — крюки для U-образных стержней;
+- `OverhangShapes` — формы выпусков;
+- `StartZones`, `EndZones`, `MainRowParameters`, `MinClearance` — атрибуты зонированного ряда;
+- `RebarOverhangParametersWithShapes` — конструктор с формами выпусков;
+- `overhangRuleConstant` — правило выпуска с одинаковым значением для всех стержней.
 
 ### Исправления
-- `math.pi` и `math.huge` — теперь вставляются как константы (без скобок).
+- Устранён дубляж ключа `Length` (переименован в `RebarLength`);
+- Обновлены описания атрибутов `Overhangs` (величины выпусков для каждого стержня в ряду).
 
 ## Установка
 
-Скопировать файл `STDL_v4.code-snippets` в папку:
+Скопировать файл `STDL_v4.1.code-snippets` в папку:
 
 `%UserProfile%\AppData\Roaming\Code\User\snippets\`
+
+---
+
+## История изменений
+
+### Версия 4.1
+- Возможность задания крюков для U-образных стержней (`LeftHook`, `RightHook`);
+- Возможность задания зон усиления при раскладке продольных и поперечных стержней (`ZonedRebarRowParameters`);
+- Возможность создания различных форм выпусков арматурных стержней (`OverhangShapes`);
+- Поддерживается Renga 9.1 и выше.
+
+### Версия 4.0
+- Возможность создания шаблона стиля армирования;
+- Возможность создания арматурной сетки в слое основы;
+- Возможность создания двух арматурных сеток в слое основы с описанием усиления торцов и фиксаторов;
+- Возможность добавления арматурного изделия и стержней произвольной формы;
+- Поддерживается Renga 9.0 и выше.

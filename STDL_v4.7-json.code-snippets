@@ -1,0 +1,430 @@
+{
+	//JSON
+	//Двумерное моделирование
+	//---------------------------------------------------------------------------
+	"STDL_scheme": {
+		"prefix": "STDL scheme",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"metadata\": {",
+			"\t\t\"defaultName\": \"${1:name}\",",
+			"\t\t\"description\": \"${2:description}\",",
+			"\t\t\"version\": \"$3.$4.$5\",",
+			"\t\t\"author\": \"${6:author}\"",
+			"\t},",
+			"\t\"styleParameters\": [",
+			"\t\t$7",
+			"\t],",
+			"\t\"ports\": [",
+			"\t\t$8",
+			"\t]",
+			"}"
+		]
+	},
+	"ParameterGroup": {
+		"prefix": "StyleParameters.ParameterGroup",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:GroupName}\",",
+			"\t\"text\": \"${2:Text}\",",
+			"\t\"params\": [",
+			"\t\t$3",
+			"\t]",
+			"}"
+		]
+	},
+	"Parameter": {
+		"prefix": "StyleParameters.Parameter",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"${3:type}\",",
+			"\t\"default\": \"${4:default}\",",
+			"\t\"min\": \"${5:min}\",",
+			"\t\"max\": \"${6:max}\"",
+			"}"
+		]
+	},
+	"ParameterMaterial": {
+		"prefix": "StyleParameters.ParameterMaterial",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:Material}\",",
+			"\t\"text\": \"${2:Материал}\",",
+			"\t\"type\": \"${3:Id}\",",
+			"\t\"entityTypeId\": \"${4:0abcb18f-0aaf-4509-bf89-5c5fad9d5d8b}\"",
+			"}"
+		]
+	},
+	"ParameterRebarStyleId": {
+		"prefix": "StyleParameters.ParameterRebarStyleId",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:RebarStyleId}\",",
+			"\t\"text\": \"${2:Арматурный стиль}\",",
+			"\t\"type\": \"Id\",",
+			"\t\"entityTypeId\": \"608edb78-96f3-40a6-a0ec-71000105581b\"",
+			"}"
+		],
+		"description": "Параметр для выбора арматурного стиля (RebarStyleId)"
+	},
+	"ParameterUserEnum": {
+		"prefix": "StyleParameters.ParameterUserEnum",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"UserEnum\",",
+			"\t\"default\": \"${3:default}\",",
+			"\t\"items\": [",
+			"\t\t$4",
+			"\t]",
+			"}"
+		]
+	},
+	"ParameterBoolean": {
+		"prefix": "StyleParameters.ParameterBoolean",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"Boolean\",",
+			"\t\"default\": \"${3:false}\"",
+			"}"
+		]
+	},
+	"Items": {
+		"prefix": "items",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"key\": \"${1:key}\",",
+			"\t\"text\": \"${2:text}\"",
+			"}"
+		]
+	},
+	"ParameterCoreEnum": {
+		"prefix": "StyleParameters.ParameterCoreEnum",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:name}\",",
+			"\t\"text\": \"${2:text}\",",
+			"\t\"type\": \"CoreEnum\",",
+			"\t\"coreEnumType\": \"${3:coreEnumType}\",",
+			"\t\"default\": \"${4:default}\"",
+			"}"
+		]
+	},
+	"Port": {
+		"prefix": "Port",
+		"scope": "json",
+		"body": [
+			"{",
+			"\t\"name\": \"${1:Name}\",",
+			"\t\"text\": \"${2:Text}\",",
+			"\t\"flowDirection\": \"${3:FlowDirection}\",",
+			"\t\"systemCategories\": [",
+			"\t\t$4",
+			"\t]",
+			"}"
+		]
+	},
+	"Build RST Tasks": {
+		"prefix": "rst-tasks",
+		"scope": "json",
+		"body": [
+			"{",
+			"    \"version\": \"2.0.0\",",
+			"    \"tasks\": [",
+			"        {",
+			"            \"label\": \"Build rst file\",",
+			"            \"type\": \"shell\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\RstBuilder\\\\RstBuilder.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.json\",",
+			"                \"${1:ParamsTest}.lua\",",
+			"                \"-s\",",
+			"                \"1.0\",",
+			"                \"-o\",",
+			"                \"${1:ParamsTest}.rst\"",
+			"            ],",
+			"            \"group\": {",
+			"                \"kind\": \"build\",",
+			"                \"isDefault\": true",
+			"            }",
+			"        },",
+			"        {",
+			"            \"type\": \"shell\",",
+			"            \"label\": \"Load rst file\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\STDLLoader\\\\STDLLoader.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.rst\",",
+			"                \"${2:Equipment}\"",
+			"            ],",
+			"            \"group\": \"test\"",
+			"        },",
+			"        {",
+			"            \"type\": \"shell\",",
+			"            \"label\": \"StdlJsonEditor\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\StdlJsonEditor\\\\StdlJsonEditor.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.json\"",
+			"            ],",
+			"            \"group\": \"test\"",
+			"        },",
+			"        {",
+			"            \"type\": \"shell\",",
+			"            \"label\": \"JsonToLuaParams\",",
+			"            \"command\": \"..\\\\..\\\\..\\\\..\\\\JsonToLuaParams\\\\JsonToLuaParams.exe\",",
+			"            \"args\": [",
+			"                \"${1:ParamsTest}.json\",",
+			"                \"${1:ParamsTest}.lua\"",
+			"            ],",
+			"            \"group\": \"test\"",
+			"        }",
+			"    ]",
+			"}"
+		],
+		"description": "Generate RST build tasks configuration"
+	},
+	"IncludeFile": {
+		"prefix": "include file",
+		"scope": "json",
+		"body": [
+			"\"-i\",",
+			"\"${1:Patch}.lua\","
+		],
+		"description": "Указание подключаемого файла"
+	},
+	"FlowDirection": {
+		"prefix": "FlowDirection",
+		"scope": "lua",
+		"body": [
+			"FlowDirection.${1|Inlet,Outlet,InletAndOutlet|}"
+		],
+		"description": "Направление потока (Inlet, Outlet или InletAndOutlet)"
+	},
+	"Integer": {
+		"prefix": "Type.Integer",
+		"scope": "json",
+		"body": [
+			"Integer"
+		],
+		"description": "Целое число"
+	},
+	"Real": {
+		"prefix": "Type.Real",
+		"scope": "json",
+		"body": [
+			"Real"
+		],
+		"description": "Действительное число"
+	},
+	"String": {
+		"prefix": "Type.String",
+		"scope": "json",
+		"body": [
+			"String"
+		],
+		"description": "Строка"
+	},
+	"Length": {
+		"prefix": "Type.Length",
+		"scope": "json",
+		"body": [
+			"Length"
+		],
+		"description": "Длина в миллиметрах"
+	},
+	"Angle": {
+		"prefix": "Type.Angle",
+		"scope": "json",
+		"body": [
+			"Angle"
+		],
+		"description": "Угол в десятичных градусах"
+	},
+	"Boolean": {
+		"prefix": "Type.Boolean",
+		"scope": "json",
+		"body": [
+			"Boolean"
+		],
+		"description": "Булевый (true/false)"
+	},
+	//Категории трубопроводных систем
+	//---------------------------------------------------------------------------
+	"DomesticColdWater": {
+		"prefix": "PipeSystems.DomesticColdWater",
+		"scope": "json",
+		"body": [
+			"\"DomesticColdWater\""
+		],
+		"description": "Категория трубопроводных систем\n\rDomesticColdWater\n\rБытовое холодное водоснабжение"
+	},
+	"DomesticHotWater": {
+		"prefix": "PipeSystems.DomesticHotWater",
+		"scope": "json",
+		"body": [
+			"\"DomesticHotWater\""
+		],
+		"description": "Категория трубопроводных систем\n\rDomesticHotWater\n\rБытовое горячее водоснабжение"
+	},
+	"DomesticSewage": {
+		"prefix": "PipeSystems.DomesticSewage",
+		"scope": "json",
+		"body": [
+			"\"DomesticSewage\""
+		],
+		"description": "Категория трубопроводных систем\n\rDomesticSewage\n\rБытовая канализация"
+	},
+	"Gas": {
+		"prefix": "PipeSystems.Gas",
+		"scope": "json",
+		"body": [
+			"\"Gas\""
+		],
+		"description": "Категория трубопроводных систем\n\rGas\n\rБытовое газоснабжение"
+	},
+	"Firewater": {
+		"prefix": "PipeSystems.Firewater",
+		"scope": "json",
+		"body": [
+			"\"Firewater\""
+		],
+		"description": "Категория трубопроводных систем\n\rFirewater\n\rВодяное пожаротушение"
+	},
+	"Heating": {
+		"prefix": "PipeSystems.Heating",
+		"scope": "json",
+		"body": [
+			"\"Heating\""
+		],
+		"description": "Категория трубопроводных систем\n\rHeating\n\rВодяное теплоснабжение"
+	},
+	"GaseousFireSuppression": {
+		"prefix": "PipeSystems.GaseousFireSuppression",
+		"scope": "json",
+		"body": [
+			"\"GaseousFireSuppression\""
+		],
+		"description": "Категория трубопроводных систем\n\rGaseousFireSuppression\n\rГазовое пожаротушение"
+	},
+	"Rainwater": {
+		"prefix": "PipeSystems.Rainwater",
+		"scope": "json",
+		"body": [
+			"\"Rainwater\""
+		],
+		"description": "Категория трубопроводных систем\n\rRainwater\n\rДождевая канализация"
+	},
+	"IndustrialColdWater": {
+		"prefix": "PipeSystems.IndustrialColdWater",
+		"scope": "json",
+		"body": [
+			"\"IndustrialColdWater\""
+		],
+		"description": "Категория трубопроводных систем\n\rIndustrialColdWater\n\rПроизводственное холодное водоснабжение"
+	},
+	"IndustrialHotWater": {
+		"prefix": "PipeSystems.IndustrialHotWater",
+		"scope": "json",
+		"body": [
+			"\"IndustrialHotWater\""
+		],
+		"description": "Категория трубопроводных систем\n\rIndustrialHotWater\n\rПроизводственное горячее водоснабжение"
+	},
+	"IndustrialSewage": {
+		"prefix": "PipeSystems.IndustrialSewage",
+		"scope": "json",
+		"body": [
+			"\"IndustrialSewage\""
+		],
+		"description": "Категория трубопроводных систем\n\rIndustrialSewage\n\rПроизводственная канализация"
+	},
+	"OtherPipeSystem": {
+		"prefix": "PipeSystems.OtherPipeSystem",
+		"scope": "json",
+		"body": [
+			"\"OtherPipeSystem\""
+		],
+		"description": "Категория трубопроводных систем\n\rOtherPipeSystem\n\rПрочие трубопроводные системы"
+	},
+	//Категории воздуховодных систем
+	//---------------------------------------------------------------------------
+	"Ventilation": {
+		"prefix": "DuctSystems.Ventilation",
+		"scope": "json",
+		"body": [
+			"\"Ventilation\""
+		],
+		"description": "Категория воздуховодных систем\n\rVentilation\n\rПриточная вентиляция"
+	},
+	"Exhaust": {
+		"prefix": "DuctSystems.Exhaust",
+		"scope": "json",
+		"body": [
+			"\"Exhaust\""
+		],
+		"description": "Категория воздуховодных систем\n\rExhaust\n\rВытяжная вентиляция"
+	},
+	"Pressurization": {
+		"prefix": "DuctSystems.Pressurization",
+		"scope": "json",
+		"body": [
+			"\"Pressurization\""
+		],
+		"description": "Категория воздуховодных систем\n\rPressurization\n\rВытяжное дымоудаление"
+	},
+	"Vacuum": {
+		"prefix": "DuctSystems.Vacuum",
+		"scope": "json",
+		"body": [
+			"\"Vacuum\""
+		],
+		"description": "Категория воздуховодных систем\n\rVacuum\n\rПылеудаление"
+	},
+	"OtherDuctSystem": {
+		"prefix": "DuctSystems.OtherDuctSystem",
+		"scope": "json",
+		"body": [
+			"\"OtherDuctSystem\""
+		],
+		"description": "Категория воздуховодных систем\n\rOtherDuctSystem\n\rПрочие воздуховодные системы"
+	},
+	//Категории электрических систем
+	//---------------------------------------------------------------------------
+	"LightingCircuit": {
+		"prefix": "ElectricalSystems.LightingCircuit",
+		"scope": "json",
+		"body": [
+			"\"LightingCircuit\""
+		],
+		"description": "Категория электрических систем\n\rLightingCircuit\n\rОсветительная сеть"
+	},
+	"PowerCircuit": {
+		"prefix": "ElectricalSystems.PowerCircuit",
+		"scope": "json",
+		"body": [
+			"\"PowerCircuit\""
+		],
+		"description": "Категория электрических систем\n\rPowerCircuit\n\rСиловая сеть"
+	},
+	"OtherElectricalSystem": {
+		"prefix": "ElectricalSystems.OtherElectricalSystem",
+		"scope": "json",
+		"body": [
+			"\"OtherElectricalSystem\""
+		],
+		"description": "Категория электрических систем\n\rOtherElectricalSystem\n\rПрочие электрические системы"
+	}
+}
